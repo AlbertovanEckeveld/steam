@@ -59,19 +59,3 @@ def get_version():
     """
     return execute_query(query)
 
-def get_customers():
-    """
-    Example function to test the database connection.
-    """
-    query = """
-        SELECT * FROM test;
-    """
-    return execute_query(query)
-
-
-def main():
-    print(get_customers())
-
-
-if __name__ == '__main__':
-    main()

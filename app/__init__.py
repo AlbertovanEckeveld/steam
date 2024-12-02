@@ -1,13 +1,10 @@
 from flask import Flask
 
-from app.views.index import Index
-from app.views.test import Test
+from app.router.index import Index
+from app.router.test import Test
 
-from app.config import Config
-
-def create_app(config_class=Config):
+def create_app():
     app = Flask(__name__)
-    app.config.from_object(config_class)
 
     # Initialize Flask extensions here
 
