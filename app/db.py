@@ -50,13 +50,21 @@ def execute_query(query):
         print(f"Error executing query: {e}")
         raise
 
+def get_version():
+    """
+    Example function to test the database connection.
+    """
+    query = """
+        SELECT version();
+    """
+    return execute_query(query)
 
 def get_customers():
     """
     Example function to test the database connection.
     """
     query = """
-        SELECT * FROM Customers;
+        SELECT * FROM test;
     """
     return execute_query(query)
 
