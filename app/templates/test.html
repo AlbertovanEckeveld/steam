@@ -6,11 +6,14 @@
         <h2>This is the test page of Steam</h2>
         <br>
         <h3>Database Check: </h3>
-        <p> Database Host: {{ env_data['DB_HOST'] }}</p>
-        <p> Database Database: {{ env_data['DB_DATABASE'] }}</p>
-        <p> Database User: {{ env_data['DB_USER'] }}</p>
+        <p> Database Host: {{ database['DB_HOST'] }}</p>
+        <p> Database Database: {{ database['DB_DATABASE'] }}</p>
+        <p> Database User: {{ user['DB_USER'] }}</p>
         <p> Database version: {{ version }} </p>
         <br>
         <h3>Steam API Check</h3>
+        <p> Steam Username: {{ player }}</p>
+        <p> Steam ID: {{ user_id }}</p>
+
     </div>
 {% endblock %}

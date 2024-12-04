@@ -1,33 +1,19 @@
-import os
 import psycopg2
-from dotenv import load_dotenv
-
-def load_environment_variables():
-    """
-    Load environment variables from .env file.
-    """
-    load_dotenv()
-    return {
-        'DB_HOST': os.getenv('DB_HOST'),
-        'DB_PORT': os.getenv('DB_PORT'),
-        'DB_DATABASE': os.getenv('DB_DATABASE'),
-        'DB_USER': os.getenv('DB_USER'),
-        'DB_PASSWORD': os.getenv('DB_PASSWORD')
-    }
-
+from app.connector import get_database_info, get_user_info
 
 def connect_to_database():
     """
     Establish a connection to the database using the loaded environment variables.
     """
-    env_vars = load_environment_variables()
+    database = get_database_info()
+    credentials = get_user_info()
     try:
         conn = psycopg2.connect(
-            host=env_vars['DB_HOST'],
-            port=env_vars['DB_PORT'],
-            dbname=env_vars['DB_DATABASE'],
-            user=env_vars['DB_USER'],
-            password=env_vars['DB_PASSWORD']
+            host=database['DB_HOST'],
+            port=database['DB_PORT'],
+            dbname=database['DB_DATABASE'],
+            user=credentials['DB_USER'],
+            password=credentials['DB_PASSWORD']
         )
 
         return conn
