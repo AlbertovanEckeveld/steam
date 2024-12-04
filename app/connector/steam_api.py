@@ -33,3 +33,53 @@ def get_friend_list(steam_id):
 
 
 
+def get_owned_games(steam_id):
+    url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
+    params = {
+        "key": API_KEY,
+        "steamid": steam_id,
+        "include_appinfo": 1,
+        "include_played_free_games": 1
+    }
+
+    response = requests.get(url, params=params)
+    return response.json()
+
+
+
+def get_play_time(steam_id):
+    url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
+    params = {
+        "key": API_KEY,
+        "steamid": steam_id,
+        "include_appinfo": 1,
+        "include_played_free_games": 1
+    }
+
+    response = requests.get(url, params=params)
+    data = response.json()
+
+    totaalAantalGespeeldeMinuten = 0
+
+
+    games = data.get('response', {}).get('games', [])
+
+    #Check of de lijst niet leeg is
+    if not games:
+        print("Geen games gevonden of een fout is opgetreden.")
+        return
+
+    for game in games:
+        gameNaam = game.get('name', 'Onbekende game')
+        speeltijdMinuten = game.get('playtime_forever', 0)
+        speeltijdUren = speeltijdMinuten / 60
+        totaalAantalGespeeldeMinuten += speeltijdMinuten
+        print(f"Game: {gameNaam}, Speeltijd: {speeltijdUren:.2f} uur")
+
+
+    totaalAantalGespeeldeUren = totaalAantalGespeeldeMinuten / 60
+    print(f"Totaal aantal uren gespeeld: {totaalAantalGespeeldeUren:.2f} uur")
+
+
+get_play_time('76561198145171009')
+
