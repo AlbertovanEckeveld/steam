@@ -139,6 +139,11 @@ th {
     background-color: #f2f2f2;
 }
 
+.error {
+    display: table;
+    margin: 0 auto;
+}
+
 /* Footer Section */
 .footer-section {
     background-color: #171a21;

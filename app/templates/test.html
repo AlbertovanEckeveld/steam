@@ -1,17 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
+
+{% block navbar %}
+    {% if not logged_in %}
+            <a href="{{ url_for('auth.login') }}">
+                    <img style="height: fit-content"
+                         src="https://community.fastly.steamstatic.com/public/images/signinthroughsteam/sits_01.png">
+            </a>
+        {% else %}
+            <div class="user-section">
+                <img class="user-avatar" src="{{ steam_avater }}" alt="User Avatar">
+                <span class="user-name">{{ display_name }}</span>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
+        {% endif %}
+{% endblock %}
 
 {% block content %}
         <h2>This is the test page of Steam</h2>
         <br>
         <h3>Database Check: </h3>
-        <p> Database Host: {{ database['DB_HOST'] }}</p>
-        <p> Database Database: {{ database['DB_DATABASE'] }}</p>
-        <p> Database User: {{ user['DB_USER'] }}</p>
+        <p> Database Host: {{ DB_host }}</p>
+        <p> Database Port: {{ DB_port }}</p>
+        <p> Database Database: {{ DB_database }}</p>
+        <p> Database User: {{ DB_user }}</p>
         <p> Database version: {{ version }} </p>
         <br>
+        {% if logged_in %}
         <h3>Steam API Check</h3>
-        <p> Steam Username: {{ player }}</p>
-        <p> Steam ID: {{ user_id }}</p>
+        <p> Steam Username: {{ display_name }}</p>
+        <p> Steam ID: {{ steam_id }}</p>
+        {% else %}
+        <p>Je bent nog niet ingelogd, meld je via de knop hieronder aan.</p>
+        <a href="{{ url_for('auth.login') }}">
+                <img src="https://community.fastly.steamstatic.com/public/images/signinthroughsteam/sits_01.png">
+        </a>
+        {% endif %}
 
     </div>
 {% endblock %}

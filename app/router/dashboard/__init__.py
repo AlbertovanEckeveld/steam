@@ -8,7 +8,7 @@ def index():
     if not session.get('steam_id'):
         return redirect(url_for('index.index'))
     else:
-        return render_template("dashboard.html", user=session.get('user'))
+        return render_template("dashboard/dashboard.html", user=session.get('user'))
 
 
 @Dash.route('/library')
@@ -17,7 +17,13 @@ def library():
         return redirect(url_for('index.index'))
     else:
         games = session.get('user')['game_list']
-        return render_template("dashboard-library.html", user=session.get('user'), games=games)
+        display_name = session.get('user')['display_name']
+        url_avatar = session.get('user')['url_avatar_small']
+        return render_template("dashboard/dashboard-library.html",
+                               display_name=display_name,
+                               url_avatar=url_avatar,
+                               games=games
+                               )
 
 
 @Dash.route('/friends')
@@ -25,7 +31,15 @@ def friends():
     if not session.get('steam_id'):
         return redirect(url_for('index.index'))
     else:
+        display_name = session.get('user')['display_name']
+        url_avatar = session.get('user')['url_avatar_small']
+
         friendlist = session.get('user')['friend_list']
         total_friends = len(friendlist)
-        return render_template("dashboard-friends.html", user=session.get('user'), friends=friendlist, total_friends=total_friends)
+        return render_template("dashboard/dashboard-friends.html",
+                               display_name=display_name,
+                               url_avatar=url_avatar,
+                               friends=friendlist,
+                               total_friends=total_friends
+                               )
 
