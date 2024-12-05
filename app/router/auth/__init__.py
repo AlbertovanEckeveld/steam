@@ -10,7 +10,7 @@ Auth = Blueprint('auth', __name__, static_folder='app/static', template_folder='
 
 @Auth.route('/')
 def index():
-    if not session.get('steam_id'):
+    if not session.get('user'):
         return '<a href="http://127.0.0.1:5000/auth/login">Login with steam</a>'
     else:
         return redirect(url_for('index.index'))

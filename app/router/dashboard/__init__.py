@@ -5,7 +5,7 @@ Dash = Blueprint('dashboard', __name__, static_folder='app/static', template_fol
 
 @Dash.route('/')
 def index():
-    if not session.get('steam_id'):
+    if not session.get('user'):
         return redirect(url_for('index.index'))
     else:
         display_name = session.get('user')['display_name']
@@ -19,7 +19,7 @@ def index():
 
 @Dash.route('/library')
 def library():
-    if not session.get('steam_id'):
+    if not session.get('user'):
         return redirect(url_for('index.index'))
     else:
         display_name = session.get('user')['display_name']
@@ -35,7 +35,7 @@ def library():
 
 @Dash.route('/friends')
 def friends():
-    if not session.get('steam_id'):
+    if not session.get('user'):
         return redirect(url_for('index.index'))
     else:
         display_name = session.get('user')['display_name']
