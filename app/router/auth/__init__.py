@@ -36,7 +36,6 @@ def login():
 def authorize():
     response = request.args
     steam_id = response['openid.identity'].split('/id/')[-1]
-    session['steam_id'] = steam_id
     fetchdata = get_player_summary(steam_id)['response']['players'][0]
     user = UserProfile(steam_id=steam_id,
                        display_name = fetchdata['personaname'],
@@ -48,7 +47,6 @@ def authorize():
                        game_list = get_owned_games(steam_id)
                        )
 
-    session['steam_id'] = steam_id
     session['user'] = user
 
     return redirect(url_for('dashboard.index'))
