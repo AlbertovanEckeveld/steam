@@ -1,11 +1,12 @@
 from flask import Blueprint, session, redirect, url_for, request
-from json import dumps
 from urllib.parse import urlencode
 
 from app.connector.steam_api import get_player_summary, get_friend_list, get_owned_games
 from app.models import UserProfile
 
+
 Auth = Blueprint('auth', __name__, static_folder='app/static', template_folder='app/templates')
+
 
 @Auth.route('/')
 def index():
@@ -13,6 +14,7 @@ def index():
         return '<a href="http://127.0.0.1:5000/auth/login">Login with steam</a>'
     else:
         return redirect(url_for('index.index'))
+
 
 @Auth.route('/login')
 def login():
@@ -27,7 +29,6 @@ def login():
 
     query_string = urlencode(params)
     auth_url = 'https://steamcommunity.com/openid/login' + "?" + query_string
-    print(auth_url)
     return redirect(auth_url)
 
 
@@ -36,7 +37,6 @@ def authorize():
     response = request.args
     steam_id = response['openid.identity'].split('/id/')[-1]
     session['steam_id'] = steam_id
-    print(get_player_summary(steam_id)['response']['players'][0])
     fetchdata = get_player_summary(steam_id)['response']['players'][0]
     user = UserProfile(steam_id=steam_id,
                        display_name = fetchdata['personaname'],
@@ -51,7 +51,7 @@ def authorize():
     session['steam_id'] = steam_id
     session['user'] = user
 
-    return redirect(url_for('index.index'))
+    return redirect(url_for('dashboard.index'))
 
 
 @Auth.route('/logout')

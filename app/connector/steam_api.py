@@ -18,6 +18,10 @@ def get_player_summary(steam_id):
         raise Exception(f"API request failed with status code {response.status_code}")
 
 
+def get_player_displayname(steam_id):
+    return get_player_summary(steam_id)['response']['players'][0]['personaname']
+
+
 def get_friend_list(steam_id):
     url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/"
     params = {
@@ -30,6 +34,7 @@ def get_friend_list(steam_id):
     friends_list = [
         {
             'steamid': friend['steamid'],
+            'display_name': get_player_displayname(friend['steamid']),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }
@@ -38,8 +43,8 @@ def get_friend_list(steam_id):
 
     # Voorbeeld over de output:
     # [
-    #   {'steamid': '76561198033737398', 'relationship': 'friend', 'friend_since': 1509471831},
-    #   {'steamid': '76561198033737398', 'relationship': 'friend', 'friend_since': 1509471831}
+    #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
+    #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
     # ]
     return friends_list
 
@@ -58,12 +63,12 @@ def get_owned_games(steam_id):
         {
             'appid': game['appid'],
             'name': game['name'],
-            'playtime_forever': game['playtime_forever']
+            'playtime_forever': round((game['playtime_forever'] / 60), 2)
         }
         for game in response.json()['response']['games']
     ]
 
-    return game_list
+    return sorted(game_list, key=lambda game: game['playtime_forever'], reverse=True)
 
 """
 def get_play_time(steam_id):

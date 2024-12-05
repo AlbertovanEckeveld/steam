@@ -1,0 +1,32 @@
+{% extends 'dashboard-base.html' %}
+
+{% block title %} Friends {% endblock %}
+
+{% block navbar %}
+            <div class="user-section">
+                <img class="user-avatar" src="{{ user['url_avatar_small'] }}" alt="User Avatar">
+                <span class="user-name">{{ user['display_name'] }}</span>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
+{% endblock %}
+
+{% block content %}
+
+        <h1>Dashboard - friends</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th><h2>Friends list  ({{ total_friends }})</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for friend in friends %}
+                    <tr>
+                        <td>{{ friend['display_name'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

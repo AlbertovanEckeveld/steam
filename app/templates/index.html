@@ -1,15 +1,25 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <span class="title"><h1>{% block title %} The Home Page of Steam Project {% endblock %}</h1></span>
-    <div class="content">
-        <h2>This is the home page of Steam</h2>
-        {% if not steam_id %}
-            <a href="{{ url_for('auth.login') }}">Login with Steam</a>
+{% block navbar %}
+    {% if not signed_in %}
+            <a href="{{ url_for('auth.login') }}"><img style="height: fit-content" src="https://community.fastly.steamstatic.com/public/images/signinthroughsteam/sits_01.png"></a>
         {% else %}
-            {{ user['display_name'] }}<br>
-            <img src="{{ user['url_avatar_full'] }}">
+            <div class="user-section">
+                <img class="user-avatar" src="{{ user['url_avatar_small'] }}" alt="User Avatar">
+                <span class="user-name">{{ user['display_name'] }}</span>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            </div>
+        {% endif %}
+{% endblock %}
+
+{% block content %}
+        <h2>Dit is Home pagina van bitje bij beetje Steam project</h2>
+        {% if not signed_in %}
+            <p>Je bent nog niet ingelogd, meld je via de knop hieronder aan.</p>
+            <a href="{{ url_for('auth.login') }}"><img src="https://community.fastly.steamstatic.com/public/images/signinthroughsteam/sits_01.png"></a>
+        {% else %}
+            <p>Je bent ingelogd als: {{ user['display_name'] }}</p>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
         {% endif %}
 
-    </div>
 {% endblock %}

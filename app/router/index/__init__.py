@@ -5,8 +5,8 @@ Index = Blueprint('index', __name__, static_folder='app/static', template_folder
 @Index.route('/')
 def index():
     if not session.get('steam_id'):
-        steam_id = False
+        signed_in = False
     else:
-        steam_id = True
+        signed_in = True
 
-    return render_template("index.html", steam_id=steam_id, user=session.get('user'))
+    return render_template("index.html", signed_in=signed_in, user=session.get('user'))
