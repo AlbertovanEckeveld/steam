@@ -2,8 +2,6 @@ import requests
 
 from app.connector import get_steam_API
 
-# "B6B4AC430AB9229F3E35F0DD9FF510CE"
-
 API_KEY = get_steam_API()
 
 def get_player_summary(steam_id):
@@ -29,8 +27,21 @@ def get_friend_list(steam_id):
     }
 
     response = requests.get(url, params=params)
-    return response.json()
+    friends_list = [
+        {
+            'steamid': friend['steamid'],
+            'relationship': friend['relationship'],
+            'friend_since': friend['friend_since']
+        }
+        for friend in response.json()['friendslist']['friends']
+    ]
 
+    # Voorbeeld over de output:
+    # [
+    #   {'steamid': '76561198033737398', 'relationship': 'friend', 'friend_since': 1509471831},
+    #   {'steamid': '76561198033737398', 'relationship': 'friend', 'friend_since': 1509471831}
+    # ]
+    return friends_list
 
 
 def get_owned_games(steam_id):
@@ -43,10 +54,18 @@ def get_owned_games(steam_id):
     }
 
     response = requests.get(url, params=params)
-    return response.json()
+    game_list = [
+        {
+            'appid': game['appid'],
+            'name': game['name'],
+            'playtime_forever': game['playtime_forever']
+        }
+        for game in response.json()['response']['games']
+    ]
 
+    return game_list
 
-
+"""
 def get_play_time(steam_id):
     url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
     params = {
@@ -81,5 +100,6 @@ def get_play_time(steam_id):
     print(f"Totaal aantal uren gespeeld: {totaalAantalGespeeldeUren:.2f} uur")
 
 
-get_play_time('76561198145171009')
+get_play_time('76561198273359778')
 
+"""

@@ -29,3 +29,10 @@ def get_steam_API():
     """
     load_dotenv()
     return os.getenv('STEAM_API')
+
+def get_secret_key():
+    """
+    Load secret key variables from .env file.
+    """
+    load_dotenv()
+    return os.getenv('SECRET_KEY')
