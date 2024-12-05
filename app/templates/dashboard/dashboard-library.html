@@ -1,11 +1,11 @@
-{% extends 'dashboard-base.html' %}
+{% extends 'base/dashboard-base.html' %}
 
 {% block title %} Library {% endblock %}
 
 {% block navbar %}
             <div class="user-section">
-                <img class="user-avatar" src="{{ user['url_avatar_small'] }}" alt="User Avatar">
-                <span class="user-name">{{ user['display_name'] }}</span>
+                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
+                <span class="user-name">{{ display_name }}</span>
                 <a href="{{ url_for('auth.logout') }}">Logout</a>
             </div>
 {% endblock %}

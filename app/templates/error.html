@@ -1,0 +1,13 @@
+{% extends 'base/error-base.html' %}
+
+{% block title %} Error {{ error_code }} {% endblock %}
+
+{% block content %}
+
+<div class="error">
+  <h1>Error {{ error_code }} </h1>
+  <h2>{{ error_description }} </h2>
+  <a href="{{ url_for('index.index') }}"><h3>Ga terug naar home pagina</h3></a>
+</div>
+
+{% endblock %}

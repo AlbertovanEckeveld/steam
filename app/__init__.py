@@ -2,6 +2,7 @@ from flask import Flask
 
 from app.connector import get_secret_key
 from app.router.dashboard import Dash
+from app.router.error import page_not_found
 from app.router.index import Index
 from app.router.auth import Auth
 from app.router.test import Test
@@ -12,6 +13,8 @@ def create_app():
 
     # Initialize Flask extensions here
 
+    # Error handling
+    app.errorhandler(404)(page_not_found)
 
     # Register blueprints here
     app.register_blueprint(Index, url_prefix='/')
