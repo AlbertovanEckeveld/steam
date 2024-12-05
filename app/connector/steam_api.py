@@ -41,11 +41,14 @@ def get_friend_list(steam_id):
         for friend in response.json()['friendslist']['friends']
     ]
 
+    # {'steamid': '76561198033737398', 'relationship': 'friend', 'friend_since': 1509471831}
+
     # Voorbeeld van de output:
     # [
     #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
     #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
     # ]
+
     return friends_list
 
 
