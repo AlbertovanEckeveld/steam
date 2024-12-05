@@ -4,5 +4,12 @@
     <span class="title"><h1>{% block title %} The Home Page of Steam Project {% endblock %}</h1></span>
     <div class="content">
         <h2>This is the home page of Steam</h2>
+        {% if not steam_id %}
+            <a href="{{ url_for('auth.login') }}">Login with Steam</a>
+        {% else %}
+            {{ user['display_name'] }}<br>
+            <img src="{{ user['url_avatar_full'] }}">
+        {% endif %}
+
     </div>
 {% endblock %}
