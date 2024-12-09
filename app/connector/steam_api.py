@@ -32,12 +32,13 @@ def get_player_displayname(steam_id):
     if isinstance(steam_id, str):
         return players[0]['personaname'] if players else None
     elif isinstance(steam_id, list):
-        return [player['personaname'] for player in players]
+        return {player['steamid']: player['personaname'] for player in players}
     else:
         raise ValueError("steam_id must be a string or a list of strings.")
 
 
 def get_friend_list(steam_id):
+
     url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/"
     params = {
         "key": API_KEY,
@@ -52,10 +53,7 @@ def get_friend_list(steam_id):
     friends = response.json()['friendslist']['friends']
     friend_ids = [friend['steamid'] for friend in friends]
 
-    player_data = get_player_summary(friend_ids)
-    players = player_data.get('response', {}).get('players', [])
-
-    displayname_of_friends = {player['steamid']: player['personaname'] for player in players}
+    displayname_of_friends = get_player_displayname(friend_ids)
 
     friends_list = [
         {
