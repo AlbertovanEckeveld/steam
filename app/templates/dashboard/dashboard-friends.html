@@ -6,18 +6,18 @@
             <div class="user-section">
                 <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
                 <span class="user-name">{{ display_name }}</span>
-                <a href="{{ url_for('auth.logout') }}">Logout</a>
+                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
             </div>
 {% endblock %}
 
 {% block content %}
 
-        <h1>Dashboard - friends</h1>
+        <h1>Dashboard - {{ gettext('Vrienden') }}</h1>
 
         <table>
             <thead>
                 <tr>
-                    <th><h2>Friends list  ({{ total_friends }})</h2></th>
+                    <th><h2>{{ gettext('Vriendenlijst') }}  ({{ total_friends }})</h2></th>
                 </tr>
             </thead>
             <tbody>

@@ -13,10 +13,10 @@
                 <img src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo">
             </div>
             <ul class="nav-links">
-                <li><a href="{{ url_for('dashboard.index') }}">HOME</a></li>
-                <li><a href="{{ url_for('dashboard.library') }}">LIBRARY</a></li>
-                <li><a href="{{ url_for('dashboard.friends') }}">FRIENDS</a></li>
-                <li><a href="#">NOTIFICATIONS</a></li>
+                <li><a href="{{ url_for('dashboard.index') }}">{{ gettext('HOME') }}</a></li>
+                <li><a href="{{ url_for('dashboard.library') }}">{{ gettext('BIBLIOTHEEK') }}</a></li>
+                <li><a href="{{ url_for('dashboard.friends') }}">{{ gettext('VRIENDEN') }}</a></li>
+                <li><a href="#">{{ gettext('MELDINGEN') }}</a></li>
             </ul>
             <ul class="nav-links">
                 <li><a href="#">Nederlands</a></li>
@@ -35,7 +35,7 @@
 
     <footer class="footer-section">
         <div class="container">
-            <p>&copy; 2024 All Rights Reserved.</p>
+            <p>&copy; 2024 {{ gettext('Alle rechten zijn voorbehouden') }}</p>
             <ul>
                 <li><a href="#">Social Media</a></li>
                 <li><a href="#">Terms and Conditions</a></li>
