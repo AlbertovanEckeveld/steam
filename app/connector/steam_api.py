@@ -77,6 +77,7 @@ def get_friend_list(steam_id):
 
 
 def get_owned_games(steam_id):
+    # https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001?key=B6B4AC430AB9229F3E35F0DD9FF510CE&steamid=76561198163327724&include_appinfo=1&include_played_free_games=1
     url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
     params = {
         "key": API_KEY,
