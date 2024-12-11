@@ -35,7 +35,7 @@ def login():
 @Auth.route('/authorize')
 def authorize():
     response = request.args
-    steam_id = response['openid.identity'].split('/id/')[-1]
+    steam_id = response['openid.claimed_id'].split('/id/')[-1]
     fetchdata = get_player_summary(steam_id)['response']['players'][0]
     user = UserProfile(steam_id=steam_id,
                        display_name = fetchdata['personaname'],
@@ -43,8 +43,7 @@ def authorize():
                        url_avatar_medium = fetchdata['avatarmedium'],
                        url_avatar_full = fetchdata['avatarfull'],
                        url_profile = fetchdata['profileurl'],
-                       friend_list = get_friend_list(steam_id),
-                       game_list = get_owned_games(steam_id)
+                       friend_list = get_friend_list(steam_id)
                        )
 
     session['user'] = user
