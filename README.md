@@ -7,6 +7,6 @@ Welkom bij ons innovatieve project waarin onze startup het Steam-platform gaat o
 
 
 Vertaling:
-pybabel extract -F babel.cfg -o messages.pot .
-pybabel init -i messages.pot -d app/translations -l en
-pybabel compile -d app/translations
+- pybabel extract -F babel.cfg -o messages.pot .
+- pybabel init -i messages.pot -d app/translations -l en
+- pybabel compile -d app/translations
