@@ -90,6 +90,7 @@ def get_owned_games(steam_id):
         {
             'appid': game['appid'],
             'name': game['name'],
+            'url_avatar': game['img_icon_url'],
             'playtime_forever': round((game['playtime_forever'] / 60), 2)
         }
         for game in response.json()['response']['games']

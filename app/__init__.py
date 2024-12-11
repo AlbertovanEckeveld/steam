@@ -1,13 +1,14 @@
 from flask import Flask, make_response, redirect, request
 from pathlib import Path
 
-from app.connector import get_secret_key
-from app.connector.babel import babel, get_locale
-from app.router.dashboard import Dash
-from app.router.error import page_not_found
-from app.router.index import Index
 from app.router.auth import Auth
 from app.router.test import Test
+from app.router.index import Index
+from app.router.dashboard import Dash
+from app.router.error import page_not_found
+
+from app.connector import get_secret_key
+from app.connector.babel import babel, get_locale
 
 
 def create_app():
@@ -34,9 +35,7 @@ def create_app():
 
     @app.route('/change_language/<lang>')
     def change_language(lang):
-        # Ensure the language is valid
         if lang in app.config['LANGUAGES']:
-            # Set the language in a cookie
             response = make_response(redirect(request.referrer))
             response.set_cookie('lang', lang)
             return response
