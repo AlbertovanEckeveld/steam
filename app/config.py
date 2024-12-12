@@ -1,12 +1,15 @@
-SECRET_KEY = '4H1ebkk20pqYWCUa8mCvveeHHIOfFZy1zIJGD0b8Pq7lC6MMJpktd0jG21hf88dY'
-STEAM_API_KEY = 'B6B4AC430AB9229F3E35F0DD9FF510CE'
-DB_HOST='20.82.97.226'
-DB_PORT=5432
-DB_DATABASE='steam_db'
-DB_USER='steam-app'
-DB_PASSWORD='CNN4pxvAkyFyvJR/iE88APyelhg='
-address='127.0.0.1:5000'
+from app.initialize import env_vars
 
-LANGUAGES = ['en', 'nl']
-BABEL_DEFAULT_LOCALE = 'nl'
-BABEL_TRANSLATION_FOLDER = 'translations'
+DB_HOST                         = env_vars.get('DB_HOST')
+DB_PORT                         = env_vars.get('DB_PORT')
+DB_USER                         = env_vars.get('DB_USER')
+DB_PASSWORD                     = env_vars.get('DB_PASSWORD')
+DB_DATABASE                     = env_vars.get('DB_DATABASE')
+
+ADDRESS                         = env_vars.get('ADDRESS')
+SECRET_KEY                      = env_vars.get('SECRET_KEY')
+STEAM_API_KEY                   = env_vars.get('STEAM_API')
+
+LANGUAGES                       = ['en', 'nl']
+BABEL_DEFAULT_LOCALE            = 'nl'
+BABEL_TRANSLATION_FOLDER        = 'translations'
