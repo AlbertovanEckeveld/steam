@@ -1,6 +1,3 @@
-from http.client import responses
-from turtledemo.clock import datum
-
 import requests
 from app.models import UserProfile
 from app.connector import get_steam_API
