@@ -66,6 +66,9 @@ if [ -d "steam" ]; then
         # Maak een virtuele omgeving aan
         python -m venv .venv
 
+        # Kopieer het .env-bestand
+        cp .env.example .env
+
         # Activeer de virtuele omgeving
         source .venv/bin/activate
 
