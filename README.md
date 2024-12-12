@@ -14,19 +14,19 @@ Na het clonen van de repository, volg deze stappen om de omgeving op te zetten e
 
 Instaleer eerst het installatie script:
 ```sh
-   wget -o setup.sh https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA
+wget -o setup.sh https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA
 ```
 Maak het script executable:
 ```sh
-   sudo chmod a+x setup.sh
+sudo chmod a+x setup.sh
 ```
 Clone het project:
 ```sh
-   git clone https://github.com/AlbertovanEckeveld/steam.git
+git clone https://github.com/AlbertovanEckeveld/steam.git
 ```
 Voer het script vervolgens uit:
 ```sh
-   sudo ./setup.sh
+sudo ./setup.sh
 ```
 
 
