@@ -14,7 +14,11 @@ Na het clonen van de repository, volg deze stappen om de omgeving op te zetten e
 
 Instaleer eerst het installatie script:
 ```sh
+<<<<<<< HEAD
 curl -L  https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA -o setup.sh
+=======
+wget -o setup.sh https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA
+>>>>>>> origin
 ```
 Maak het script executable:
 ```sh
