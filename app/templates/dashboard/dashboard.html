@@ -6,12 +6,12 @@
             <div class="user-section">
                 <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
                 <span class="user-name">{{ display_name }}</span>
-                <a href="{{ url_for('auth.logout') }}">Logout</a>
+                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
             </div>
 {% endblock %}
 
 {% block content %}
         <h1>Dashboard</h1>
-        <p>Logged in as: {{ display_name }}</p>
+        <p>{{ gettext('Ingelogd als') }}: {{ display_name }}</p>
 
 {% endblock %}
