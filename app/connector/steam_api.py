@@ -1,3 +1,6 @@
+from http.client import responses
+from turtledemo.clock import datum
+
 import requests
 from app.models import UserProfile
 from app.connector import get_steam_API
@@ -171,6 +174,50 @@ def get_common_games(own_games, friend_games):
         }
         for game_id in own_game_dict if game_id in friend_game_dict
     ]
+
+def get_recent_playtime(steam_id: str):
+    """
+        Haal recent gespeelde spellen op van de Steam API.
+
+        Argumenten:
+        steam_id (str): Steam ID.
+
+        Returns:
+        list: Lijst van recent gespeelde spellen met speeltijden.
+    """
+
+    # Stel de URL en parameters in voor de API-aanroep
+    url = "https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/"
+    params = { "key": API_KEY, "steamid": steam_id, "format": "json"}
+
+    # Voer de API-aanroep uit en controleer de status code van de response
+    responses = requests.get(url, params=params)
+    data = responses.json()
+    if responses.status_code != 200 or 'response' not in responses.json():
+        print(f"Mislukt om recent gespeelde spellen op te halen: {responses.status_code}")
+        return []
+
+    # Haal de spellenlijst op uit de response
+    if "games" in data["response"]:
+        games = data["response"]["games"]
+        total_playtime_2weeks = round((sum(game['playtime_2weeks'] for game in games) / 60), 2)
+        sorted_games = sorted([
+            {
+                'name': game['name'],
+                'playtime_2weeks': round((game['playtime_2weeks']) / 60, 2)
+            }
+            for game in games
+        ], key=lambda game: game['playtime_2weeks'], reverse=True)
+        return {
+            'total_playtime_2weeks': total_playtime_2weeks,
+            'games': sorted_games
+        }
+    else:
+        return {
+            'total_playtime_2weeks': 0,
+            'games': []
+        }
+
 
 def get_user_profile(steam_id: str = None, incl_friends: bool = True, incl_games: bool = False):
     """

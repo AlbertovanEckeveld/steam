@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, url_for
 
-from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games
+from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime
 from app.models import UserProfile
 
 # Dashboard blueprint
@@ -22,10 +22,15 @@ def index():
     user_profile_data = session.get('user_profile')
     user = UserProfile(**user_profile_data) if user_profile_data else None
 
+    recent = get_recent_playtime(user.get_steam_id())
+
     # Render de dashboard hoofdpagina met gebruikersgegevens
     return render_template("dashboard/dashboard.html",
-                           display_name=user.get_displayname() if user else "",
-                           url_avatar=user.get_avatar_small() if user else "")
+                            display_name=user.get_displayname() if user else "",
+                            url_avatar=user.get_avatar_small() if user else "",
+                            games=recent['games'],
+                            playtime=recent['total_playtime_2weeks']
+                           )
 
 
 @Dash.route('/library')

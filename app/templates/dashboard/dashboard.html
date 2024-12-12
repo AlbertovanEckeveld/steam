@@ -14,4 +14,30 @@
         <h1>Dashboard</h1>
         <p>{{ gettext('Ingelogd als') }}: {{ display_name }}</p>
 
+        <h2>{{ gettext('Mijn statestieken') }}</h2>
+        <p>{{ gettext('Uren gespeeld deze 2 weken') }}: {{ playtime }}</p>
+
+        <h2>{{ gettext('Meest gespeelde spelen deze 2 weken:') }}</h2>
+    {% if games %}
+        <table>
+            <thead>
+                <tr>
+                    <th><h2>{{ gettext('Naam van spel') }}</h2></th>
+                    <th><h2>{{ gettext('Uren deze 2 weken') }}</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                    <tr>
+                        <td>{{ game.name }}</td>
+                        <td>{{ game.playtime_2weeks }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
+        <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
+    {% endif %}
+
 {% endblock %}
