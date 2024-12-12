@@ -131,9 +131,6 @@ def compare(friend_id):
     # Maak een UserProfile object voor de vriend
     friend = get_user_profile(friend_id, incl_friends=False, incl_games=True)
 
-    print(friend.get_games())
-    print(f"Friend: {friend.get_steam_id()} Naam: {friend.get_displayname()}")
-
     # Render de spellenvergelijkingspagina met gebruikers- en vriend spelgegevens
     return render_template("dashboard/dashboard-friends-compare.html",
                            display_name=user.get_displayname() if user else "",
