@@ -1,8 +1,8 @@
-from app.config import DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD, SECRET_KEY, STEAM_API_KEY
+from app.config import DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD, SECRET_KEY, STEAM_API_KEY, IPv4_address
 
 def get_database_info():
     """
-    Load database info variables from .env file.
+        Laad databaseinformatie variabelen uit het bestand config.py.
     """
     return {
         'DB_HOST': DB_HOST,
@@ -12,21 +12,27 @@ def get_database_info():
 
 def get_user_info():
     """
-    Load user info variables from .env file.
+        Laad gebruikersinformatie variabelen uit het bestand config.py.
     """
     return {
         'DB_USER': DB_USER,
         'DB_PASSWORD': DB_PASSWORD
     }
 
+def get_ipv4_address():
+    """
+        Laad IPv4-adres variabelen uit het bestand config.py.
+    """
+    return IPv4_address
+
 def get_steam_API():
     """
-    Load steam api variables from .env file.
+        Laad Steam API-sleutel variabel uit het bestand config.py.
     """
     return STEAM_API_KEY
 
 def get_secret_key():
     """
-    Load secret key variables from .env file.
+        Laad secret key variabel uit het bestand config.py.
     """
     return SECRET_KEY

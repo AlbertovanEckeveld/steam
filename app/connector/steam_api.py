@@ -1,64 +1,95 @@
 import requests
-
 from app.connector import get_steam_API
 
 API_KEY = get_steam_API()
 
-
 def get_player_summary(steam_id):
-    url = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/"
+    """
+        Haal gebruiker(s) informatie op van de Steam API.
 
+        Argumenten:
+        steam_id (str of list): Steam ID of lijst van Steam IDs.
+
+        Returns:
+        dict: gebruikers informatie.
+    """
+    id = steam_id
+
+    # Controleer of steam_id een lijst is en converteer naar een string
     if isinstance(steam_id, list):
         steam_id = ",".join(steam_id)
     elif not isinstance(steam_id, str):
-        raise ValueError("steam_id must be a string or a list of strings.")
+        raise ValueError("steam_id moet een string of een lijst zijn.")
 
-    params = {
-        "key": API_KEY,
-        "steamids": steam_id
-    }
+    # Stel de URL en parameters in voor de API-aanroep
+    url = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/"
+    params = { "key": API_KEY, "steamids": steam_id }
 
+    # Voer de API-aanroep uit en controleer de status code van de response
     response = requests.get(url, params=params)
     if response.status_code == 200:
-        return response.json()
+
+        # return de spelersgegevens op uit de response
+        if isinstance(id, str):
+            return response.json()['response']['players'][0]
+
+        return response.json()['response']['players']
     else:
-        raise Exception(f"API request failed with status code {response.status_code}")
+        raise Exception(f"API request mislukt met status code {response.status_code}")
 
 
 def get_player_displayname(steam_id):
-    player_data = get_player_summary(steam_id)
-    players = player_data.get('response', {}).get('players', [])
+    """
+        Haal gebruikersweergavenaam op van de Steam API.
 
+        Argumenten:
+        steam_id (str of list): één Steam ID of lijst van Steam IDs.
+
+        Returns:
+        str of dict: Gebruikersweergavenaam of dict van weergavenamen.
+    """
+    # Haal de spelersgegevens op van de Steam API
+    player_data = get_player_summary(steam_id)
+
+    # Controleer of steam_id een string is en retourneer de weergavenaam
     if isinstance(steam_id, str):
-        return players[0]['personaname'] if players else None
-    elif isinstance(steam_id, list):
-        return {player['steamid']: player['personaname'] for player in players}
-    else:
-        raise ValueError("steam_id must be a string or a list of strings.")
+        return player_data[0]['personaname'] if player_data else None
+
+    # Maak een dict van weergavenamen voor een lijst van Steam IDs
+    return {player['steamid']: player['personaname'] for player in player_data}
 
 
 def get_friend_list(steam_id):
+    """
+        Haal vriendenlijst op van de Steam API.
 
+        Argumenten:
+        steam_id (str): Steam ID.
+
+        Returns:
+        list: Lijst van vrienden met details.
+    """
+    # Stel de URL en parameters in voor de API-aanroep
     url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/"
-    params = {
-        "key": API_KEY,
-        "steamid": steam_id,
-        "relationship": "friend"
-    }
+    params = {"key": API_KEY, "steamid": steam_id, "relationship": "friend" }
 
+    # Voer de API-aanroep uit en controleer de status code van de response
     response = requests.get(url, params=params)
     if response.status_code != 200 or 'friendslist' not in response.json():
-        raise Exception(f"Failed to fetch friends list: {response.status_code}")
+        raise Exception(f"Mislukt om vriendenlijst op te halen: {response.status_code}")
 
+    # Haal de vriendenlijst op uit de response
     friends = response.json()['friendslist']['friends']
     friend_ids = [friend['steamid'] for friend in friends]
 
-    displayname_of_friends = get_player_displayname(friend_ids)
+    # Haal de weergavenamen van de vrienden op
+    display_names = get_player_displayname(friend_ids)
 
-    friends_list = [
+    # Return een lijst van vrienden met details
+    return [
         {
             'steamid': friend['steamid'],
-            'display_name': displayname_of_friends.get(friend['steamid'], "Unknown"),
+            'display_name': display_names.get(friend['steamid'], "Unknown"),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }
@@ -73,11 +104,19 @@ def get_friend_list(steam_id):
     #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
     # ]
 
-    return friends_list
 
 
 def get_owned_games(steam_id):
-    # https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001?key=B6B4AC430AB9229F3E35F0DD9FF510CE&steamid=76561198163327724&include_appinfo=1&include_played_free_games=1
+    """
+        Haal bezeten spellen op van de Steam API.
+
+        Argumenten:
+        steam_id (str): Steam ID.
+
+        Returns:
+        list: Lijst van bezeten spellen met details.
+    """
+    # Stel de URL en parameters in voor de API-aanroep
     url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
     params = {
         "key": API_KEY,
@@ -86,15 +125,24 @@ def get_owned_games(steam_id):
         "include_played_free_games": 1
     }
 
+    # Voer de API-aanroep uit en controleer de status code van de response
     response = requests.get(url, params=params)
-    game_list = [
-        {
-            'appid': game['appid'],
-            'name': game['name'],
-            'url_avatar': game['img_icon_url'],
-            'playtime_forever': round((game['playtime_forever'] / 60), 2)
-        }
-        for game in response.json()['response']['games']
-    ]
+    if response.status_code != 200 or 'response' not in response.json():
+        raise Exception(f"Failed to fetch game list: {response.status_code}")
 
-    return sorted(game_list, key=lambda game: game['playtime_forever'], reverse=True)
+    # Haal de spellenlijst op uit de response
+    games = response.json().get('response', {}).get('games', [])
+
+    # Retourneer spellenlijst met details van de spellen gesorteerd op speeltijd
+    return sorted(
+        [
+            {
+                'appid': game['appid'],
+                'name': game['name'],
+                'url_avatar': game['img_icon_url'],
+                'playtime_forever': round(game['playtime_forever'] / 60, 2)
+            }
+            for game in games
+        ],
+        key=lambda game: game['playtime_forever'], reverse=True
+    )
