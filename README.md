@@ -8,7 +8,7 @@ Welkom bij ons innovatieve project waarin onze startup het Steam-platform gaat o
 
 na clonen:
 - python -m venv .venv
-- source .venv/bin/activate
+- source .venv/bin/activate (Linux / MacOS) -> .\env\Scripts\activate.bat or .\env\Scripts\Activate.ps1 (Windows) 
 - pip install -r requirements.txt
 - pybabel compile -d app/translations
 - flask run --host=0.0.0.0 --debug
