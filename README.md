@@ -10,6 +10,7 @@ na clonen:
 - python -m venv .venv
 - source .venv/bin/activate
 - pip install -r requirements.txt
+- pybabel compile -d app/translations
 - flask run --host=0.0.0.0 --debug
 
 Vertaling:
