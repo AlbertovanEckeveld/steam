@@ -5,7 +5,7 @@ DB_PORT=5432
 DB_DATABASE='steam_db'
 DB_USER='steam-app'
 DB_PASSWORD='CNN4pxvAkyFyvJR/iE88APyelhg='
-IPv4_address='127.0.0.1:5000'
+address='127.0.0.1:5000'
 
 LANGUAGES = ['en', 'nl']
 BABEL_DEFAULT_LOCALE = 'nl'

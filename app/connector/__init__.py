@@ -1,4 +1,4 @@
-from app.config import DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD, STEAM_API_KEY, IPv4_address
+from app.config import DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD, STEAM_API_KEY, address
 
 def get_database_info():
     """
@@ -19,11 +19,11 @@ def get_user_info():
         'DB_PASSWORD': DB_PASSWORD
     }
 
-def get_ipv4_address():
+def get_address():
     """
         Laad IPv4-adres variabelen uit het bestand config.py.
     """
-    return IPv4_address
+    return address
 
 def get_steam_API():
     """
