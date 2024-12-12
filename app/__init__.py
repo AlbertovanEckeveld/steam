@@ -6,15 +6,13 @@ from app.router.test import Test
 from app.router.index import Index
 from app.router.dashboard import Dash
 from app.router.error import page_not_found
-
-from app.connector import get_secret_key
 from app.connector.babel import babel, get_locale
-from app.config import LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSLATION_FOLDER
+from app.config import SECRET_KEY, LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSLATION_FOLDER
 
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = get_secret_key()
+    app.secret_key = SECRET_KEY
 
     basedir = Path(__file__).resolve().parent
 

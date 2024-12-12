@@ -1,4 +1,5 @@
 import requests
+from app.models import UserProfile
 from app.connector import get_steam_API
 
 API_KEY = get_steam_API()
@@ -29,7 +30,7 @@ def get_player_summary(steam_id):
     response = requests.get(url, params=params)
     if response.status_code == 200:
 
-        # return de spelersgegevens op uit de response
+        # Return de spelersgegevens op uit de response
         if isinstance(id, str):
             return response.json()['response']['players'][0]
 
@@ -59,7 +60,7 @@ def get_player_displayname(steam_id):
     return {player['steamid']: player['personaname'] for player in player_data}
 
 
-def get_friend_list(steam_id):
+def get_friend_list(steam_id: str):
     """
         Haal vriendenlijst op van de Steam API.
 
@@ -95,18 +96,16 @@ def get_friend_list(steam_id):
         }
         for friend in friends
     ]
-
-    # {'steamid': '76561198033737398', 'relationship': 'friend', 'friend_since': 1509471831}
-
-    # Voorbeeld van de output:
-    # [
-    #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
-    #   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
-    # ]
-
+"""
+ Voorbeeld van de return:
+ [
+   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
+   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
+ ]
+"""
 
 
-def get_owned_games(steam_id):
+def get_owned_games(steam_id: str):
     """
         Haal bezeten spellen op van de Steam API.
 
@@ -133,7 +132,7 @@ def get_owned_games(steam_id):
     # Haal de spellenlijst op uit de response
     games = response.json().get('response', {}).get('games', [])
 
-    # Retourneer spellenlijst met details van de spellen gesorteerd op speeltijd
+    # Return spellenlijst met details van de spellen gesorteerd op speeltijd
     return sorted(
         [
             {
@@ -146,3 +145,42 @@ def get_owned_games(steam_id):
         ],
         key=lambda game: game['playtime_forever'], reverse=True
     )
+
+def get_user_profile(steam_id: str, incl_games: bool = True):
+    """
+        Maakt een userprofile aan.
+
+        Argumenten:
+        steam_id (str): Steam ID.
+
+        Returns:
+        dict: Gebruikersprofiel.
+    """
+    # Haal de spelersgegevens op van de Steam API
+    player_data = get_player_summary(steam_id)
+
+    # Haal de vriendenlijst op van de Steam API
+    try:
+        friend_list = get_friend_list(steam_id)
+    except Exception as e:
+        friend_list = []
+        print(f'Fout: {e}, vriendenlijst mogelijk op prive. Vriendenlijst is leeg: {friend_list}')
+
+    # Haal de bezeten spellen op van de Steam API
+    try:
+        owned_games = get_owned_games(steam_id)
+    except Exception as e:
+        owned_games = []
+        print(f'Fout: {e}, gamelijst mogelijk op prive. Gamelijst is leeg: {friend_list}')
+
+    # Maak een dict van het gebruikersprofiel
+    return {
+        'steamid': player_data['steamid'],
+        'display_name': player_data['personaname'],
+        'profile_url': player_data['profileurl'],
+        'avatar_url': player_data['avatarfull'],
+        'friend_count': player_data['friend_count'],
+        'friends': friend_list,
+        'game_count': len(owned_games),
+        'games': owned_games
+    }
