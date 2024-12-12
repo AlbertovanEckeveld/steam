@@ -146,6 +146,32 @@ def get_owned_games(steam_id: str):
         key=lambda game: game['playtime_forever'], reverse=True
     )
 
+def get_common_games(own_games, friend_games):
+    """
+        Bepaal gemeenschappelijke spellen en vergelijk speeltijden.
+
+        Argumenten:
+        own_games (list): Lijst van spellen die de gebruiker bezit.
+        friend_games (list): Lijst van spellen die de vriend bezit.
+
+        Returns:
+        list: Lijst van gemeenschappelijke spellen met speeltijden.
+    """
+    # Maak dictionaries van de spellenlijsten
+    own_game_dict = {game['appid']: game for game in own_games}
+    friend_game_dict = {game['appid']: game for game in friend_games}
+
+    # Maak een lijst van gemeenschappelijke spellen met speeltijden
+    return [
+        {
+            'id': game_id,
+            'name': own_game_dict[game_id]['name'],
+            'own_playtime': own_game_dict[game_id].get('playtime_forever', 0),
+            'friend_playtime': friend_game_dict[game_id].get('playtime_forever', 0)
+        }
+        for game_id in own_game_dict if game_id in friend_game_dict
+    ]
+
 def get_user_profile(steam_id: str = None, incl_friends: bool = True, incl_games: bool = False):
     """
         Maakt een userprofile aan.
