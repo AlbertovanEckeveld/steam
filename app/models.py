@@ -15,20 +15,23 @@ class UserProfile:
     def __str__(self):
         return self.steam_id
 
-    def get_displayname(self):
+    def get_displayname(self) -> str:
         return self.display_name
 
-    def get_avatar_small(self):
+    def get_avatar_small(self) -> str:
         return self.url_avatar_small
 
-    def get_avatar_medium(self):
+    def get_avatar_medium(self) -> str:
         return self.url_avatar_medium
 
-    def get_avatar_full(self):
+    def get_avatar_full(self) -> str:
         return self.url_avatar_full
 
-    def get_profile(self):
+    def get_profile(self) -> str:
         return self.url_profile
 
-    def get_friendlist(self):
+    def get_friendlist(self) -> List:
         return self.friend_list
+
+    def get_gamelist(self) -> List:
+        return self.game_list
