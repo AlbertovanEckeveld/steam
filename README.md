@@ -10,6 +10,26 @@ Welkom bij ons innovatieve project waarin onze startup het Steam-platform gaat o
 
 Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie te draaien:
 
+## Installatie script
+
+Instaleer eerst het installatie script:
+```sh
+   wget https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA
+```
+Maak het script executable:
+```sh
+   sudo chmod a+x setup.sh
+```
+Clone het project:
+```sh
+   git clone https://github.com/AlbertovanEckeveld/steam.git
+```
+Voer het script vervolgens uit:
+```sh
+   sudo ./setup.sh
+```
+
+
 ## Docker
 Om de applicatie in een Docker-container te draaien, volg deze stappen:  
 
