@@ -9,6 +9,7 @@ from app.router.error import page_not_found
 
 from app.connector import get_secret_key
 from app.connector.babel import babel, get_locale
+from app.config import LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSLATION_FOLDER
 
 
 def create_app():
@@ -17,22 +18,24 @@ def create_app():
 
     basedir = Path(__file__).resolve().parent
 
-    app.config['LANGUAGES'] = ['en', 'nl']
-    app.config['BABEL_DEFAULT_LOCALE'] = 'nl'
-    app.config['BABEL-TRANSLATION-FOLDER'] = str(basedir / 'translations')
+    app.config['LANGUAGES'] = LANGUAGES
+    app.config['BABEL_DEFAULT_LOCALE'] = BABEL_DEFAULT_LOCALE
+    app.config['BABEL-TRANSLATION-FOLDER'] = str(basedir / BABEL_TRANSLATION_FOLDER)
 
-    # Initialize Flask extensions here
+    # Initialiseer hier Flask-extensies
     babel.init_app(app, locale_selector=get_locale)
 
-    # Error handling
+    # Foutafhandeling
     app.errorhandler(404)(page_not_found)
 
-    # Register blueprints here
+    # Registreer hier blauwdrukken
     app.register_blueprint(Index, url_prefix='/')
     app.register_blueprint(Dash, url_prefix='/dashboard')
     app.register_blueprint(Auth, url_prefix='/auth')
     app.register_blueprint(Test, url_prefix='/test')
 
+
+    # Taal wijzigen
     @app.route('/change_language/<lang>')
     def change_language(lang):
         if lang in app.config['LANGUAGES']:
