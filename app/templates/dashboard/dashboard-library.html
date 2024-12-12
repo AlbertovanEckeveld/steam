@@ -12,7 +12,7 @@
 
 {% block content %}
         <h1>Dashboard - {{ gettext('Bibliotheek') }}</h1>
-
+    {% if games %}
         <table>
             <thead>
                 <tr>
@@ -29,6 +29,11 @@
                 {% endfor %}
             </tbody>
         </table>
+    {% else %}
+        <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
+        <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
+        <a href="{{ url_for('dashboard.index') }}">{{ gettext('Ga terug') }}</a>
+    {% endif %}
 
 
 {% endblock %}
