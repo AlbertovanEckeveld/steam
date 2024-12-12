@@ -1,4 +1,4 @@
-from flask import Flask, make_response, redirect, request
+from flask import Flask, make_response, redirect, request, session
 from pathlib import Path
 
 from app.router.auth import Auth
@@ -13,7 +13,6 @@ from app.config import SECRET_KEY, LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSL
 def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
-
     basedir = Path(__file__).resolve().parent
 
     app.config['LANGUAGES'] = LANGUAGES
