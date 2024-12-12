@@ -15,6 +15,12 @@ class UserProfile:
     def __str__(self):
         return self.steam_id
 
+    def __dir__(self):
+        return ['steam_id', 'display_name', 'url_avatar_small', 'url_avatar_medium', 'url_avatar_full', 'url_profile', 'friend_list']
+
+    def get_steam_id(self) -> str:
+        return self.steam_id
+
     def get_displayname(self) -> str:
         return self.display_name
 
@@ -33,5 +39,13 @@ class UserProfile:
     def get_friendlist(self) -> List:
         return self.friend_list
 
-    def get_gamelist(self) -> List:
+    def get_total_friends(self) -> int:
+        if self.friend_list is None: return 0
+        return len(self.friend_list)
+
+    def get_games(self) -> List:
         return self.game_list
+
+    def get_total_games(self) -> int:
+        if self.game_list is None: return 0
+        return len(self.game_list)

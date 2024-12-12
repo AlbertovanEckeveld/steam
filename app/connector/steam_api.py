@@ -4,7 +4,7 @@ from app.connector import get_steam_API
 
 API_KEY = get_steam_API()
 
-def get_player_summary(steam_id):
+def get_player_summary(steam_id: str):
     """
         Haal gebruiker(s) informatie op van de Steam API.
 
@@ -39,7 +39,7 @@ def get_player_summary(steam_id):
         raise Exception(f"API request mislukt met status code {response.status_code}")
 
 
-def get_player_displayname(steam_id):
+def get_player_displayname(steam_id: str):
     """
         Haal gebruikersweergavenaam op van de Steam API.
 
@@ -104,7 +104,6 @@ def get_friend_list(steam_id: str):
  ]
 """
 
-
 def get_owned_games(steam_id: str):
     """
         Haal bezeten spellen op van de Steam API.
@@ -127,7 +126,8 @@ def get_owned_games(steam_id: str):
     # Voer de API-aanroep uit en controleer de status code van de response
     response = requests.get(url, params=params)
     if response.status_code != 200 or 'response' not in response.json():
-        raise Exception(f"Failed to fetch game list: {response.status_code}")
+        print(f"Mislukt om bezeten spellen op te halen: {response.status_code}")
+        return []
 
     # Haal de spellenlijst op uit de response
     games = response.json().get('response', {}).get('games', [])
@@ -146,7 +146,7 @@ def get_owned_games(steam_id: str):
         key=lambda game: game['playtime_forever'], reverse=True
     )
 
-def get_user_profile(steam_id: str, incl_games: bool = True):
+def get_user_profile(steam_id: str = None, incl_friends: bool = True, incl_games: bool = False):
     """
         Maakt een userprofile aan.
 
@@ -159,6 +159,19 @@ def get_user_profile(steam_id: str, incl_games: bool = True):
     # Haal de spelersgegevens op van de Steam API
     player_data = get_player_summary(steam_id)
 
+    # Controleer of de vriendenlijst moet worden opgenomen
+    if not incl_friends and not incl_games:
+        # Maak een dict van het gebruikersprofiel
+        profile =  UserProfile(
+            steam_id=player_data['steamid'],
+            display_name=player_data['personaname'],
+            url_avatar_small=player_data['avatar'],
+            url_avatar_medium=player_data['avatarmedium'],
+            url_avatar_full=player_data['avatarfull'],
+            url_profile=player_data['profileurl'],
+        )
+        return profile
+
     # Haal de vriendenlijst op van de Steam API
     try:
         friend_list = get_friend_list(steam_id)
@@ -166,21 +179,36 @@ def get_user_profile(steam_id: str, incl_games: bool = True):
         friend_list = []
         print(f'Fout: {e}, vriendenlijst mogelijk op prive. Vriendenlijst is leeg: {friend_list}')
 
-    # Haal de bezeten spellen op van de Steam API
-    try:
-        owned_games = get_owned_games(steam_id)
-    except Exception as e:
-        owned_games = []
-        print(f'Fout: {e}, gamelijst mogelijk op prive. Gamelijst is leeg: {friend_list}')
+    # Controleer of de spellenlijst moet worden opgenomen
+    if incl_games:
+        # Haal de spellenlijst op van de Steam API
+        try:
+            game_list = get_owned_games(steam_id)
+        except Exception as e:
+            game_list = []
+            print(f'Fout: {e}, vriendenlijst mogelijk op prive. Vriendenlijst is leeg: {friend_list}')
+
+        # Maak een dict van het gebruikersprofiel
+        profile = UserProfile(
+            steam_id=player_data['steamid'],
+            display_name=player_data['personaname'],
+            url_avatar_small=player_data['avatar'],
+            url_avatar_medium=player_data['avatarmedium'],
+            url_avatar_full=player_data['avatarfull'],
+            url_profile=player_data['profileurl'],
+            friend_list=friend_list,
+            game_list=game_list
+        )
+        return profile
 
     # Maak een dict van het gebruikersprofiel
-    return {
-        'steamid': player_data['steamid'],
-        'display_name': player_data['personaname'],
-        'profile_url': player_data['profileurl'],
-        'avatar_url': player_data['avatarfull'],
-        'friend_count': player_data['friend_count'],
-        'friends': friend_list,
-        'game_count': len(owned_games),
-        'games': owned_games
-    }
+    profile = UserProfile(
+        steam_id=player_data['steamid'],
+        display_name=player_data['personaname'],
+        url_avatar_small=player_data['avatar'],
+        url_avatar_medium=player_data['avatarmedium'],
+        url_avatar_full=player_data['avatarfull'],
+        url_profile=player_data['profileurl'],
+        friend_list=friend_list,
+    )
+    return profile

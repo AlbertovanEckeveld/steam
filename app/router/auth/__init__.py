@@ -1,10 +1,8 @@
 from flask import Blueprint, session, redirect, url_for, request
 from urllib.parse import urlencode
 
-from app.models import UserProfile
-from app.connector import get_ipv4_address
-from app.connector.steam_api import get_player_summary, get_friend_list
-
+from app.connector import get_address
+from app.connector.steam_api import get_user_profile
 
 # Auth blueprint
 Auth = Blueprint('auth', __name__, static_folder='app/static', template_folder='app/templates')
@@ -40,8 +38,8 @@ def login():
         'openid.identity': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.mode': 'checkid_setup',
-        'openid.return_to': f'http://{get_ipv4_address()}/auth/authorize',
-        'openid.realm': f'http://{get_ipv4_address()}'
+        'openid.return_to': f'http://{get_address()}/auth/authorize',
+        'openid.realm': f'http://{get_address()}'
     }
 
     # Maak de query string en de volledige URL voor de Steam login
@@ -60,35 +58,16 @@ def authorize():
         Returns:
         Response: Redirect naar de dashboard pagina.
     """
-    # Haal de response parameters op
-    response = request.args
-
     # Haal de Steam ID op uit de response
+    response = request.args
     steam_id = response['openid.claimed_id'].split('/id/')[-1]
 
-    # Haal de gebruikersgegevens op van Steam
-    fetchdata = get_player_summary(steam_id)
-
-    try:
-        # Haal de vriendenlijst op van de gebruiker van Steam
-        friend_list = get_friend_list(steam_id)
-    except Exception as e:
-        # Log de fout en stel de vriendenlijst in op een lege lijst
-        print(e)
-        friend_list = []
-
-    # Maak een UserProfile object voor de gebruiker
-    user = UserProfile(steam_id=steam_id,
-                       display_name = fetchdata['personaname'],
-                       url_avatar_small = fetchdata['avatar'],
-                       url_avatar_medium = fetchdata['avatarmedium'],
-                       url_avatar_full = fetchdata['avatarfull'],
-                       url_profile = fetchdata['profileurl'],
-                       friend_list = friend_list
-                       )
+    # Maak een User object met de Steam ID
+    user_profile = get_user_profile(steam_id)
+    session['user_profile'] = user_profile.__dict__
 
     # Stel de sessiegegevens in voor de ingelogde gebruiker
-    session['user'] = user
+    session['user'] = steam_id
 
     # Redirect naar de dashboard pagina
     return redirect(url_for('dashboard.index'))
