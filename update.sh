@@ -98,7 +98,6 @@ else
 
 fi
 
-
 # Start de applicatie
 echo -e "${BOLD_GREEN}Applicatie starten..${NC}"
 

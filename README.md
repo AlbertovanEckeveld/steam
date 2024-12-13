@@ -6,6 +6,12 @@
 Welkom bij ons innovatieve project waarin onze startup het Steam-platform gaat ondersteunen en uitbreiden. Ons team van vijf studenten gaat aan de slag om Steam te helpen met het verbeteren van gebruikerservaringen door inzichten te bieden in gaming-gedrag via nieuwe, interactieve dashboards en grafische weergaven.
 
 
+## Update instructies
+
+```sh
+sudo 
+```
+
 ## Installatie instructies
 
 Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie te draaien:

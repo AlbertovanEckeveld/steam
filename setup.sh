@@ -63,6 +63,10 @@ if [ ! -d ${STEAM_DIR} ]; then
         sudo apt-get update > /dev/null 2>&1
         sudo apt-get install -y python3 python3-venv python3-pip python3-dev build-essential gettext git > /dev/null 2>&1
     fi
+
+    # Kloon de repository
+    sudo -u ${REQUIRED_USER} git clone git@github.com:AlbertovanEckeveld/steam.git
+    echo -e "${GREEN}Repository succesvol gekloond${NC}"
     
 else 
     echo -e "${GREEN}Repository is al gekloond${NC}"
@@ -71,8 +75,39 @@ fi
 # Controleer of de repository succesvol is gekloond en controleer het bestaan van virtuele omgeving
 if [ -d ${STEAM_DIR} ]; then
 
-    echo -e "${GREEN}Repository succesvol gekloond${NC}"
+        # Controleer of de repository bestaat
+    if [  -d "${GIT_DIR}" ]; then
+        echo -e "${BOLD_GREEN}Repository gevonden${NC}"
 
+        # Controleer of de huidige branch de productie-branch is
+        if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
+            echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
+            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
+        fi
+
+        # Controleer of de repository up-to-date is
+        sudo -u ${REQUIRED_USER} git fetch origin prod_webserv > /dev/null 2>&1
+
+        if [ "$(sudo -u ${REQUIRED_USER} git rev-parse HEAD)" != "$(sudo -u ${REQUIRED_USER} git rev-parse @{u})" ]; then
+            echo -e "${BOLD_YELLOW}Repository is verouderd, ${YELLOW}nu bijwerken..${NC}"
+            
+            # Controleer of merge is mogelijk
+            if sudo -u ${REQUIRED_USER} git merge-base @{u} HEAD; then
+                sudo -u ${REQUIRED_USER} git merge origin/prod_webserv
+            else
+                echo -e "${RED}Merge is niet mogelijk${NC}"
+                exit 1
+            fi
+
+            echo -e "${GREEN}Repository succesvol bijgewerkt${NC}"
+
+        else
+            echo -e "${GREEN}Repository was al up-to-date${NC}"
+        fi
+
+    fi
+
+    # Controleer of de virtuele omgeving bestaat
     if [ ! -d ${VENV_DIR} ]; then
         echo -e "${YELLOW}Virtuele omgeving bestaat nog niet.. ${YELLOW}Virtuele omgeving configureren${NC}"
 
