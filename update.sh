@@ -38,53 +38,70 @@ else
     exit 1
 fi
 
-# Controleer of de repository nog niet is gekloond
-if [ ! -d "steam" ]; then
-    echo -e "${YELLOW}Repository nog niet gekloond, nu klonen..${NC}"
+# Controleer of de virtuele omgeving bestaat
+if [ ! -d ".venv" ]; then
+    echo -e "${YELLOW}Virtuele omgeving bestaat nog niet.. ${YELLOW}Virtuele omgeving configureren${NC}"
 
-    # Controleer of Python3 is geïnstalleerd
-    if [ ! -x "$(command -v python3)" ]; then
-        echo -e "${YELLOW}Python3 is niet geïnstalleerd, installeren...${NC}"
-        sudo apt-get update > /dev/null 2>&1
-        sudo apt-get install -y python3 python3-venv python3-pip python3-dev build-essential gettext git > /dev/null 2>&1
-    fi
+    cd steam
     
-else 
-    echo -e "${GREEN}Repository is al gekloond${NC}"
+    # Maak een virtuele omgeving aan
+    python -m venv .venv
+
+    # Kopieer het .env-bestand
+    cp .env.example .env
+
+    # Activeer de virtuele omgeving
+    source .venv/bin/activate
+
+    # Installeer de vereiste Python-pakketten
+    pip install -r requirements.txt > /dev/null 2>&1 
+
+    # Compileer vertalingen
+    pybabel compile -d app/translations
+
+    # Deactiveer de virtuele omgeving
+    deactivate
+
+    echo -e "${GREEN}Virtuele omgeving aangemaakt${NC}"
+fi
+    
+# Controleer of de repository bestaat
+if [ -d ".git" ]; then
+    echo -e "${BOLD_GREEN}Repository gevonden${NC}"
+
+    # Controleer of de huidige branch de productie-branch is
+    if [ "$(git branch --show-current)" != "prod_webserv" ]; then
+        echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
+        git checkout origin/prod_webserv
+    fi
+
+else
+    echo -e "${BOLD_RED}Repository niet gevonden${NC}"
+    exit 1
 fi
 
-# Controleer of de repository succesvol is gekloond en controleer het bestaan van virtuele omgeving
-if [ -d "steam" ]; then
+# Controleer of de repository up-to-date is
+git fetch origin prod_webserv
 
-    echo -e "${GREEN}Repository succesvol gekloond${NC}"
-
-    if [ ! -d ".venv" ]; then
-        echo -e "${YELLOW}Virtuele omgeving bestaat nog niet.. ${YELLOW}Virtuele omgeving configureren${NC}"
-
-        cd steam
-        
-        # Maak een virtuele omgeving aan
-        python -m venv .venv
-
-        # Kopieer het .env-bestand
-        cp .env.example .env
-
-        # Activeer de virtuele omgeving
-        source .venv/bin/activate
-
-        # Installeer de vereiste Python-pakketten
-        pip install -r requirements.txt > /dev/null 2>&1 
-
-        # Compileer vertalingen
-        pybabel compile -d app/translations
-
-        # Deactiveer de virtuele omgeving
-        deactivate
-
-        echo -e "${GREEN}Virtuele omgeving aangemaakt${NC}"
-    fi
+if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+    echo -e "${BOLD_YELLOW}Repository is verouderd, ${YELLOW}nu bijwerken..${NC}"
     
+    # Controleer of merge is mogelijk
+    if git merge-base @{u} HEAD; then
+        git merge origin/prod_webserv
+    else
+        echo -e "${RED}Merge is niet mogelijk${NC}"
+        exit 1
+    fi
+
+    echo -e "${GREEN}Repository succesvol bijgewerkt${NC}"
+
+else
+    echo -e "${GREEN}Repository is up-to-date${NC}"
 fi
+    
+# Start de applicatie
+echo -e "${BOLD_GREEN}Applicatie starten..${NC}"
 
 # Controleer of Docker al is geïnstalleerd
 if [ -x "$(command -v docker)" ]; then
@@ -136,11 +153,6 @@ if [ "$(systemctl is-enabled docker)" != "enabled" ]; then
     echo -e "${BOLD_RED}Docker-service is niet ingeschakeld.. ${YELLOW}Inschakelen ...${NC}"
     sudo systemctl enable docker
     echo -e "${GREEN}Docker-service ingeschakeld${NC}"
-fi
-
-# Controleer of de working directory de steam-map is
-if [ -d "steam" ]; then
-    cd steam
 fi
 
 # Controleer of er een Dockerfile aanwezig is
