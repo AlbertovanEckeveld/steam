@@ -88,6 +88,7 @@ if [ -d ${STEAM_DIR} ]; then
         # Controleer of de repository up-to-date is
         sudo -u ${REQUIRED_USER} git fetch origin prod_webserv > /dev/null 2>&1
 
+        # Controleer of de repository verouderd is
         if [ "$(sudo -u ${REQUIRED_USER} git rev-parse HEAD)" != "$(sudo -u ${REQUIRED_USER} git rev-parse @{u})" ]; then
             echo -e "${BOLD_YELLOW}Repository is verouderd, ${YELLOW}nu bijwerken..${NC}"
             
@@ -104,6 +105,9 @@ if [ -d ${STEAM_DIR} ]; then
         else
             echo -e "${GREEN}Repository was al up-to-date${NC}"
         fi
+
+        sudo chmod a+x ${REQUIRED_SCRIPT}
+        sudo chmod a+x update.sh
 
     fi
 

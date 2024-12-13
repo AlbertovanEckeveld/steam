@@ -87,12 +87,50 @@ if [ ! -d "${GIT_DIR}" ]; then
 else
     echo -e "${BOLD_GREEN}Git is geïnitialiseerd${NC}"
 
-    # Update de repository met update-repo.sh script
-    if [ -f "${REQUIRED_SCRIPT}" ]; then
-        echo -e "${GREEN}${REQUIRED_SCRIPT} script gevonden${NC}"
-        sudo -u ${REQUIRED_USER} bash ${REQUIRED_SCRIPT}
+    # Controleer of de repository bestaat
+    if [  -d "${GIT_DIR}" ]; then
+        echo -e "${BOLD_GREEN}Repository gevonden${NC}"
+
+        # Controleer of de huidige branch de productie-branch is
+        if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
+            echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
+            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
+        fi
+
+        # Controleer of er niet-gecommiteerde wijzigingen zijn
+        if [ "$(sudo -u ${REQUIRED_USER} git status --porcelain)" ]; then
+            echo -e "${BOLD_YELLOW}Er zijn niet-gecommiteerde wijzigingen.. ${YELLOW}Commit wijzigingen${NC}"
+            sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
+            files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
+            sudo -u ${REQUIRED_USER} sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
+            sudo -u ${REQUIRED_USER} git push origin prod_webserv > /dev/null 2>&1
+            echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
+        fi
+
+        # Controleer of de repository up-to-date is
+        sudo -u ${REQUIRED_USER} git fetch origin prod_webserv > /dev/null 2>&1
+
+        if [ "$(sudo -u ${REQUIRED_USER} git rev-parse HEAD)" != "$(sudo -u ${REQUIRED_USER} git rev-parse @{u})" ]; then
+            echo -e "${BOLD_YELLOW}Repository is verouderd, ${YELLOW}nu bijwerken..${NC}"
+            
+            # Controleer of merge is mogelijk
+            if sudo -u ${REQUIRED_USER} git merge-base @{u} HEAD; then
+                sudo -u ${REQUIRED_USER} git merge origin/prod_webserv
+            else
+                echo -e "${RED}Merge is niet mogelijk${NC}"
+                exit 1
+            fi
+
+            echo -e "${GREEN}Repository succesvol bijgewerkt${NC}"
+
+        else
+            echo -e "${GREEN}Repository was al up-to-date${NC}"
+        fi
+
+        echo -e "${BOLD_GREEN}Repository is up-to-date${NC}"
+
     else
-        echo -e "${RED}${REQUIRED_SCRIPT} script niet gevonden${NC}"
+        echo -e "${BOLD_RED}Repository niet gevonden${NC}"
         exit 1
     fi
 

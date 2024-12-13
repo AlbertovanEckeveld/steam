@@ -9,7 +9,7 @@ Welkom bij ons innovatieve project waarin onze startup het Steam-platform gaat o
 ## Update instructies
 
 ```sh
-sudo 
+sudo ./update.sh
 ```
 
 ## Installatie instructies
