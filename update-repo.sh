@@ -3,7 +3,7 @@
 # Auteur: Alberto van Eckeveld
 # Datum: 2021-09-29
 # Versie: 1.0
-# Beschrijving: Dit script installeert en configureert de Steam-applicatie op een Debian-gebaseerd systeem
+# Beschrijving: Dit script update de Steam-applicatie code op een Debian-gebaseerd systeem
 
 # Definieer kleurcodes
 RED='\033[0;31m'
@@ -24,6 +24,14 @@ set -e
 # Toon de naam van de auteur
 echo -e "${BOLD_BLUE}Script gemaakt door Alberto van Eckeveld${NC}"
 
+# Controleer of het systeem Debian-gebaseerd is
+if [ -f "/etc/debian_version" ]; then
+    echo -e "${BOLD_GREEN}Systeem is Debian-gebaseerd${NC}"
+else
+    echo -e "${BOLD_RED}Systeem is niet Debian-gebaseerd${NC}"
+    exit 1
+fi
+
 # Controleer of de repository bestaat
 if [ -d ".git" ]; then
     echo -e "${BOLD_GREEN}Repository gevonden${NC}"
@@ -34,18 +42,18 @@ if [ -d ".git" ]; then
         git checkout origin/prod_webserv
     fi
 
-        # Controleer of er niet-gecommiteerde wijzigingen zijn
+    # Controleer of er niet-gecommiteerde wijzigingen zijn
     if [ "$(git status --porcelain)" ]; then
         echo -e "${BOLD_YELLOW}Er zijn niet-gecommiteerde wijzigingen.. ${YELLOW}Commit wijzigingen${NC}"
-        git add .
+        git add . > /dev/null 2>&1
         files=$(git status --porcelain | awk '{print $2}')
         git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
-        git push origin prod_webserv
-        echo -e "${GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
+        git push origin prod_webserv > /dev/null 2>&1
+        echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
     fi
 
     # Controleer of de repository up-to-date is
-    git fetch origin prod_webserv
+    git fetch origin prod_webserv > /dev/null 2>&1
 
     if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
         echo -e "${BOLD_YELLOW}Repository is verouderd, ${YELLOW}nu bijwerken..${NC}"
@@ -61,7 +69,7 @@ if [ -d ".git" ]; then
         echo -e "${GREEN}Repository succesvol bijgewerkt${NC}"
 
     else
-        echo -e "${GREEN}Repository is up-to-date${NC}"
+        echo -e "${GREEN}Repository was al up-to-date${NC}"
     fi
 
 else
