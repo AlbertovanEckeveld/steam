@@ -26,6 +26,13 @@ VENV_DIR=".venv"
 GIT_DIR=".git"
 DEBIAN_FILE="/etc/debian_version"
 
+# Docker informatie
+DOCKER_IMAGE="steam-project"
+DOCKER_CONTAINER="steam-project-prod"
+DOCKER_PORT="5000"
+DOCKER_IP="localhost"
+
+
 # Stop onmiddellijk als een commando een niet-nul status retourneert
 set -e
 
@@ -175,12 +182,14 @@ if [ -f "Dockerfile" ]; then
     fi
 
     # Bouw het Docker-image
-    sudo docker build -t steam-project . > /dev/null  2>&1 
+    sudo docker build -t ${DOCKER_IMAGE} . > /dev/null  2>&1 
     echo -e "${BOLD_GREEN}Docker-image succesvol gebouwd${NC}"
 
     # Start de Docker-container
-    sudo docker run -d -p 5000:5000 --name steam-project-prod steam-project
+    sudo docker run -d -p 5000:5000 --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
     echo -e "${BOLD_GREEN}Docker-container succesvol gestart${NC}"
+    echo -e "${BOLD_GREEN}Docker container aangemaakt met de naam ${DOCKER_CONTAINER}$, met poort: ${DOCKER_PORT}{NC}"
+    echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op http://${DOCKER_IP}:${DOCKER_PORT}${NC}"
 else 
     echo -e "${BOLD_RED}Dockerfile niet gevonden${NC}"
     exit 1

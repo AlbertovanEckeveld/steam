@@ -18,22 +18,25 @@ BOLD_YELLOW='\033[1;33m'
 BOLD_BLUE='\033[1;34m'
 BOLD_NC='\033[0m' # Geen Kleur
 
+# Script informatie
+AUTHOR="Alberto van Eckeveld"
+REQUIRED_USER="school"
+REQUIRED_SCRIPT="update-repo.sh"
+VENV_DIR=".venv"
+GIT_DIR=".git"
+DEBIAN_FILE="/etc/debian_version"
+
 # Stop onmiddellijk als een commando een niet-nul status retourneert
 set -e
 
-# Toon de naam van de auteur
-echo -e "${BOLD_BLUE}Script gemaakt door Alberto van Eckeveld${NC}"
-
 # Controleer of het systeem Debian-gebaseerd is
-if [ -f "/etc/debian_version" ]; then
-    echo -e "${BOLD_GREEN}Systeem is Debian-gebaseerd${NC}"
-else
+if [ ! -f "${DEBIAN_FILE}" ]; then
     echo -e "${BOLD_RED}Systeem is niet Debian-gebaseerd${NC}"
     exit 1
 fi
 
 # Controleer of de repository bestaat
-if [ -d ".git" ]; then
+if [  -d "${GIT_DIR}" ]; then
     echo -e "${BOLD_GREEN}Repository gevonden${NC}"
 
     # Controleer of de huidige branch de productie-branch is
@@ -71,6 +74,8 @@ if [ -d ".git" ]; then
     else
         echo -e "${GREEN}Repository was al up-to-date${NC}"
     fi
+
+    echo -e "${BOLD_GREEN}Repository is up-to-date${NC}"
 
 else
     echo -e "${BOLD_RED}Repository niet gevonden${NC}"
