@@ -112,24 +112,7 @@ else
         fi
 
         # Controleer of de repository up-to-date is
-        sudo -u ${REQUIRED_USER} git fetch origin prod_webserv > /dev/null 2>&1
-
-        if [ "$(sudo -u ${REQUIRED_USER} git rev-parse HEAD)" != "$(sudo -u ${REQUIRED_USER} git rev-parse @{u})" ]; then
-            echo -e "${BOLD_YELLOW}Repository is verouderd, ${YELLOW}nu bijwerken..${NC}"
-            
-            # Controleer of merge is mogelijk
-            if sudo -u ${REQUIRED_USER} git merge-base @{u} HEAD; then
-                sudo -u ${REQUIRED_USER} git merge origin/prod_webserv
-            else
-                echo -e "${RED}Merge is niet mogelijk${NC}"
-                exit 1
-            fi
-
-            echo -e "${GREEN}Repository succesvol bijgewerkt${NC}"
-
-        else
-            echo -e "${GREEN}Repository was al up-to-date${NC}"
-        fi
+        sudo -u ${REQUIRED_USER} git pull origin prod_webserv > /dev/null 2>&1
 
         echo -e "${BOLD_GREEN}Repository is up-to-date${NC}"
 
