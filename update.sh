@@ -92,12 +92,12 @@ else
         echo -e "${BOLD_GREEN}Repository gevonden${NC}"
 
         # Controleer of de huidige branch de productie-branch is
-        if [ "$(git branch --show-current)" != "prod_webserv" ]; then
+        if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
             echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
-            git add . > /dev/null 2>&1
-            git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $(git status --porcelain | awk '{print $2}')"
-            git push origin $(git branch --show-current)
-            git checkout origin/prod_webserv
+            sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
+            sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')"
+            sudo -u ${REQUIRED_USER} git push origin $(sudo -u ${REQUIRED_USER} git branch --show-current)
+            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
         fi
 
         # Controleer of er niet-gecommiteerde wijzigingen zijn
@@ -106,7 +106,7 @@ else
             sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
             files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
             sudo -u ${REQUIRED_USER} sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
-            sudo -u ${REQUIRED_USER} git push origin prod_webserv > /dev/null 2>&1
+            sudo -u ${REQUIRED_USER} git push origin HEAD:prod_webserv > /dev/null 2>&1
             echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
         fi
 
