@@ -3,7 +3,7 @@
 # Auteur: Alberto van Eckeveld
 # Datum: 2021-09-29
 # Versie: 1.0
-# Beschrijving: Dit script update de Steam-applicatie op een Debian-gebaseerd systeem
+# Beschrijving: Dit script installeert en configureert de Steam-applicatie op een Debian-gebaseerd systeem
 
 # Definieer kleurcodes
 RED='\033[0;31m'
@@ -24,6 +24,7 @@ REQUIRED_USER="school"
 REQUIRED_SCRIPT="update-repo.sh"
 VENV_DIR=".venv"
 GIT_DIR=".git"
+STEAM_DIR="steam"
 DEBIAN_FILE="/etc/debian_version"
 
 # Docker informatie
@@ -52,55 +53,53 @@ else
     exit 1
 fi
 
-# Controleer of de virtuele omgeving bestaat
-if [ ! -d "${VENV_DIR}" ]; then
-    echo -e "${YELLOW}Virtuele omgeving bestaat nog niet.. ${YELLOW}Virtuele omgeving configureren${NC}"
+# Controleer of de repository nog niet is gekloond
+if [ ! -d ${STEAM_DIR} ]; then
+    echo -e "${YELLOW}Repository nog niet gekloond, nu klonen..${NC}"
 
-    cd ${STEAM_DIR}
-    
-    # Maak een virtuele omgeving aan
-    python -m venv ${VENV_DIR}
-
-    # Kopieer het .env-bestand
-    cp .env.example .env
-
-    # Activeer de virtuele omgeving
-    source ${VENV_DIR}/bin/activate
-
-    # Installeer de vereiste Python-pakketten
-    pip install -r requirements.txt > /dev/null 2>&1 
-
-    # Compileer vertalingen
-    pybabel compile -d app/translations
-
-    # Deactiveer de virtuele omgeving
-    deactivate
-
-    echo -e "${GREEN}Virtuele omgeving aangemaakt${NC}"
-fi
-    
-# Controleer of git is geinitialiseerd
-if [ ! -d "${GIT_DIR}" ]; then
-    echo -e "${YELLOW}Git is nog niet geïnitialiseerd"
-    exit 1
-
-else
-    echo -e "${BOLD_GREEN}Git is geïnitialiseerd${NC}"
-
-    # Update de repository met update-repo.sh script
-    if [ -f "${REQUIRED_SCRIPT}" ]; then
-        echo -e "${GREEN}${REQUIRED_SCRIPT} script gevonden${NC}"
-        sudo -u ${REQUIRED_USER} bash ${REQUIRED_SCRIPT}
-    else
-        echo -e "${RED}${REQUIRED_SCRIPT} script niet gevonden${NC}"
-        exit 1
+    # Controleer of Python3 is geïnstalleerd
+    if [ ! -x "$(command -v python3)" ]; then
+        echo -e "${YELLOW}Python3 is niet geïnstalleerd, installeren...${NC}"
+        sudo apt-get update > /dev/null 2>&1
+        sudo apt-get install -y python3 python3-venv python3-pip python3-dev build-essential gettext git > /dev/null 2>&1
     fi
-
+    
+else 
+    echo -e "${GREEN}Repository is al gekloond${NC}"
 fi
 
+# Controleer of de repository succesvol is gekloond en controleer het bestaan van virtuele omgeving
+if [ -d ${STEAM_DIR} ]; then
 
-# Start de applicatie
-echo -e "${BOLD_GREEN}Applicatie starten..${NC}"
+    echo -e "${GREEN}Repository succesvol gekloond${NC}"
+
+    if [ ! -d ${VENV_DIR} ]; then
+        echo -e "${YELLOW}Virtuele omgeving bestaat nog niet.. ${YELLOW}Virtuele omgeving configureren${NC}"
+
+        cd ${STEAM_DIR}
+        
+        # Maak een virtuele omgeving aan
+        python -m venv ${VENV_DIR}
+
+        # Kopieer het .env-bestand
+        cp .env.example .env
+
+        # Activeer de virtuele omgeving
+        source ${VENV_DIR}/bin/activate
+
+        # Installeer de vereiste Python-pakketten
+        pip install -r requirements.txt > /dev/null 2>&1 
+
+        # Compileer vertalingen
+        pybabel compile -d app/translations
+
+        # Deactiveer de virtuele omgeving
+        deactivate
+
+        echo -e "${GREEN}Virtuele omgeving aangemaakt${NC}"
+    fi
+    
+fi
 
 # Controleer of Docker al is geïnstalleerd
 if [ -x "$(command -v docker)" ]; then
@@ -136,7 +135,7 @@ else
 
     echo -e "${GREEN}Docker succesvol geïnstalleerd${NC}"
     echo -e "${GREEN}Docker-service gestart${NC}"
-    echo -e "${GREEN}Gebruiker toegevoegd aan de Docker-groep${NC}"
+    echo -e "${GREEN}Gebruiker: ${${REQUIRED_USER}} toegevoegd aan de Docker-groep${NC}"
 fi
 
 # Controleren of de Docker-service actief is
@@ -152,6 +151,11 @@ if [ "$(systemctl is-enabled docker)" != "enabled" ]; then
     echo -e "${BOLD_RED}Docker-service is niet ingeschakeld.. ${YELLOW}Inschakelen ...${NC}"
     sudo systemctl enable docker
     echo -e "${GREEN}Docker-service ingeschakeld${NC}"
+fi
+
+# Controleer of de working directory de steam-map is
+if [ ! -d ${STEAM_DIR} ]; then
+    cd ${STEAM_DIR}
 fi
 
 # Controleer of er een Dockerfile aanwezig is
