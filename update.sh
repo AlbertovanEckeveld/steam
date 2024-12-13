@@ -175,7 +175,7 @@ if [ -f "Dockerfile" ]; then
     # Controleer of het Docker-image bestaat
     if [ "$(sudo docker images -q ${DOCKER_IMAGE} )" ]; then
         # Verwijder het Docker-image
-        sudo docker image image ${DOCKER_IMAGE}
+        sudo docker image rm ${DOCKER_IMAGE}
         echo -e "${GREEN}Oude Docker-image: ${DOCKER_IMAGE} verwijderd${NC}"
     fi
 
