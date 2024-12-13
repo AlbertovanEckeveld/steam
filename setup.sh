@@ -65,7 +65,7 @@ if [ ! -d ${STEAM_DIR} ]; then
     fi
 
     # Kloon de repository
-    sudo -u ${REQUIRED_USER} git clone git@github.com:AlbertovanEckeveld/steam.git
+    sudo -u ${REQUIRED_USER} git clone git@github.com:AlbertovanEckeveld/steam.git > /dev/null 2>&1
     echo -e "${GREEN}Repository succesvol gekloond${NC}"
     
 else 
@@ -73,7 +73,7 @@ else
 fi
 
 # Controleer of de repository succesvol is gekloond en controleer het bestaan van virtuele omgeving
-if [ -d ${STEAM_DIR} ]; then
+if [ -d "${STEAM_DIR}" ]; then
 
     cd ${STEAM_DIR}
 
@@ -83,8 +83,9 @@ if [ -d ${STEAM_DIR} ]; then
 
         # Controleer of de huidige branch de productie-branch is
         if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
-            echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
-            sudo -u ${REQUIRED_USER} git switch origin/prod_webserv --detach
+            echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: origin/prod_webserv${NC}"
+            sudo -u ${REQUIRED_USER} git config --global advice.detachedHead false
+            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
         fi
 
         # Controleer of de repository up-to-date is
@@ -112,7 +113,7 @@ if [ -d ${STEAM_DIR} ]; then
         pip install -r requirements.txt > /dev/null 2>&1 
 
         # Compileer vertalingen
-        pybabel compile -d app/translations
+        pybabel compile -d app/translations > /dev/null 2>&1
 
         # Deactiveer de virtuele omgeving
         deactivate
