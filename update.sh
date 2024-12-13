@@ -96,7 +96,7 @@ else
             echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
             sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
             sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')"
-            sudo -u ${REQUIRED_USER} git push origin HEAD:$(sudo -u ${REQUIRED_USER} git branch --show-current)
+            sudo -u ${REQUIRED_USER} git push origin HEAD:prod_webserv > /dev/null 2>&1
             sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
         fi
 
