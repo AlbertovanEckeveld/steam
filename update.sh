@@ -30,7 +30,7 @@ DEBIAN_FILE="/etc/debian_version"
 DOCKER_IMAGE="steam-project"
 DOCKER_CONTAINER="steam-project-prod"
 DOCKER_PORT="5000"
-DOCKER_IP="localhost"
+DOCKER_IP="192.168.178.248"
 
 
 # Stop onmiddellijk als een commando een niet-nul status retourneert
