@@ -18,11 +18,19 @@ BOLD_YELLOW='\033[1;33m'
 BOLD_BLUE='\033[1;34m'
 BOLD_NC='\033[0m' # Geen Kleur
 
+# Script informatie
+AUTHOR="Alberto van Eckeveld"
+REQUIRED_USER="school"
+REQUIRED_SCRIPT="update-repo.sh"
+VENV_DIR=".venv"
+GIT_DIR=".git"
+DEBIAN_FILE="/etc/debian_version"
+
 # Stop onmiddellijk als een commando een niet-nul status retourneert
 set -e
 
 # Toon de naam van de auteur
-echo -e "${BOLD_BLUE}Script gemaakt door Alberto van Eckeveld${NC}"
+echo -e "${BOLD_BLUE}Script gemaakt door ${AUTHOR}${NC}"
 
 # Controleer of het script als root wordt uitgevoerd
 if [ "$EUID" -ne 0 ]; then
@@ -31,7 +39,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Controleer of het systeem Debian-gebaseerd is
-if [ -f "/etc/debian_version" ]; then
+if [ -f "${DEBIAN_FILE}" ]; then
     echo -e "${BOLD_GREEN}Systeem is Debian-gebaseerd${NC}"
 else
     echo -e "${BOLD_RED}Systeem is niet Debian-gebaseerd${NC}"
@@ -39,7 +47,7 @@ else
 fi
 
 # Controleer of de virtuele omgeving bestaat
-if [ ! -d ".venv" ]; then
+if [ ! -d "${VENV_DIR}" ]; then
     echo -e "${YELLOW}Virtuele omgeving bestaat nog niet.. ${YELLOW}Virtuele omgeving configureren${NC}"
 
     cd steam
@@ -66,7 +74,7 @@ if [ ! -d ".venv" ]; then
 fi
     
 # Controleer of git is geinitialiseerd
-if [ ! -d ".git" ]; then
+if [ ! -d "${GIT_DIR}" ]; then
     echo -e "${YELLOW}Git is nog niet geïnitialiseerd"
     exit 1
 
@@ -74,11 +82,11 @@ else
     echo -e "${BOLD_GREEN}Git is geïnitialiseerd${NC}"
 
     # Update de repository met update-repo.sh script
-    if [ -f "update-repo.sh" ]; then
-        echo -e "${GREEN}update-repo.sh script gevonden${NC}"
-        sudo -u school bash update-repo.sh
+    if [ -f "${REQUIRED_SCRIPT}" ]; then
+        echo -e "${GREEN}${REQUIRED_SCRIPT} script gevonden${NC}"
+        sudo -u ${REQUIRED_USER} bash ${REQUIRED_SCRIPT}
     else
-        echo -e "${RED}update-repo.sh script niet gevonden${NC}"
+        echo -e "${RED}${REQUIRED_SCRIPT} script niet gevonden${NC}"
         exit 1
     fi
 
