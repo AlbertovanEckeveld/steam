@@ -1,27 +1,29 @@
-# Gebruik een officiële Python runtime als parent image
-FROM python:3.9-slim
-LABEL authors="alberto"
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
 
-# Stel de werkdirectory in in de container
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install dependencies and Nginx
+RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir gunicorn
+
+# Set working directory
 WORKDIR /app
 
-# Kopieer de requirements file naar de werkdirectory
+# Install Python dependencies
 COPY requirements.txt .
-
-# Installeer de Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Kopieer de rest van de applicatiecode naar de werkdirectory
+# Copy application code
 COPY . .
 
-CMD ["pybabel", "compile", "-d", "app/translations"]
+# Copy Nginx configuration
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Stel de environment variables in
-ENV FLASK_APP=app
-ENV FLASK_ENV=production
+# Expose ports
+EXPOSE 80
 
-# Exposeer de poort waarop de app draait
-EXPOSE 5000
-
-# Definieer het commando om de app te starten
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Start Nginx and Gunicorn
+CMD service nginx start && gunicorn --bind unix:/tmp/gunicorn.sock wsgi:app
