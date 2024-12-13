@@ -1,4 +1,30 @@
-    # Controleer of de repository bestaat
+#!/bin/bash
+
+# Auteur: Alberto van Eckeveld
+# Datum: 2021-09-29
+# Versie: 1.0
+# Beschrijving: Dit script installeert en configureert de Steam-applicatie op een Debian-gebaseerd systeem
+
+# Definieer kleurcodes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # Geen Kleur
+
+BOLD='\033[1m'
+BOLD_RED='\033[1;31m'
+BOLD_GREEN='\033[1;32m'
+BOLD_YELLOW='\033[1;33m'
+BOLD_BLUE='\033[1;34m'
+BOLD_NC='\033[0m' # Geen Kleur
+
+# Stop onmiddellijk als een commando een niet-nul status retourneert
+set -e
+
+# Toon de naam van de auteur
+echo -e "${BOLD_BLUE}Script gemaakt door Alberto van Eckeveld${NC}"
+
+# Controleer of de repository bestaat
 if [ -d ".git" ]; then
     echo -e "${BOLD_GREEN}Repository gevonden${NC}"
 
