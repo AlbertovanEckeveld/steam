@@ -102,6 +102,7 @@ else
 
         # Controleer of er niet-gecommiteerde wijzigingen zijn
         if [ "$(sudo -u ${REQUIRED_USER} git status --porcelain)" ]; then
+            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
             echo -e "${BOLD_YELLOW}Er zijn niet-gecommiteerde wijzigingen.. ${YELLOW}Commit wijzigingen${NC}"
             sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
             files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
