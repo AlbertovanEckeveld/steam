@@ -65,6 +65,26 @@ if [ ! -d ".venv" ]; then
     echo -e "${GREEN}Virtuele omgeving aangemaakt${NC}"
 fi
     
+# Controleer of git is geinitialiseerd
+if [ ! -d ".git" ]; then
+    echo -e "${YELLOW}Git is nog niet geïnitialiseerd"
+    exit 1
+
+else
+    echo -e "${BOLD_GREEN}Git is geïnitialiseerd${NC}"
+
+    # Update de repository met update-repo.sh script
+    if [ -f "update-repo.sh" ]; then
+        echo -e "${GREEN}update-repo.sh script gevonden${NC}"
+        sudo -u school bash update-repo.sh
+    else
+        echo -e "${RED}update-repo.sh script niet gevonden${NC}"
+        exit 1
+    fi
+
+fi
+
+
 # Start de applicatie
 echo -e "${BOLD_GREEN}Applicatie starten..${NC}"
 
