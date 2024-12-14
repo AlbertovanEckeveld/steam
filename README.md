@@ -16,7 +16,8 @@ Project Steam is een webapplicatie geschreven in Python met behulp van het Flask
 Er zijn verschillende manieren om de applicatie te installeren en draaien, zowel lokaal als in een Docker-container.
 
 <details><summary>Installatie via Docker image</summary>
-Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie te draaien
+
+##### Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie te draaien
 in een Docker-container:  
 
 #### Bouw de Docker image:  
@@ -33,7 +34,7 @@ Met deze instructies kun je de applicatie eenvoudig opzetten en draaien, zowel l
 
 <details><summary>Installatie handmatig lokaal</summary>
 
-Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie lokaal te draaien:
+### Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie lokaal te draaien:
 
 #### 1: Maak een virtuele omgeving aan:
 ```sh
