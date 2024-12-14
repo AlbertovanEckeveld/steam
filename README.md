@@ -1,11 +1,11 @@
 ![Steam](https://logos-world.net/wp-content/uploads/2020/10/Steam-Logo-2002-present.png) 
 
 # Project Steam - Bitje bij beetje 🚀
-![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%201877413-8A2BE2)  <br> 
-![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%201886518-8A2BE2) <br>
-![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%201886710-8A2BE2) <br> 
-![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%201876166-8A2BE2) <br> 
-![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%201767972-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2)  <br> 
+![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2) <br>
+![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2) <br>
 
 ## Omschrijving
 Project Steam is bedoeld om gebruikers meer inzicht te geven in hun Steam-games en -vrienden.
