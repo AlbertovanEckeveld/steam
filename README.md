@@ -1,16 +1,20 @@
-<img src="https://logos-world.net/wp-content/uploads/2020/10/Steam-Logo-2002-present.png" alt="Steam" width="140"/>
 
-![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2)  <br> 
-![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2) <br>
-![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2) <br> 
-![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2) <br> 
-![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2) <br>
 
 # Project Steam - Bitje bij beetje  
+
+Project Steam is een semesterproject binnen de propedeuse van de opleiding HBO-ICT aan de Hogeschool Utrecht.
+
 ## Omschrijving
 Project Steam is bedoeld om gebruikers meer inzicht te geven in hun Steam-games en -vrienden.
 De Steam Web API is gebruikt om gegevens over games en gebruikers op te halen.
 Project Steam is een webapplicatie geschreven in Python met behulp van het Flask framework. 
+
+## Contributors
+![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2) 
+![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2) <br>
+![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2) 
+![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2) 
 
 ## Installatie instructies
 Er zijn verschillende manieren om de applicatie te installeren en draaien, zowel lokaal als in een Docker-container.
