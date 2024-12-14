@@ -9,7 +9,7 @@ Project Steam is thirt-party platform om gebruikers meer inzicht te geven in hun
 De Steam Web API is gebruikt om gegevens over spellen en gebruikers op te halen.
  
 <details><summary>Context: Opgeleverd prototype</summary><br>
-<br>
+
 In het opgeleverde prototype van Project Steam is het een webapplicatie, 
 die gebruikers in staat stelt om in te loggen met hun Steam-account met RFID Twee-factor authenticatie, 
 en hun eigen Steam-profiel, spellen en vrienden te bekijken.
