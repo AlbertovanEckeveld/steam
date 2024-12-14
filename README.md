@@ -122,7 +122,7 @@ sudo chmod a+x setup.sh && sudo ./setup.sh
 ```
 </details>
 
-Nadat de applicatie is geïnstalleerd en draait, is de url:  ```http://<ip-adres>:5000/```
+Nadat de applicatie is geïnstalleerd en de docker container draait, is de url:  ```http://<ip-adres>:5000/```
 
 ## Gebruik
 
