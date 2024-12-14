@@ -1,4 +1,4 @@
-
+<p align="center"><img alt="Steam" src="https://img.itch.zone/aW1nLzE4MzUyNzU5LnBuZw==/original/8DRbfb.png" width="260"></p>
 
 # Project Steam - Bitje bij beetje  
 
