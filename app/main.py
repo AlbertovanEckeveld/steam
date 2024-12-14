@@ -1,5 +1,10 @@
-from flask import Flask, make_response, redirect, request, session
+import sys
 from pathlib import Path
+from flask import Flask, make_response, redirect, request, session
+
+# Voeg de projectroot toe aan het Python-pad
+project_root = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_root))
 
 from app.router.auth import Auth
 from app.router.test import Test
@@ -8,7 +13,6 @@ from app.router.dashboard import Dash
 from app.router.error import page_not_found
 from app.connector.babel import babel, get_locale
 from app.config import SECRET_KEY, LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSLATION_FOLDER
-
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -39,6 +43,7 @@ def change_language(lang):
         response.set_cookie('lang', lang)
         return response
     return redirect(request.referrer)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
