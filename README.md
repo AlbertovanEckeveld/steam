@@ -5,9 +5,25 @@
 Project Steam is een semesterproject binnen de propedeuse van de opleiding HBO-ICT aan de Hogeschool Utrecht.
 
 ## Omschrijving
-Project Steam is bedoeld om gebruikers meer inzicht te geven in hun Steam-games en -vrienden.
-De Steam Web API is gebruikt om gegevens over games en gebruikers op te halen.
-Project Steam is een webapplicatie geschreven in Python met behulp van het Flask framework. 
+Project Steam is thirt-party platform om gebruikers meer inzicht te geven in hun Steam-spellen en -vrienden.
+De Steam Web API is gebruikt om gegevens over spellen en gebruikers op te halen.
+ 
+<details><summary>Context: Opgeleverd prototype</summary>
+
+In het opgeleverde prototype van Project Steam is het een webapplicatie, 
+die gebruikers in staat stelt om in te loggen met hun Steam-account met RFID Twee-factor authenticatie, 
+en hun eigen Steam-profiel, spellen en vrienden te bekijken.
+Daarnaast kunnen gebruikers hun spelstatistieken vergelijken met een vriend en de gemiddelde spelprijs per spel-genre bekijken.
+
+###### Technische context
+De webapplicatie draaide op een Raspberry Pi 4 met een RFID-lezer en een Oled-display.
+
+Een Raspberry Pi Pico W met een afstands-sensor werd geplaatst boven een beeldscherm, 
+om te detecteren of de gebruiker te dicht in de buurt van het beeldscherm zit.
+
+De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
+
+</details>
 
 ## Contributors
 <a href="https://github.com/KevinMakkink" target="__blank">![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2)</a>
@@ -17,20 +33,29 @@ Project Steam is een webapplicatie geschreven in Python met behulp van het Flask
 <a href="#">![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2)</a>
 
 ## Functionaliteiten
-- Inloggen met Steam-account
-- Bekijk je eigen Steam-profiel
-- Bekijk je eigen Steam-vrienden
-- Bekijk je eigen Steam-games
-- Vergelijk je eigen Steam-games met die van je vrienden
+- Inloggen met Steam account
+- Twee-factor authenticatie met RFID tags
+- 
+- Inzien van eigen Steam-profiel, games en vrienden
+- Spel statistieken vergelijken met een vriend
+- Gemiddelde spelprijs per spel-genre
 
-## Benodigdheden
-Benodigdheden om de installatiestappen te volgen:
-
-- Python 3.8 of hoger
-- python3-venv
 
 ## Installatie instructies
-Er zijn verschillende manieren om de applicatie te installeren en draaien, zowel lokaal als in een Docker-container.
+### Benodigdheden om de installatiestappen te volgen:
+<details><summary>Benodigdheden</summary>
+
+- Git
+- Python 3.8 of hoger
+- python3-venv
+- Database (PostgreSQL)
+<br><br>
+- (Optioneel) Docker
+- (Optioneel) curl
+</details>
+
+### Installatie methodes
+Er zijn verschillende manieren om de applicatie te installeren en draaien:
 
 <details><summary>Installatie via Docker image (Windows / Linux / MacOS)</summary>
 
@@ -96,6 +121,10 @@ curl -L  https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/m
 sudo chmod a+x setup.sh && sudo ./setup.sh
 ```
 </details>
+
+De applicatie is nu geïnstalleerd en draait op ```http://<ip-adres>:5000/```
+
+## Gebruik
 
 ### Vertaling
 Om nieuwe vertalingen toe te voegen of bestaande te updaten, volg deze stappen:  
