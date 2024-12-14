@@ -3,9 +3,10 @@
 # Project Steam - Bitje bij beetje 🚀
 ![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%201876166-8A2BE2)
 ![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%201886518-8A2BE2)
+![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%201767972-8A2BE2)
 ![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%201886710-8A2BE2)
-![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20188-8A2BE2)
-![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%20188-8A2BE2)
+![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%201877413-8A2BE2)
+
 
 
 
