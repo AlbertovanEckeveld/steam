@@ -8,8 +8,8 @@ Project Steam is een semesterproject binnen de propedeuse van de opleiding HBO-I
 Project Steam is thirt-party platform om gebruikers meer inzicht te geven in hun Steam-spellen en -vrienden.
 De Steam Web API is gebruikt om gegevens over spellen en gebruikers op te halen.
  
-<details><summary>Context: Opgeleverd prototype</summary>
-
+<details><summary>Context: Opgeleverd prototype</summary><br>
+<br>
 In het opgeleverde prototype van Project Steam is het een webapplicatie, 
 die gebruikers in staat stelt om in te loggen met hun Steam-account met RFID Twee-factor authenticatie, 
 en hun eigen Steam-profiel, spellen en vrienden te bekijken.
@@ -27,15 +27,15 @@ De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
 
 ## Contributors
 <a href="https://github.com/KevinMakkink" target="__blank">![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2)</a>
-<a href="https://github.com/Remmerswaal" target="__blank">![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2)</a> <br>
-<a href="https://github.com/Maxbox10" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20UI/UX%20:-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2)</a>
-<a href="https://github.com/owzezo" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20%20Backend%20:-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2)</a>
-<a href="#">![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2)</a>
+<a href="https://github.com/Remmerswaal" target="__blank">![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-green)</a> <br>
+<a href="https://github.com/Maxbox10" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20UI/UX%20:-%20Max%20Arink:%20MaxBox10%20(1886710)-blue)</a>
+<a href="https://github.com/owzezo" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20%20Backend%20:-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-blue)</a>
+<a href="#">![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-yellow)</a>
 
 ## Functionaliteiten
 - Inloggen met Steam account
 - Twee-factor authenticatie met RFID tags
-- 
+- Gebruikersafstand monitoren met afstands-sensor
 - Inzien van eigen Steam-profiel, games en vrienden
 - Spel statistieken vergelijken met een vriend
 - Gemiddelde spelprijs per spel-genre
