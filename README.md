@@ -1,19 +1,16 @@
 ![Steam](https://logos-world.net/wp-content/uploads/2020/10/Steam-Logo-2002-present.png) 
 
 # Project Steam - Bitje bij beetje 🚀
-![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%201876166-8A2BE2)
-![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%201886518-8A2BE2)
-![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%201767972-8A2BE2)
-![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%201886710-8A2BE2)
-![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%201877413-8A2BE2)
-
-
-
+![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%201877413-8A2BE2)  <br> 
+![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%201886518-8A2BE2) <br>
+![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%201886710-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%201876166-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%201767972-8A2BE2) <br> 
 
 ## Omschrijving
+Project Steam is bedoeld om gebruikers meer inzicht te geven in hun Steam-games en -vrienden.
+De Steam Web API is gebruikt om gegevens over games en gebruikers op te halen.
 Project Steam is een webapplicatie geschreven in Python met behulp van het Flask framework. 
-De applicatie is bedoeld om gebruikers meer inzicht te geven in hun Steam-games en -vrienden.
-De applicatie maakt gebruik van de Steam Web API om gegevens over games en gebruikers op te halen.
 
 ## Installatie instructies
 Er zijn verschillende manieren om de applicatie te installeren en draaien, zowel lokaal als in een Docker-container.
