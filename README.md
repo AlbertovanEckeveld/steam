@@ -10,11 +10,24 @@ De Steam Web API is gebruikt om gegevens over games en gebruikers op te halen.
 Project Steam is een webapplicatie geschreven in Python met behulp van het Flask framework. 
 
 ## Contributors
-![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2) 
-![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2) <br>
-![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2) 
-![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2) <br> 
-![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2) 
+<a href="https://github.com/KevinMakkink" target="__blank">![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2)</a>
+<a href="https://github.com/Remmerswaal" target="__blank">![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2)</a> <br>
+<a href="https://github.com/Maxbox10" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20UI/UX%20:-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2)</a>
+<a href="https://github.com/owzezo" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20%20Backend%20:-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2)</a>
+<a href="#">![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2)</a>
+
+## Functionaliteiten
+- Inloggen met Steam-account
+- Bekijk je eigen Steam-profiel
+- Bekijk je eigen Steam-vrienden
+- Bekijk je eigen Steam-games
+- Vergelijk je eigen Steam-games met die van je vrienden
+
+## Benodigdheden
+Benodigdheden om de installatiestappen te volgen:
+
+- Python 3.8 of hoger
+- python3-venv
 
 ## Installatie instructies
 Er zijn verschillende manieren om de applicatie te installeren en draaien, zowel lokaal als in een Docker-container.
@@ -87,6 +100,8 @@ sudo chmod a+x setup.sh && sudo ./setup.sh
 ### Vertaling
 Om nieuwe vertalingen toe te voegen of bestaande te updaten, volg deze stappen:  
 
+<details><summary>Voeg een nieuwe taal toe aan de configuratie</summary>
+
 #### Extraheer de vertaalbare strings: 
 ```sh
 pybabel extract -F babel.cfg -o messages.pot .
@@ -99,3 +114,4 @@ pybabel init -i messages.pot -d app/translations -l en
 ```sh
 pybabel compile -d app/translations
 ```
+</details>
