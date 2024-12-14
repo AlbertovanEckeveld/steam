@@ -12,8 +12,8 @@ Project Steam is een webapplicatie geschreven in Python met behulp van het Flask
 ## Contributors
 ![Static Badge](https://img.shields.io/badge/AI:-%20Kevin%20Makkink:%20Kevin%20(1877413)-8A2BE2) 
 ![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-8A2BE2) <br>
-![Static Badge](https://img.shields.io/badge/SD%20(Backend):-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2) 
-![Static Badge](https://img.shields.io/badge/SD(Frontend):-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2) <br> 
+![Static Badge](https://img.shields.io/badge/SD%20UI/UX%20:-%20Max%20Arink:%20MaxBox10%20(1886710)-8A2BE2) <br>
+![Static Badge](https://img.shields.io/badge/SD%20%20Backend%20:-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-8A2BE2) 
 ![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-8A2BE2) 
 
 ## Installatie instructies
