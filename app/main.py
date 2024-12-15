@@ -1,5 +1,9 @@
-from flask import Flask, make_response, redirect, request, session
+import sys
 from pathlib import Path
+from flask import Flask, make_response, redirect, request, session
+
+basedir = Path(__file__).resolve().parent
+sys.path.append(str(basedir.parent))
 
 from app.router.auth import Auth
 from app.router.test import Test
@@ -12,7 +16,6 @@ from app.config import SECRET_KEY, LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSL
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-basedir = Path(__file__).resolve().parent
 
 app.config['LANGUAGES'] = LANGUAGES
 app.config['BABEL_DEFAULT_LOCALE'] = BABEL_DEFAULT_LOCALE
@@ -39,6 +42,7 @@ def change_language(lang):
         response.set_cookie('lang', lang)
         return response
     return redirect(request.referrer)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
