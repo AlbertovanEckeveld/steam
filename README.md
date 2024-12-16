@@ -1,4 +1,4 @@
-<p align="center"><img alt="Steam" src="https://img.itch.zone/aW1nLzE4MzUyNzU5LnBuZw==/original/8DRbfb.png" width="260"></p>
+<p align="center"><img alt="Steam" src="https://img.itch.zone/aW1nLzE4MzUyNzU5LnBuZw==/original/8DRbfb.png" width="200"></p>
 
 # Project Steam - Bitje bij beetje  
 
@@ -40,12 +40,6 @@ De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
 - Spel statistieken vergelijken met een vriend
 - Gemiddelde spelprijs per spel-genre
 
-
-## Update instructies
-
-```sh
-sudo ./update.sh
-```
 
 ## Installatie instructies
 ### Benodigdheden om de installatiestappen te volgen:
@@ -107,7 +101,8 @@ pybabel compile -d app/translations
 ```
 #### 5: Start de Flask-applicatie:  
 ```sh
-flask run --host=0.0.0.0 --debug
+cd app
+python main.py
 ```
 Met deze stappen kun je de applicatie lokaal opzetten en draaien.
 
@@ -128,6 +123,11 @@ sudo chmod a+x setup.sh && sudo ./setup.sh
 ```
 </details>
 
+## Update instructies
+#### Om de docker cotainer te updaten, volg deze stappen:
+```sh
+sudo ./update.sh
+```
 
 ## Gebruik
 
