@@ -1,25 +1,37 @@
-# Gebruik een officiële Python runtime als parent image
-FROM python:3.9-slim
-LABEL authors="Alberto van Eckeveld"
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
 
-# Stel de werkdirectory in in de container
-WORKDIR /app
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Kopieer de requirements file naar de werkdirectory
+# Install dependencies and Nginx
+RUN apt-get update && apt-get install -y nginx supervisor && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir gunicorn
+
+# Install Python dependencies
 COPY requirements.txt .
-
-# Installeer de Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Kopieer de rest van de applicatiecode naar de werkdirectory
-COPY . .
+# Copy application code
+COPY . /steam/
 
-# Stel de environment variables in
-ENV FLASK_APP=app
-ENV FLASK_ENV=production
+# Copy configuration files 
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Exposeer de poort waarop de app draait
-EXPOSE 5000
+# Set up Nginx
+COPY docker/nginx/ssl-default.conf /etc/nginx/sites-available/default
+COPY docker/nginx/ssl/certificate.crt /etc/nginx/ssl/certificate.crt
+COPY docker/nginx/ssl/private.key /etc/nginx/ssl/private.key
 
-# Definieer het commando om de app te starten
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Set working directory
+WORKDIR /steam/app
+
+# Compile translations
+RUN pybabel compile -d translations
+
+# Expose ports
+EXPOSE 80 433
+
+# Start Supervisor
+CMD ["supervisord", "-n"]
