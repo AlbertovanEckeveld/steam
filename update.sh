@@ -27,8 +27,8 @@ GIT_DIR=".git"
 DEBIAN_FILE="/etc/debian_version"
 
 # Docker informatie
-DOCKER_IMAGE="steam-project"
-DOCKER_CONTAINER="steam-project-prod"
+DOCKER_IMAGE="steam"
+DOCKER_CONTAINER="steam"
 DOCKER_PORT="80"
 DOCKER_PORT_SSL="443"
 DOCKER_IP="192.168.178.248"
