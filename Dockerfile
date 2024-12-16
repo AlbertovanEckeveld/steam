@@ -6,24 +6,32 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Install dependencies and Nginx
-RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nginx supervisor && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir gunicorn
-
-# Set working directory
-WORKDIR /app
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY . .
+COPY . /steam/
 
-# Copy Nginx configuration
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+# Copy configuration files 
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Set up Nginx
+COPY docker/nginx/ssl-default.conf /etc/nginx/sites-available/default
+COPY docker/nginx/ssl/certificate.crt /etc/nginx/ssl/certificate.crt
+COPY docker/nginx/ssl/private.key /etc/nginx/ssl/private.key
+
+# Set working directory
+WORKDIR /steam/app
+
+# Compile translations
+RUN pybabel compile -d translations
 
 # Expose ports
-EXPOSE 80
+EXPOSE 80 433
 
-# Start Nginx and Gunicorn
-CMD service nginx start && gunicorn --bind unix:/tmp/gunicorn.sock wsgi:app
+# Start Supervisor
+CMD ["supervisord", "-n"]

@@ -2,9 +2,8 @@ import sys
 from pathlib import Path
 from flask import Flask, make_response, redirect, request, session
 
-# Voeg de projectroot toe aan het Python-pad
-project_root = Path(__file__).resolve().parent.parent
-sys.path.append(str(project_root))
+basedir = Path(__file__).resolve().parent
+sys.path.append(str(basedir.parent))
 
 from app.router.auth import Auth
 from app.router.test import Test
@@ -14,9 +13,9 @@ from app.router.error import page_not_found
 from app.connector.babel import babel, get_locale
 from app.config import SECRET_KEY, LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSLATION_FOLDER
 
+
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-basedir = Path(__file__).resolve().parent
 
 app.config['LANGUAGES'] = LANGUAGES
 app.config['BABEL_DEFAULT_LOCALE'] = BABEL_DEFAULT_LOCALE
