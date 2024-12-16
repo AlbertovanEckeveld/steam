@@ -67,9 +67,9 @@ docker build -t steam-project .
 ```
 #### Draai de Docker container:  
 ```sh
-docker run -d -p 5000:5000 --name steam-project--prod steam-project
+docker run -d -p 80:80 -p 443:443 --name steam steam-project
 ```
-Met deze instructies kun je de applicatie eenvoudig opzetten en draaien, zowel lokaal als in een Docker-container.
+Nadat de applicatie is geïnstalleerd en de docker container draait, is de url:  ```https://<ip-adres>```
 
 </details>
 
@@ -122,7 +122,6 @@ sudo chmod a+x setup.sh && sudo ./setup.sh
 ```
 </details>
 
-Nadat de applicatie is geïnstalleerd en de docker container draait, is de url:  ```http://<ip-adres>:5000/```
 
 ## Gebruik
 

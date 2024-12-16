@@ -28,9 +28,10 @@ STEAM_DIR="steam"
 DEBIAN_FILE="/etc/debian_version"
 
 # Docker informatie
-DOCKER_IMAGE="steam-project"
-DOCKER_CONTAINER="steam-project-prod"
-DOCKER_PORT="5000"
+DOCKER_IMAGE="steam"
+DOCKER_CONTAINER="steam"
+DOCKER_PORT="80"
+DOCKER_PORT_SSL="443"
 DOCKER_IP="192.168.178.248"
 
 # Stop onmiddellijk als een commando een niet-nul status retourneert
@@ -60,7 +61,7 @@ if [ ! -d ${STEAM_DIR} ]; then
     # Controleer of Python3 is geïnstalleerd
     if [ ! -x "$(command -v python3)" ]; then
         echo -e "${YELLOW}Python3 is niet geïnstalleerd, installeren...${NC}"
-        sudo apt-get update > /dev/null 2>&1
+        sudo apt-get update && sudo apt-get upgrade -y > /dev/null 2>&1
         sudo apt-get install -y python3 python3-venv python3-pip python3-dev build-essential gettext git > /dev/null 2>&1
     fi
 
@@ -157,7 +158,7 @@ else
 
     echo -e "${GREEN}Docker succesvol geïnstalleerd${NC}"
     echo -e "${GREEN}Docker-service gestart${NC}"
-    echo -e "${GREEN}Gebruiker: ${${REQUIRED_USER}} toegevoegd aan de Docker-groep${NC}"
+    echo -e "${GREEN}Gebruiker: ${REQUIRED_USER} toegevoegd aan de Docker-groep${NC}"
 fi
 
 # Controleren of de Docker-service actief is
@@ -211,10 +212,10 @@ if [ -f "Dockerfile" ]; then
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE} succesvol gebouwd${NC}"
 
     # Start de Docker-container
-    sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
+    sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
     echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER} succesvol gestart${NC}"
 
-    echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op http://${DOCKER_IP}:${DOCKER_PORT}${NC}"
+    echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op https://${DOCKER_IP}:${DOCKER_PORT_SSL}${NC}"
 else 
     echo -e "${BOLD_RED}Dockerfile niet gevonden${NC}"
     exit 1
