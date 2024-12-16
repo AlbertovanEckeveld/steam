@@ -27,9 +27,10 @@ GIT_DIR=".git"
 DEBIAN_FILE="/etc/debian_version"
 
 # Docker informatie
-DOCKER_IMAGE="steam-project"
-DOCKER_CONTAINER="steam-project-prod"
-DOCKER_PORT="5000"
+DOCKER_IMAGE="steam"
+DOCKER_CONTAINER="steam"
+DOCKER_PORT="80"
+DOCKER_PORT_SSL="443"
 DOCKER_IP="192.168.178.248"
 
 # Stop onmiddellijk als een commando een niet-nul status retourneert
@@ -91,25 +92,21 @@ else
     if [  -d "${GIT_DIR}" ]; then
         echo -e "${BOLD_GREEN}Repository gevonden${NC}"
 
-        # Controleer of de huidige branch de productie-branch is
-        if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
-            echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
-            sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
-            sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')"
-            sudo -u ${REQUIRED_USER} git push origin HEAD:prod_webserv > /dev/null 2>&1
-            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
-        fi
+     # Controleer of er niet-gecommiteerde wijzigingen zijn
+    if [ "$(sudo -u ${REQUIRED_USER} git status --porcelain)" ]; then
+        echo -e "${BOLD_YELLOW}Er zijn niet-gecommiteerde wijzigingen.. ${YELLOW}Commit wijzigingen${NC}"
+        sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
+        files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
+        sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
+        sudo -u ${REQUIRED_USER} git push origin $(sudo -u ${REQUIRED_USER} git branch --show-current) 
+        echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
+    fi
 
-        # Controleer of er niet-gecommiteerde wijzigingen zijn
-        if [ "$(sudo -u ${REQUIRED_USER} git status --porcelain)" ]; then
-            sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
-            echo -e "${BOLD_YELLOW}Er zijn niet-gecommiteerde wijzigingen.. ${YELLOW}Commit wijzigingen${NC}"
-            sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
-            files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
-            sudo -u ${REQUIRED_USER} sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
-            sudo -u ${REQUIRED_USER} git push origin HEAD:prod_webserv > /dev/null 2>&1
-            echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
-        fi
+    # Controleer of de huidige branch de productie-branch is
+    if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
+        echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
+        sudo -u ${REQUIRED_USER} git switch origin/prod_webserv
+    fi
 
         # Controleer of de repository up-to-date is
         sudo -u ${REQUIRED_USER} git pull origin prod_webserv > /dev/null 2>&1
@@ -209,10 +206,10 @@ if [ -f "Dockerfile" ]; then
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE} succesvol gebouwd${NC}"
 
     # Start de Docker-container
-    sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
+    sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
     echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER} succesvol gestart${NC}"
 
-    echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op http://${DOCKER_IP}:${DOCKER_PORT}${NC}"
+    echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op https://${DOCKER_IP}:${DOCKER_PORT_SSL}${NC}"
 else 
     echo -e "${BOLD_RED}Dockerfile niet gevonden${NC}"
     exit 1

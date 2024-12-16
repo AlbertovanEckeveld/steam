@@ -39,24 +39,20 @@ fi
 if [  -d "${GIT_DIR}" ]; then
     echo -e "${BOLD_GREEN}Repository gevonden${NC}"
 
-    # Controleer of de huidige branch de productie-branch is
-    if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
-        echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
-        sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
-        sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
-        sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')"
-        sudo -u ${REQUIRED_USER} git push origin $(sudo -u ${REQUIRED_USER} git branch --show-current)
-        sudo -u ${REQUIRED_USER} git checkout origin/prod_webserv
-    fi
-
-    # Controleer of er niet-gecommiteerde wijzigingen zijn
+     # Controleer of er niet-gecommiteerde wijzigingen zijn
     if [ "$(sudo -u ${REQUIRED_USER} git status --porcelain)" ]; then
         echo -e "${BOLD_YELLOW}Er zijn niet-gecommiteerde wijzigingen.. ${YELLOW}Commit wijzigingen${NC}"
         sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
         files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
         sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
-        sudo -u ${REQUIRED_USER} git push origin prod_webserv 
+        sudo -u ${REQUIRED_USER} git push origin $(sudo -u ${REQUIRED_USER} git branch --show-current) 
         echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
+    fi
+
+    # Controleer of de huidige branch de productie-branch is
+    if [ "$(sudo -u ${REQUIRED_USER} git branch --show-current)" != "prod_webserv" ]; then
+        echo -e "${BOLD_YELLOW}Huidige branch is niet de productie-branch.. ${YELLOW}Overschakelen naar: "origin/prod_webserv"${NC}"
+        sudo -u ${REQUIRED_USER} git switch origin/prod_webserv
     fi
 
     # Controleer of de repository up-to-date is
