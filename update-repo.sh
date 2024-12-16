@@ -45,7 +45,7 @@ if [  -d "${GIT_DIR}" ]; then
         sudo -u ${REQUIRED_USER} git add . > /dev/null 2>&1
         files=$(sudo -u ${REQUIRED_USER} git status --porcelain | awk '{print $2}')
         sudo -u ${REQUIRED_USER} git commit -m "Update-script: $(date +'%Y-%m-%d %H:%M:%S') - Files: $files"
-        sudo -u ${REQUIRED_USER} git push $(sudo -u ${REQUIRED_USER} git branch --show-current) 
+        sudo -u ${REQUIRED_USER} git push origin $(sudo -u ${REQUIRED_USER} git branch --show-current) 
         echo -e "${BOLD_GREEN}Wijzigingen succesvol gecommit & gepushed: ${files}"
     fi
 
