@@ -18,7 +18,11 @@ COPY . /steam/
 
 # Copy configuration files 
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY docker/nginx/default.conf /etc/nginx/sites-available/default
+
+# Set up Nginx
+COPY docker/nginx/ssl-default.conf /etc/nginx/sites-available/default
+COPY docker/nginx/ssl/certificate.crt /etc/nginx/ssl/certificate.crt
+COPY docker/nginx/ssl/private.key /etc/nginx/ssl/private.key
 
 # Set working directory
 WORKDIR /steam/app
@@ -27,7 +31,7 @@ WORKDIR /steam/app
 RUN pybabel compile -d translations
 
 # Expose ports
-EXPOSE 80
+EXPOSE 80 433
 
 # Start Supervisor
 CMD ["supervisord", "-n"]
