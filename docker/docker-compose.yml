@@ -8,9 +8,6 @@ services:
       - 443:443 # HTTPS
     devices:
       - /dev/gpiomem:/dev/gpiomem # GPIO access
-<<<<<<< HEAD
-    restart: unless-stopped
-=======
     restart: unless-stopped
 #    networks:
 #        - steam_network
