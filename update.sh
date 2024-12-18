@@ -206,7 +206,7 @@ if [ -f "Dockerfile" ]; then
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE} succesvol gebouwd${NC}"
 
     # Start de Docker-container
-    sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
+    sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --privileged --device /dev/gpiomem:/dev/gpiomem --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
     echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER} succesvol gestart${NC}"
 
     echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op https://${DOCKER_IP}:${DOCKER_PORT_SSL}${NC}"
