@@ -20,7 +20,9 @@ docker-compose.yml
 
 # Negeer environment bestanden
 .env
-#.env.*
+README.md
+Afstandsensor/
+babel.cfg
 
 # Negeer Git bestanden
 .git/
