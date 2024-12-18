@@ -20,7 +20,7 @@ docker-compose.yml
 
 # Negeer environment bestanden
 .env
-.env.*
+#.env.*
 
 # Negeer Git bestanden
 .git/
