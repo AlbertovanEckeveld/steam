@@ -3,3 +3,5 @@ python-dotenv~=1.0.1
 psycopg2-binary~=2.9.10
 requests~=2.32.3
 flask-babel~=4.0.0
+#neopixel~=0.0.1 # Alleen voor Raspberry Pi
+RPi.GPIO~=0.7.0 # Alleen voor Raspberry Pi
