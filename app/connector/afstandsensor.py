@@ -1,37 +1,44 @@
 import time
-import machine
-import neopixel
-from machine import Pin, time_pulse_us
+#import neopixel
+from gpiozero import DigitalOutputDevice, DigitalInputDevice
 
 # Constants
-SOUND_SPEED = 340  # in m/s
-TRIG_PULSE_DURATION_US = 10  # microseconds
+SOUND_SPEED = 343  # in m/s
+TRIG_PULSE_DURATION_US = 10  # 10 microseconden
 THRESHOLD_DISTANCE = 20  # in cm
 HIGH_DISTANCE = 30  # in cm
 
 # Pins
-trig_pin = Pin(15, Pin.OUT)
-echo_pin = Pin(14, Pin.IN)
-np = neopixel.NeoPixel(machine.Pin(13), 8)
+trig_pin = DigitalOutputDevice(15)  # GPIO 15 as output
+echo_pin = DigitalInputDevice(14)   # GPIO 14 as input
+#np = neopixel.NeoPixel(machine.Pin(13), 8)
 
 def measure_distance():
     """
-    Meet de afstand met de ultrasone sensor en retourneert deze in cm.
+    Measures distance using the ultrasonic sensor and returns it in cm.
     """
-    trig_pin.value(0)
+    # Verzend trigger signaal
+    trig_pin.off()
+    time.sleep(0.000002)  # Wacht 2 microseconden
+    trig_pin.on()
+    time.sleep(0.00001) # Verzend 10 microseconden signaal
+    trig_pin.off()
 
-    trig_pin.value(1)
-    time.sleep_us(TRIG_PULSE_DURATION_US)
-    trig_pin.value(0)
-    ultrason_duration = time_pulse_us(echo_pin, 1, 30000)
-    if ultrason_duration < 0:
-        return None  # Geen meetwaarde (timeout)
-    
-    # Berekening van afstand
-    distance_cm = SOUND_SPEED * ultrason_duration / 20000
+    # Wacht tot echo signaal wordt ontvangen
+    while not echo_pin.value:
+        pass  # Wacht op echo
+    start_time = time.time()
+
+    while echo_pin.value:
+        pass  # Wacht tot echo signaal stopt
+    end_time = time.time()
+
+    # Bereken afstand in cm
+    duration = end_time - start_time
+    distance_cm = (SOUND_SPEED * duration * 100) / 2  # Deel door 2 omdat het geluid heen en terug gaat
     return distance_cm
 
-
+"""
 # Pulserende licht effecten
 def light_pulse_effect_red(color, cycles=1):
     for _ in range(cycles):
@@ -53,9 +60,7 @@ def light_pulse_effect_red(color, cycles=1):
             time.sleep(0.025)
             
 def light_pulse_effect_green(color, cycles=1):
-    """
-    Laat een pulserend effect zien met de opgegeven kleur.
-    """
+
     for _ in range(cycles):
         # Fade in
         for brightness in range(0, 256, 5):
@@ -76,9 +81,7 @@ def light_pulse_effect_green(color, cycles=1):
             
             
 def light_pulse_effect_blue(color, cycles=1):
-    """
-    Laat een pulserend effect zien met de opgegeven kleur.
-    """
+
     for _ in range(cycles):
         # Fade in
         for brightness in range(0, 256, 10):
@@ -96,6 +99,4 @@ def light_pulse_effect_blue(color, cycles=1):
                          brightness * color[2] // 255]
             np.write()
             time.sleep(0.08)
-
-
-  
+"""
