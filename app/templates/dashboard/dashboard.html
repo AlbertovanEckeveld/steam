@@ -18,7 +18,8 @@
         <p>{{ gettext('Uren gespeeld deze 2 weken') }}: {{ playtime }}</p>
 
     {% if afstand %}
-        <h2 id="afstand"></h2>
+        <h2>{{ gettext('Afstand tussen laptop: ') }}</h2>
+        <p id="afstand"></p>
     {% else %}
         <p>{{ gettext('Fout: We konden de afstand niet ophalen.') }}</p>
         <a href="{{ url_for('dashboard.index') }}">{{ gettext('Ga terug') }}</a>
@@ -52,7 +53,7 @@
             const afstandValue = "{{ afstand | tojson }}";
             
             const afstandElement = document.getElementById('afstand');
-            afstandElement.innerHTML = `{{ gettext('Afstand tussen laptop: ') }} ${afstandValue}`;
+            afstandElement.innerHTML = `${afstandValue}`;
         }
     
         setInterval(updateAfstand, 100);
