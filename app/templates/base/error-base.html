@@ -16,11 +16,11 @@
                 <li><a href="{{ url_for('dashboard.index') }}">{{ gettext('HOME') }}</a></li>
                 <li><a href="{{ url_for('dashboard.library') }}">{{ gettext('BIBLIOTHEEK') }}</a></li>
                 <li><a href="{{ url_for('dashboard.friends') }}">{{ gettext('VRIENDEN') }}</a></li>
-                <li><a href="#">{{ gettext('MELDINGEN') }}</a></li>
+                <li><a href="{{ url_for('dashboard.afstand') }}">{{ gettext('AFSTAND') }}</a></li>
             </ul>
             <ul class="nav-links">
-                <li><a href="#">Nederlands</a></li>
-                <li><a href="#">English</a></li>
+                <li><a href="{{ url_for('change_language', lang='nl') }}">Nederlands</a></li>
+                <li><a href="{{ url_for('change_language', lang='en') }}">English</a></li>
             </ul>
                 {% block navbar %} {% endblock %}
         </nav>
