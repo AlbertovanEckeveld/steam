@@ -1,42 +1,43 @@
+import RPi.GPIO as GPIO
 import time
-#import neopixel
-from gpiozero import DigitalOutputDevice, DigitalInputDevice
 
 # Constants
-SOUND_SPEED = 343  # in m/s
-TRIG_PULSE_DURATION_US = 10  # 10 microseconden
-THRESHOLD_DISTANCE = 20  # in cm
-HIGH_DISTANCE = 30  # in cm
+TRIG_PIN = 15  # GPIO 15
+ECHO_PIN = 14  # GPIO 14
+SOUND_SPEED = 343  # m/s
 
-# Pins
-trig_pin = DigitalOutputDevice(15)  # GPIO 15 as output
-echo_pin = DigitalInputDevice(14)   # GPIO 14 as input
-#np = neopixel.NeoPixel(machine.Pin(13), 8)
+# GPIO Setup
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(TRIG_PIN, GPIO.OUT)
+GPIO.setup(ECHO_PIN, GPIO.IN)
 
 def measure_distance():
     """
     Measures distance using the ultrasonic sensor and returns it in cm.
     """
-    # Verzend trigger signaal
-    trig_pin.off()
-    time.sleep(0.000002)  # Wacht 2 microseconden
-    trig_pin.on()
-    time.sleep(0.00001) # Verzend 10 microseconden signaal
-    trig_pin.off()
+    # Send trigger pulse
+    GPIO.output(TRIG_PIN, GPIO.LOW)
+    time.sleep(0.000002)  # Wait 2 microseconds
+    GPIO.output(TRIG_PIN, GPIO.HIGH)
+    time.sleep(0.00001)  # Send 10 microsecond pulse
+    GPIO.output(TRIG_PIN, GPIO.LOW)
 
-    # Wacht tot echo signaal wordt ontvangen
-    while not echo_pin.value:
-        pass  # Wacht op echo
+    # Wait for echo start
+    while GPIO.input(ECHO_PIN) == 0:
+        pass
     start_time = time.time()
 
-    while echo_pin.value:
-        pass  # Wacht tot echo signaal stopt
+    # Wait for echo end
+    while GPIO.input(ECHO_PIN) == 1:
+        pass
     end_time = time.time()
 
-    # Bereken afstand in cm
+    # Calculate distance
     duration = end_time - start_time
-    distance_cm = (SOUND_SPEED * duration * 100) / 2  # Deel door 2 omdat het geluid heen en terug gaat
+    distance_cm = (SOUND_SPEED * duration * 100) / 2  # Divide by 2 for round trip
     return distance_cm
+
+
 
 """
 # Pulserende licht effecten
