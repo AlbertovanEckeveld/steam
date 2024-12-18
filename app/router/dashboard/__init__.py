@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, url_for
+import json
 
 from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime
 from app.connector.afstandsensor import measure_distance
@@ -138,4 +139,4 @@ def afstand():
     afstand = round(measure_distance(), 2)
 
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
-    return afstand if afstand else 0
+    return json(afstand if afstand else 0)
