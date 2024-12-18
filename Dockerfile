@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Kopieer de applicatiecode
 COPY . /steam/
+COPY .env.example /steam/.env
 
 # Kopieer configuratiebestanden
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -23,6 +24,9 @@ COPY docker/nginx/ssl/private.key /etc/nginx/ssl/private.key
 
 # Zet de werkmap
 WORKDIR /steam/app
+
+# Compileer vertalingen
+RUN pybabel compile -d translations
 
 # Expose ports
 EXPOSE 80 433

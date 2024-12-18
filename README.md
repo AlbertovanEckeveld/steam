@@ -30,7 +30,7 @@ De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
 <a href="https://github.com/Remmerswaal" target="__blank">![Static Badge](https://img.shields.io/badge/TI:-%20Max%20Remmerswaal:%20Max%20(1886518)-green)</a> <br>
 <a href="https://github.com/Maxbox10" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20UI/UX%20:-%20Max%20Arink:%20MaxBox10%20(1886710)-blue)</a>
 <a href="https://github.com/owzezo" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20%20Backend%20:-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-blue)</a>
-<a href="#">![Static Badge](https://img.shields.io/badge/CSC:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-yellow)</a>
+<a href="#">![Static Badge](https://img.shields.io/badge/CSC%20en%20SD%20(backend):-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-yellow)</a>
 
 ## Functionaliteiten
 - Inloggen met Steam account
