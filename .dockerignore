@@ -1,0 +1,41 @@
+# Negeer Python cache bestanden
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Negeer virtual environments
+.venv/
+env/
+venv/
+
+# Negeer test en development bestanden
+tests/
+*.log
+*.tmp
+
+# Negeer Docker bestanden
+Dockerfile
+docker-compose.yml
+
+# Negeer environment bestanden
+.env
+.env.*
+
+# Negeer Git bestanden
+.git/
+.gitignore
+
+# Negeer IDE bestandens
+.DS_Store
+Thumbs.db
+
+# Negeer overige bestanden
+*.bak
+*.swp
+*.swo
+*.tmp
+*.tmp.*
+*.log
+*.log.*
+*.sh
