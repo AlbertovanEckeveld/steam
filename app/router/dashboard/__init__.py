@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for
-import json
+from flask import Blueprint, render_template, session, redirect, url_for, jsonify, request 
 
 from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime
 from app.connector.afstandsensor import measure_distance
@@ -127,7 +126,7 @@ def compare(friend_id):
                            common_games=get_common_games(games, friend.get_games())
                            )
 
-@Dash.route('/afstand')
+@Dash.route('/afstand', methods = ['GET'])
 def afstand():
     """
         Afstand van de gebruiker tussen het beeldscherm.
@@ -135,8 +134,9 @@ def afstand():
         Returns:
         Response: Rendered template voor de afstandpagina.
     """
-
-    afstand = round(measure_distance(), 2)
+    if(request.method == 'GET'): 
+        return jsonify({"afstand" : round(measure_distance(), 2)}) 
+    
 
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
-    return jsonify({'afstand': afstand if afstand else 0})
+    #return jsonify({'afstand': afstand if afstand else 0})
