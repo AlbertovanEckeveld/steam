@@ -7,6 +7,9 @@ ENV PYTHONUNBUFFERED=1
 
 # Install dependencies and Nginx
 RUN apt-get update && apt-get install -y nginx supervisor && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir python3-full
+RUN sudo apt install python3-rpi.gpio
 RUN pip install --no-cache-dir gunicorn
 
 # Install Python dependencies
