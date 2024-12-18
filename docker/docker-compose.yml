@@ -8,4 +8,28 @@ services:
       - 443:443 # HTTPS
     devices:
       - /dev/gpiomem:/dev/gpiomem # GPIO access
+<<<<<<< HEAD
     restart: unless-stopped
+=======
+    restart: unless-stopped
+#    networks:
+#        - steam_network
+
+#  postgres:
+#    image: postgres
+#    container_name: postgres
+#    ports:
+#      - 5432:5432
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_DB=postgres
+#    restart: unless-stopped
+#    networks:
+#      - steam_network
+
+#networks:
+#    default:
+#        external: true
+#        name: steam_network
+>>>>>>> prod_webserv

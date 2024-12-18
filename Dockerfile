@@ -6,12 +6,13 @@ RUN apt-get update && apt-get install -y nginx supervisor python3-dev python3-rp
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir gunicorn
 
-# Install Python dependencies
+# Installeer de Python-pakketten
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Kopieer de applicatiecode
 COPY . /steam/
+COPY .env.example /steam/.env
 
 # Kopieer configuratiebestanden
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -23,6 +24,9 @@ COPY docker/nginx/ssl/private.key /etc/nginx/ssl/private.key
 
 # Zet de werkmap
 WORKDIR /steam/app
+
+# Compileer vertalingen
+RUN pybabel compile -d translations
 
 # Expose ports
 EXPOSE 80 433
