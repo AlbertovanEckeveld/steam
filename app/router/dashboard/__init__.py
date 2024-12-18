@@ -134,19 +134,8 @@ def afstand():
         Returns:
         Response: Rendered template voor de afstandpagina.
     """
-    # Controleer of de gebruiker is ingelogd
-    if not session.get('user'):
-        return redirect(url_for('index.index'))
-
-    # Haal de profile object van de gebruiker op
-    user_profile_data = session.get('user_profile')
-    user = UserProfile(**user_profile_data) if user_profile_data else None
 
     afstand = round(measure_distance(), 2)
 
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
-    return render_template("dashboard/dashboard-afstand.html",
-                           display_name=user.get_displayname() if user else "",
-                           url_avatar=user.get_avatar_small()  if user else "",
-                           afstand=afstand if afstand else 0
-                           )
+    return afstand if afstand else 0
