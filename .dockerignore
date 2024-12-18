@@ -7,7 +7,7 @@ __pycache__/
 # Negeer virtual environments
 .venv/
 env/
-venv/
+.venv/
 
 # Negeer test en development bestanden
 tests/
