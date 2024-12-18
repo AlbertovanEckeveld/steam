@@ -17,6 +17,13 @@
         <h2>{{ gettext('Mijn statestieken') }}</h2>
         <p>{{ gettext('Uren gespeeld deze 2 weken') }}: {{ playtime }}</p>
 
+    {% if afstand %}
+        <h2 id="afstand"></h2>
+    {% else %}
+        <p>{{ gettext('Fout: We konden de afstand niet ophalen.') }}</p>
+        <a href="{{ url_for('dashboard.index') }}">{{ gettext('Ga terug') }}</a>
+    {% endif %}
+
         <h2>{{ gettext('Meest gespeelde spelen deze 2 weken:') }}</h2>
     {% if games %}
         <table>
@@ -39,5 +46,16 @@
         <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
         <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
     {% endif %}
+
+    <script>
+        function updateAfstand() {
+            const afstandValue = "{{ afstand | tojson }}";
+            
+            const afstandElement = document.getElementById('afstand');
+            afstandElement.innerHTML = `{{ gettext('Afstand tussen laptop: ') }} ${afstandValue}`;
+        }
+    
+        setInterval(updateAfstand, 100);
+    </script>
 
 {% endblock %}

@@ -25,12 +25,15 @@ def index():
 
     recent = get_recent_playtime(user.get_steam_id())
 
+    afstand = round(measure_distance(), 2)
+
     # Render de dashboard hoofdpagina met gebruikersgegevens
     return render_template("dashboard/dashboard.html",
                             display_name=user.get_displayname() if user else "",
                             url_avatar=user.get_avatar_small() if user else "",
                             games=recent['games'],
-                            playtime=recent['total_playtime_2weeks']
+                            playtime=recent['total_playtime_2weeks'],
+                            afstand=afstand if afstand else 0
                            )
 
 
