@@ -139,4 +139,4 @@ def afstand():
     afstand = round(measure_distance(), 2)
 
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
-    return json(afstand if afstand else 0)
+    return jsonify({'afstand': afstand if afstand else 0})
