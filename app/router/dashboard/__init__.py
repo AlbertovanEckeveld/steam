@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for
 
 from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime
+from app.connector.afstandsensor import measure_distance
 from app.models import UserProfile
 
 # Dashboard blueprint
@@ -120,4 +121,29 @@ def compare(friend_id):
                            friend_avatar=friend.get_avatar_small() if friend else "",
                            friend_games=friend.get_games(),
                            common_games=get_common_games(games, friend.get_games())
+                           )
+
+@Dash.route('/afstand')
+def afstand():
+    """
+        Afstand van de gebruiker tussen het beeldscherm.
+
+        Returns:
+        Response: Rendered template voor de afstandpagina.
+    """
+    # Controleer of de gebruiker is ingelogd
+    if not session.get('user'):
+        return redirect(url_for('index.index'))
+
+    # Haal de profile object van de gebruiker op
+    user_profile_data = session.get('user_profile')
+    user = UserProfile(**user_profile_data) if user_profile_data else None
+
+    afstand = measure_distance()
+
+    # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
+    return render_template("dashboard/dashboard-afstand.html",
+                           display_name=user.get_displayname() if user else "",
+                           url_avatar=user.get_avatar_small()  if user else "",
+                           afstand=afstand if afstand else 0
                            )
