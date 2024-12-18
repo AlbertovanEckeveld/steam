@@ -9,23 +9,23 @@ services:
     devices:
       - /dev/gpiomem:/dev/gpiomem # GPIO access
     restart: unless-stopped
-    networks:
-        - steam_network
+#    networks:
+#        - steam_network
 
-  postgres:
-    image: postgres
-    container_name: postgres
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    restart: unless-stopped
-    networks:
-      - steam_network
+#  postgres:
+#    image: postgres
+#    container_name: postgres
+#    ports:
+#      - 5432:5432
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_DB=postgres
+#    restart: unless-stopped
+#    networks:
+#      - steam_network
 
-networks:
-    default:
-        external: true
-        name: steam_network
+#networks:
+#    default:
+#        external: true
+#        name: steam_network
