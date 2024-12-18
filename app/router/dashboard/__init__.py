@@ -139,7 +139,7 @@ def afstand():
     user_profile_data = session.get('user_profile')
     user = UserProfile(**user_profile_data) if user_profile_data else None
 
-    afstand = measure_distance()
+    afstand = round(measure_distance(), 2)
 
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
     return render_template("dashboard/dashboard-afstand.html",
