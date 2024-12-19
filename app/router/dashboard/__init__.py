@@ -126,6 +126,29 @@ def compare(friend_id):
                            common_games=get_common_games(games, friend.get_games())
                            )
 
+@Dash.route('/statistiek', methods = ['GET'])
+def statistiek():
+    """
+        Statistieken van de gebruiker en steam.
+
+        Returns:
+        Response: Rendered template voor de statistiekenpagina.
+    """
+    # Controleer of de gebruiker is ingelogd
+    if not session.get('user'):
+        return redirect(url_for('index.index'))
+
+    # Haal de profile object van de gebruiker op
+    user_profile_data = session.get('user_profile')
+    user = UserProfile(**user_profile_data) if user_profile_data else None
+
+    # Render de statistiekenpagina met gebruikersgegevens
+    return render_template("dashboard/dashboard-statistics.html",
+                           display_name=user.get_displayname() if user else "",
+                           url_avatar=user.get_avatar_small() if user else ""
+                           )
+
+
 @Dash.route('/afstand', methods = ['GET'])
 def afstand():
     """
@@ -137,7 +160,3 @@ def afstand():
     if(request.method == 'GET'): 
         afstand = round(measure_distance(), 2)
         return jsonify({'afstand': afstand if afstand else 0})
-    
-
-    # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
-    #return jsonify({'afstand': afstand if afstand else 0})
