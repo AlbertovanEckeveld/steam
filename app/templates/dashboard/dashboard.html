@@ -49,26 +49,40 @@
     {% endif %}
 
     <script>
+        // Counter om bij te houden hoe vaak de functie is aangeroepen
+        let counter = 0;
+        const maxCalls = 20;
+    
         function updateAfstand() {
-            // Maak een variabele met de URL van de room_detail view
-            const afstand_url = "{{ url_for('dashboard.afstand', afstand=afstand) }}";
-            
-            // Fetch data van de afstand API
+            // Maak de interval leeg als maxCalls is bereikt
+            if (counter >= maxCalls) {
+                clearInterval(interval); // Stop the interval if maxCalls is reached
+                return;
+            }
+    
+            // URL om de afstand op te halen
+            const afstand_url = "/dashboard/afstand?afstand=13.28";
+    
+            // Fetch data van de afstand URL
             fetch(afstand_url)
                 .then(response => response.json())
                 .then(data => {
                     const afstandValue = data.afstand;
-                    
+    
                     // Update de afstand in de HTML
                     const afstandElement = document.getElementById('afstand');
                     afstandElement.innerHTML = `${afstandValue}`;
                 })
                 .catch(error => {
-                    console.error('Error ophalen van afstand:', error);
+                    console.error('Error fetching afstand:', error);
                 });
+    
+            // Optellen bij de counter
+            counter++;
         }
-        
-        setInterval(updateAfstand, 3000);
+    
+        // Zet de interval om de 3 seconden
+        const interval = setInterval(updateAfstand, 3000);
     </script>
 
 {% endblock %}
