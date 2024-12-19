@@ -7,7 +7,7 @@ __pycache__/
 # Negeer virtual environments
 .venv/
 env/
-venv/
+.venv/
 
 # Negeer test en development bestanden
 tests/
@@ -20,7 +20,9 @@ docker-compose.yml
 
 # Negeer environment bestanden
 .env
-.env.*
+README.md
+Afstandsensor/
+babel.cfg
 
 # Negeer Git bestanden
 .git/

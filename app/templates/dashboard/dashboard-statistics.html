@@ -1,0 +1,20 @@
+{% extends 'base/dashboard-base.html' %}
+
+{% block title %} Statistiek {% endblock %}
+
+{% block content %}
+    <h1>Dashboard - {{ gettext('statistiek') }}</h1>
+{% endblock %}
+
+{% block navbar %}
+            <div class="user-section">
+                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
+                <span class="user-name">{{ display_name }}</span>
+                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
+            </div>
+{% endblock %}
+
+{% block content %}
+        <h1>Dashboard - {{ gettext('statistiek') }}</h1>
+
+{% endblock %}

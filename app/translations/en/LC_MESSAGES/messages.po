@@ -66,8 +66,8 @@ msgstr "FRIENDS"
 
 #: app/templates/base/base.html:19 app/templates/base/dashboard-base.html:20
 #: app/templates/base/error-base.html:19
-msgid "MELDINGEN"
-msgstr "NOTIFICATIONS"
+msgid "STATISTIEK"
+msgstr "STATISTICS"
 
 #: app/templates/base/base.html:38 app/templates/base/dashboard-base.html:38
 #: app/templates/base/error-base.html:38
