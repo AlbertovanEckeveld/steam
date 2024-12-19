@@ -30,6 +30,8 @@ DEBIAN_FILE="/etc/debian_version"
 # Docker informatie
 DOCKER_IMAGE="steam"
 DOCKER_CONTAINER="steam"
+DOCKER_IMAGE_AFSTANDSENSOR="afstandsensor"
+DOCKER_CONTAINER_AFSTANDSENSOR="afstandsensor"
 DOCKER_PORT="80"
 DOCKER_PORT_SSL="443"
 DOCKER_IP="192.168.178.248"
@@ -184,37 +186,64 @@ fi
 if [ -f "Dockerfile" ]; then
 
     # Controleer of de Docker-container al bestaat
-    if [ "$(sudo docker ps -aq -f name=${DOCKER_CONTAINER})" ]; then
-        echo -e "${BOLD_YELLOW}Docker-container: ${DOCKER_CONTAINER} bestaat al.. ${YELLOW}Container verwijderen..${NC}"
-        
+    if [ "$(sudo docker ps -aq -f name=${DOCKER_CONTAINER_STEAM})" ]; then
+        echo -e "${BOLD_YELLOW}Docker-container: ${DOCKER_CONTAINER_STEAM} bestaat al.. ${YELLOW}Container verwijderen..${NC}"
+
         # Controleer of de Docker-container actief is
-        if [ "$(sudo docker ps -q -f name=${DOCKER_CONTAINER})" ]; then
+        if [ "$(sudo docker ps -q -f name=${DOCKER_CONTAINER_STEAM})" ]; then
             # Stop de Docker-container
-            sudo docker stop ${DOCKER_CONTAINER}
-            echo -e "${GREEN}Oude Docker-container: ${DOCKER_CONTAINER} gestopt. ${YELLOW}Verwijder container..${NC}"
+            sudo docker stop ${DOCKER_CONTAINER_STEAM}
+            echo -e "${GREEN}Oude Docker-container: ${DOCKER_CONTAINER_STEAM} gestopt. ${YELLOW}Verwijder container..${NC}"
         fi
 
         # Verwijder de Docker-container
-        sudo docker rm ${DOCKER_CONTAINER}
-        echo -e "${GREEN}Oude Docker-container: ${DOCKER_CONTAINER} verwijderd${NC}"
+        sudo docker rm ${DOCKER_CONTAINER_STEAM}
+        echo -e "${GREEN}Oude Docker-container: ${DOCKER_CONTAINER_STEAM} verwijderd${NC}"
+    fi
+
+    # Controleer of de Docker-container al bestaat
+    if [ "$(sudo docker ps -aq -f name=${DOCKER_CONTAINER_AFSTANDSENSOR})" ]; then
+        echo -e "${BOLD_YELLOW}Docker-container: ${DOCKER_CONTAINER_AFSTANDSENSOR} bestaat al.. ${YELLOW}Container verwijderen..${NC}"
+
+        # Controleer of de Docker-container actief is
+        if [ "$(sudo docker ps -q -f name=${DOCKER_CONTAINER_AFSTANDSENSOR})" ]; then
+            # Stop de Docker-container
+            sudo docker stop ${DOCKER_CONTAINER_AFSTANDSENSOR}
+            echo -e "${GREEN}Oude Docker-container: ${DOCKER_CONTAINER_AFSTANDSENSOR} gestopt. ${YELLOW}Verwijder container..${NC}"
+        fi
+
+        # Verwijder de Docker-container
+        sudo docker rm ${DOCKER_CONTAINER_AFSTANDSENSOR}
+        echo -e "${GREEN}Oude Docker-container: ${DOCKER_CONTAINER_AFSTANDSENSOR} verwijderd${NC}"
     fi
 
     # Controleer of het Docker-image bestaat
-    if [ "$(sudo docker images -q ${DOCKER_IMAGE} )" ]; then
+    if [ "$(sudo docker images -q ${DOCKER_IMAGE_STEAM} )" ]; then
         # Verwijder het Docker-image
         sudo docker image rm ${DOCKER_IMAGE}
-        echo -e "${GREEN}Oude Docker-image: ${DOCKER_IMAGE} verwijderd${NC}"
+        echo -e "${GREEN}Oude Docker-image: ${DOCKER_IMAGE_STEAM} verwijderd${NC}"
+    fi
+
+    # Controleer of het Docker-image bestaat
+    if [ "$(sudo docker images -q ${DOCKER_IMAGE_AFSTANDSENSOR} )" ]; then
+        # Verwijder het Docker-image
+        sudo docker image rm ${DOCKER_IMAGE_AFSTANDSENSOR}
+        echo -e "${GREEN}Oude Docker-image: ${DOCKER_IMAGE_AFSTANDSENSOR} verwijderd${NC}"
     fi
 
     # Bouw het Docker-image
-    sudo docker build -t ${DOCKER_IMAGE} . > /dev/null  2>&1 
-    echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE} succesvol gebouwd${NC}"
+    sudo docker build -t ${DOCKER_IMAGE_STEAM} . > /dev/null  2>&1
+    echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_STEAM} succesvol gebouwd${NC}"
+
+    cd afstandsensor
+    sudo docker build -t ${DOCKER_IMAGE_AFSTANDSENSOR} . > /dev/null  2>&1
+    echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_AFSTANDSENSOR} succesvol gebouwd${NC}"
 
     # Start de Docker-container
-    #sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --privileged --device /dev/gpiomem:/dev/gpiomem --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
+    #sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --privileged --device /dev/gpiomem:/dev/gpiomem --name ${DOCKER_CONTAINER_STEAM} ${DOCKER_IMAGE_STEAM}
     cd docker
     docker compose up -d
-    echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER} succesvol gestart${NC}"
+    echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER_STEAM} succesvol gestart${NC}"
 
     echo -e "${BOLD_GREEN}Applicatie is nu beschikbaar op https://${DOCKER_IP}:${DOCKER_PORT_SSL}${NC}"
 else 
