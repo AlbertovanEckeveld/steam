@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template
 
+from app.connector.rfid import tfa
+
 # Auth blueprint
 Easter_egg = Blueprint('easter-egg', __name__, static_folder='app/static', template_folder='app/templates')
 
@@ -14,9 +16,7 @@ def index():
 
     if tfa() == True:
         # Redirect naar de easter eggs pagina
-        return render_template("easter-egg/Easter_egg.html")
-    # Redirect naar de easter eggs pagina
-    #return render_template("easter-egg/Easter_egg-jeroen.html")
+        return render_template("easter-egg/Easter_egg-jeroen.html")
 
 
 @Easter_egg.route('/alberto')
@@ -28,6 +28,7 @@ def alberto():
         Response: Redirect naar de alberto pagina voor easter egg.
     """
 
+    if tfa() == True:
     # Redirect naar de easter eggs pagina
-    return render_template("easter-egg/Easter_egg-alberto.html")
+        return render_template("easter-egg/Easter_egg-alberto.html")
 

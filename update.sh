@@ -226,17 +226,19 @@ if [ -f "Dockerfile" ]; then
         echo -e "${GREEN}Oude Docker-image: ${DOCKER_IMAGE_NEOPIXEL} verwijderd${NC}"
     fi
 
-    # Bouw het Docker-image
-    sudo docker build -t ${DOCKER_IMAGE_STEAM} . > /dev/null  2>&1
-    echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_STEAM} succesvol gebouwd${NC}"
-
     cd afstandsensor
     sudo docker build -t ${DOCKER_IMAGE_NEOPIXEL} . > /dev/null  2>&1
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_NEOPIXEL} succesvol gebouwd${NC}"
 
+    cd ../steam
+
+    # Bouw het Docker-image
+    sudo docker build -t ${DOCKER_IMAGE_STEAM} . > /dev/null  2>&1
+    echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_STEAM} succesvol gebouwd${NC}"
+
     # Start de Docker-container
     #sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --privileged --device /dev/gpiomem:/dev/gpiomem --name ${DOCKER_CONTAINER_STEAM} ${DOCKER_IMAGE_STEAM}
-    cd ../docker
+    cd docker
     docker compose up -d
     echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER_STEAM} succesvol gestart${NC}"
 
