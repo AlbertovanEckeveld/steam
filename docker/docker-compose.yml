@@ -10,9 +10,9 @@ services:
       - /dev/gpiomem:/dev/gpiomem # GPIO toegang
     restart: unless-stopped
 
-  afstandsensor:
-    image: afstandsensor
-    container_name: afstandsensor
+  neopixel:
+    image: neopixel
+    container_name: neopixel
     privileged: true # nodig voor GPIO toegang
     devices:
       - /dev/gpiomem:/dev/gpiomem # GPIO toegang
