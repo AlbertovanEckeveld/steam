@@ -126,8 +126,8 @@ def compare(friend_id):
                            common_games=get_common_games(games, friend.get_games())
                            )
 
-@Dash.route('/statistiek')
-def statistiek():
+@Dash.route('/statistics')
+def statistics():
     """
         Statistieken van de gebruiker en steam.
 
@@ -143,6 +143,7 @@ def statistiek():
     #user = UserProfile(**user_profile_data) if user_profile_data else None
 
     return '<h1>Statistieken</h1>'
+
     # Render de statistiekenpagina met gebruikersgegevens
     #return render_template("dashboard/dashboard-statistics.html",
     #                       display_name=user.get_displayname() if user else "",
