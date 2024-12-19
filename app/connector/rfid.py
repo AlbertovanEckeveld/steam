@@ -1,43 +1,22 @@
-from app.connector.database import execute_query
+from app.connector.database import rf_authentication
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 
-reader = SimpleMFRC522()
+def tfa():
+    """
+        Two-factor authentication voor RFID-kaarten.
 
+        Returns:
+            bool: True als de authenticatie is geslaagd, anders False.
+    """
+    try:
+        reader = SimpleMFRC522()
 
-def rfid_authentication(userRFID):
-    isAuthenticated = False
+        if rf_authentication(reader.read()[0]) == True:
+            return True
+        
+        return False
 
-
-    rfidQuery = execute_query(f"SELECT COUNT(*) FROM authentication WHERE rfid = '{userRFID}'")
-
-
-    print("Resultaat query =", rfidQuery)
-
-
-    if rfidQuery[0][0] == 1:
-        print("Je RFID komt voor in het systeem.")
-        isAuthenticated = True
-    else:
-        print("Helaas, je RFID komt niet voor in het systeem")
-
-    return isAuthenticated
-
-
-
-try:
-    print("Houd je RFID-kaart voor de lezer")
-
-
-    id, text = reader.read()
-    print(f"Gelezen RFID: {id}")
-
-
-    if rfid_authentication(id) == True:
-        print("Toegang verleend!")
-    else:
-        print("Toegang geweigerd!")
-
-finally:
-    GPIO.cleanup()
+    finally:
+        GPIO.cleanup()
 

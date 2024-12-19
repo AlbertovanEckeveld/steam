@@ -4,3 +4,4 @@ psycopg2-binary~=2.9.10
 requests~=2.32.3
 flask-babel~=4.0.0
 rpi.gpio~=0.7.1 # Alleen voor Raspberry Pi
+mfrc522-python~=0.07

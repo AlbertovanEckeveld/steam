@@ -11,14 +11,18 @@ def index():
         Returns:
         Response: Redirect naar de pagina voor easter eggs.
     """
+
+    if tfa() == True:
+        # Redirect naar de easter eggs pagina
+        return render_template("easter-egg/Easter_egg.html")
     # Redirect naar de easter eggs pagina
-    return render_template("easter-egg/Easter_egg-jeroen.html")
+    #return render_template("easter-egg/Easter_egg-jeroen.html")
 
 
 @Easter_egg.route('/alberto')
 def alberto():
     """
-        alberto route easter egg.
+        Alberto route easter egg.
 
         Returns:
         Response: Redirect naar de alberto pagina voor easter egg.
