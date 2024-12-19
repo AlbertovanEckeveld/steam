@@ -58,7 +58,7 @@
                 .then(response => response.json())
                 .then(data => {
                     // Assuming the response has 'afstand' as a key
-                    const afstandValue = data.afstand;
+                    const afstandValue = data;
                     
                     // Update the UI with the fetched afstand value
                     const afstandElement = document.getElementById('afstand');

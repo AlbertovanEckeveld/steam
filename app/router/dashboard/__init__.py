@@ -135,7 +135,8 @@ def afstand():
         Response: Rendered template voor de afstandpagina.
     """
     if(request.method == 'GET'): 
-        return jsonify({"afstand" : round(measure_distance(), 2)}) 
+        afstand = round(measure_distance(), 2)
+        return jsonify({'afstand': afstand if afstand else 0})
     
 
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
