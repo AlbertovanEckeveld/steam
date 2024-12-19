@@ -57,7 +57,7 @@
             fetch(afstand_url)
                 .then(response => response.json())
                 .then(data => {
-                    const afstandValue = data.json().afstand;
+                    const afstandValue = data.afstand;
                     
                     // Update de afstand in de HTML
                     const afstandElement = document.getElementById('afstand');
@@ -68,7 +68,7 @@
                 });
         }
         
-        setInterval(updateAfstand, 1000);
+        setInterval(updateAfstand, 3000);
     </script>
 
 {% endblock %}
