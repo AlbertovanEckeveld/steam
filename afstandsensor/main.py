@@ -1,10 +1,10 @@
 import time
 import neopixel
 import RPi.GPIO as GPIO
-<<<<<<< HEAD:Afstandsensor/main.py
-=======
+<<<<<<<<< Temporary merge branch 1:Afstandsensor/main.py
+=========
 import board
->>>>>>> 59ebe5fa8b911aaf0ea69822665c0495017620e1:afstandsensor/main.py
+>>>>>>>>> Temporary merge branch 2:afstandsensor/main.py
 
 # Constants
 TRIG_PIN = 15  # GPIO 15
@@ -14,7 +14,7 @@ TRIG_PULSE_DURATION_US = 10  # microseconds
 THRESHOLD_DISTANCE = 20  # in cm
 HIGH_DISTANCE = 30  # in cm
 
-<<<<<<< HEAD:Afstandsensor/main.py
+<<<<<<<<< Temporary merge branch 1:Afstandsensor/main.py
 # Pins
 trig_pin = Pin(15, Pin.OUT)
 echo_pin = Pin(14, Pin.IN)
@@ -26,7 +26,7 @@ GPIO.setup(TRIG_PIN, GPIO.OUT)
 GPIO.setup(ECHO_PIN, GPIO.IN)
 GPIO.setup(np, GPIO.OUT)
 
-=======
+=========
 # GPIO Setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(TRIG_PIN, GPIO.OUT)
@@ -37,16 +37,16 @@ NEOPIXEL_PIN = board.D18
 NUM_PIXELS = 8
 ORDER = neopixel.GRB
 np = neopixel.NeoPixel(NEOPIXEL_PIN, NUM_PIXELS, brightness=0.5, auto_write=False, pixel_order=ORDER)
->>>>>>> 59ebe5fa8b911aaf0ea69822665c0495017620e1:afstandsensor/main.py
+>>>>>>>>> Temporary merge branch 2:afstandsensor/main.py
 
 def measure_distance():
     """
     Measures distance using the ultrasonic sensor and returns it in cm.
-<<<<<<< HEAD:Afstandsensor/main.py
+<<<<<<<<< Temporary merge branch 1:Afstandsensor/main.py
     """ 
-=======
+=========
     """
->>>>>>> 59ebe5fa8b911aaf0ea69822665c0495017620e1:afstandsensor/main.py
+>>>>>>>>> Temporary merge branch 2:afstandsensor/main.py
     # Send trigger pulse
     GPIO.output(TRIG_PIN, GPIO.LOW)
     time.sleep(0.000002)  # Wait 2 microseconds
