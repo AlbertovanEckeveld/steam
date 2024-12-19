@@ -241,7 +241,7 @@ if [ -f "Dockerfile" ]; then
 
     # Start de Docker-container
     #sudo docker run -d -p ${DOCKER_PORT}:${DOCKER_PORT} -p ${DOCKER_PORT_SSL}:${DOCKER_PORT_SSL} --privileged --device /dev/gpiomem:/dev/gpiomem --name ${DOCKER_CONTAINER_STEAM} ${DOCKER_IMAGE_STEAM}
-    cd docker
+    cd ../docker
     docker compose up -d
     echo -e "${BOLD_GREEN}Docker-container: ${DOCKER_CONTAINER_STEAM} succesvol gestart${NC}"
 
