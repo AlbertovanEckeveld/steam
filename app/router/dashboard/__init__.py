@@ -139,14 +139,15 @@ def statistiek():
         return redirect(url_for('index.index'))
 
     # Haal de profile object van de gebruiker op
-    user_profile_data = session.get('user_profile')
-    user = UserProfile(**user_profile_data) if user_profile_data else None
+    #user_profile_data = session.get('user_profile')
+    #user = UserProfile(**user_profile_data) if user_profile_data else None
 
+    return '<h1>Statistieken</h1>'
     # Render de statistiekenpagina met gebruikersgegevens
-    return render_template("dashboard/dashboard-statistics.html",
-                           display_name=user.get_displayname() if user else "",
-                           url_avatar=user.get_avatar_small() if user else "",
-                           )
+    #return render_template("dashboard/dashboard-statistics.html",
+    #                       display_name=user.get_displayname() if user else "",
+    #                       url_avatar=user.get_avatar_small() if user else "",
+    #                       )
 
 
 @Dash.route('/afstand', methods = ['GET'])
