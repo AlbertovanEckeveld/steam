@@ -1,13 +1,20 @@
 import time
 import neopixel
 import RPi.GPIO as GPIO
+<<<<<<< HEAD:Afstandsensor/main.py
+=======
+import board
+>>>>>>> 59ebe5fa8b911aaf0ea69822665c0495017620e1:afstandsensor/main.py
 
 # Constants
-SOUND_SPEED = 340  # in m/s
+TRIG_PIN = 15  # GPIO 15
+ECHO_PIN = 14  # GPIO 14
+SOUND_SPEED = 343  # m/s
 TRIG_PULSE_DURATION_US = 10  # microseconds
 THRESHOLD_DISTANCE = 20  # in cm
 HIGH_DISTANCE = 30  # in cm
 
+<<<<<<< HEAD:Afstandsensor/main.py
 # Pins
 trig_pin = Pin(15, Pin.OUT)
 echo_pin = Pin(14, Pin.IN)
@@ -19,11 +26,27 @@ GPIO.setup(TRIG_PIN, GPIO.OUT)
 GPIO.setup(ECHO_PIN, GPIO.IN)
 GPIO.setup(np, GPIO.OUT)
 
+=======
+# GPIO Setup
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(TRIG_PIN, GPIO.OUT)
+GPIO.setup(ECHO_PIN, GPIO.IN)
+NEOPIXEL_PIN = board.D18
+
+# NeoPixel setup
+NUM_PIXELS = 8
+ORDER = neopixel.GRB
+np = neopixel.NeoPixel(NEOPIXEL_PIN, NUM_PIXELS, brightness=0.5, auto_write=False, pixel_order=ORDER)
+>>>>>>> 59ebe5fa8b911aaf0ea69822665c0495017620e1:afstandsensor/main.py
 
 def measure_distance():
     """
     Measures distance using the ultrasonic sensor and returns it in cm.
+<<<<<<< HEAD:Afstandsensor/main.py
     """ 
+=======
+    """
+>>>>>>> 59ebe5fa8b911aaf0ea69822665c0495017620e1:afstandsensor/main.py
     # Send trigger pulse
     GPIO.output(TRIG_PIN, GPIO.LOW)
     time.sleep(0.000002)  # Wait 2 microseconds
@@ -79,7 +102,7 @@ def light_pulse_effect_green(color, cycles=1):
                          brightness * color[1] // 255, 
                          brightness * color[2] // 255]
             np.write()
-            time.sleep(0.05)
+            time.sleep(0.025)
         # Fade out
         for brightness in range(255, -1, -5):
             for i in range(8):
@@ -87,7 +110,7 @@ def light_pulse_effect_green(color, cycles=1):
                          brightness * color[1] // 255, 
                          brightness * color[2] // 255]
             np.write()
-            time.sleep(0.05)
+            time.sleep(0.025)
             
             
 def light_pulse_effect_blue(color, cycles=1):
@@ -102,7 +125,7 @@ def light_pulse_effect_blue(color, cycles=1):
                          brightness * color[1] // 255, 
                          brightness * color[2] // 255]
             np.write()
-            time.sleep(0.08)
+            time.sleep(0.025)
         # Fade out
         for brightness in range(255, -1, -10):
             for i in range(8):
@@ -110,7 +133,7 @@ def light_pulse_effect_blue(color, cycles=1):
                          brightness * color[1] // 255, 
                          brightness * color[2] // 255]
             np.write()
-            time.sleep(0.08)
+            time.sleep(0.025)
 
 # Main loop
 while True:
@@ -133,4 +156,3 @@ while True:
         print("No distance measured (timeout)")
 
     time.sleep(0.25)
-  

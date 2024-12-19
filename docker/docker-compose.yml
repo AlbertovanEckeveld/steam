@@ -2,12 +2,20 @@ services:
   steam:
     image: steam
     container_name: steam
-    privileged: true # Required for GPIO access
+    privileged: true # nodig voor GPIO toegang
     ports:
       - 80:80 # HTTP
       - 443:443 # HTTPS
     devices:
-      - /dev/gpiomem:/dev/gpiomem # GPIO access
+      - /dev/gpiomem:/dev/gpiomem # GPIO toegang
+    restart: unless-stopped
+
+  afstandsensor:
+    image: afstandsensor
+    container_name: afstandsensor
+    privileged: true # nodig voor GPIO toegang
+    devices:
+      - /dev/gpiomem:/dev/gpiomem # GPIO toegang
     restart: unless-stopped
 #    networks:
 #        - steam_network
