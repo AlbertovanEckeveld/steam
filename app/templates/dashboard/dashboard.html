@@ -51,7 +51,7 @@
     <script>
         function updateAfstand() {
             // Maak een variabele met de URL van de room_detail view
-            const afstand_url = "{{ url_for('dashboard.afstand', afstand=afstand) | tojson }}";
+            const afstand_url = "{{ url_for('dashboard.afstand', afstand=afstand) }}";
             
             // Fetch data van de afstand API
             fetch(afstand_url)
