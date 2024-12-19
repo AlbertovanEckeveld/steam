@@ -21,7 +21,7 @@ docker-compose.yml
 # Negeer environment bestanden
 .env
 README.md
-Afstandsensor/
+afstandsensor/
 babel.cfg
 
 # Negeer Git bestanden

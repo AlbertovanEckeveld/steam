@@ -1,30 +1,38 @@
 import time
-import machine
 import neopixel
-from machine import Pin, time_pulse_us
+import rpi.gpio as GPIO
+import board
 
 # Constants
-SOUND_SPEED = 340  # in m/s
+TRIG_PIN = 15  # GPIO 15
+ECHO_PIN = 14  # GPIO 14
+SOUND_SPEED = 343  # m/s
 TRIG_PULSE_DURATION_US = 10  # microseconds
 THRESHOLD_DISTANCE = 20  # in cm
 HIGH_DISTANCE = 30  # in cm
 
-# Pins
-trig_pin = Pin(15, Pin.OUT)
-echo_pin = Pin(14, Pin.IN)
-np = neopixel.NeoPixel(machine.Pin(13), 8)
+# GPIO Setup
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(TRIG_PIN, GPIO.OUT)
+GPIO.setup(ECHO_PIN, GPIO.IN)
+NEOPIXEL_PIN = board.D18
+
+# NeoPixel setup
+NUM_PIXELS = 8
+ORDER = neopixel.GRB
+np = neopixel.NeoPixel(NEOPIXEL_PIN, NUM_PIXELS, brightness=0.5, auto_write=False, pixel_order=ORDER)
 
 def measure_distance():
     """
     Meet de afstand met de ultrasone sensor en retourneert deze in cm.
     """
-    trig_pin.value(0)
+    TRIG_PIN.value(0)
     time.sleep_us(5)
 
-    trig_pin.value(1)
+    TRIG_PIN.value(1)
     time.sleep_us(TRIG_PULSE_DURATION_US)
-    trig_pin.value(0)
-    ultrason_duration = time_pulse_us(echo_pin, 1, 30000)
+    TRIG_PIN.value(0)
+    ultrason_duration = time_pulse_us(ECHO_PIN, 1, 30000)
     if ultrason_duration < 0:
         return None  # Geen meetwaarde (timeout)
     

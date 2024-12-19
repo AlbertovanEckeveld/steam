@@ -1,5 +1,6 @@
 # Gebruik een bestaande image als basis
 FROM python:3.12-slim
+LABEL authors="AlbertoVE"
 
 # Installeer de benodigde pakketten en Nginx
 RUN apt-get update && apt-get install -y nginx supervisor python3-dev python3-rpi.gpio build-essential && rm -rf /var/lib/apt/lists/*
