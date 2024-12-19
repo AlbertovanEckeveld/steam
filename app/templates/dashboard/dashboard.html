@@ -50,13 +50,26 @@
 
     <script>
         function updateAfstand() {
-            const afstandValue = "{{ afstand | tojson }}";
+            // Maak een variabele met de URL van de room_detail view
+            const afstand_url = "{{ url_for('dashboard.afstand', afstand=afstand) | tojson }}";
             
-            const afstandElement = document.getElementById('afstand');
-            afstandElement.innerHTML = `${afstandValue}`;
+            // Fetch data van de afstand API
+            fetch(afstand_url)
+                .then(response => response.json())
+                .then(data => {
+                    // Assuming the response has 'afstand' as a key
+                    const afstandValue = data.afstand;
+                    
+                    // Update the UI with the fetched afstand value
+                    const afstandElement = document.getElementById('afstand');
+                    afstandElement.innerHTML = `${afstandValue}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching afstand:', error);
+                });
         }
-    
-        setInterval(updateAfstand, 100);
+        
+        setInterval(updateAfstand, 1000);
     </script>
 
 {% endblock %}
