@@ -57,15 +57,14 @@
             fetch(afstand_url)
                 .then(response => response.json())
                 .then(data => {
-                    // Assuming the response has 'afstand' as a key
-                    const afstandValue = data;
+                    const afstandValue = data.json().afstand;
                     
-                    // Update the UI with the fetched afstand value
+                    // Update de afstand in de HTML
                     const afstandElement = document.getElementById('afstand');
                     afstandElement.innerHTML = `${afstandValue}`;
                 })
                 .catch(error => {
-                    console.error('Error fetching afstand:', error);
+                    console.error('Error ophalen van afstand:', error);
                 });
         }
         
