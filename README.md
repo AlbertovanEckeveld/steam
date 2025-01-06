@@ -5,7 +5,7 @@
 Project Steam is een semesterproject binnen de propedeuse van de opleiding HBO-ICT aan de Hogeschool Utrecht.
 
 ## Omschrijving
-Project Steam is thirt-party platform om gebruikers meer inzicht te geven in hun Steam-spellen en -vrienden.
+Project Steam is third-party platform om gebruikers meer inzicht te geven in hun Steam-spellen en -vrienden.
 De Steam Web API is gebruikt om gegevens over spellen en gebruikers op te halen.
  
 <details><summary>Context: Opgeleverd prototype</summary><br>
