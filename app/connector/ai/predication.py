@@ -1,5 +1,6 @@
 import requests
 import matplotlib.pyplot as plt
+import random
 from datetime import datetime
 
 API_KEY = "B6B4AC430AB9229F3E35F0DD9FF510CE"
@@ -38,7 +39,7 @@ def calculate_regression(x, y):
 
     return slope, intercept
 
-def visualize_creation_dates_with_regression(root_id):
+def visualize_creation_dates_with_regression(root_id, file_name):
     print("Vrienden ophalen...")
     friends = get_friends(root_id)
     print(f"{len(friends)} vrienden gevonden voor gebruiker {root_id}.")
@@ -89,6 +90,8 @@ def visualize_creation_dates_with_regression(root_id):
     plt.legend()
     plt.grid(True, linestyle="--", alpha=0.6)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(file_name, dpi=300, bbox_inches='tight')
 
-visualize_creation_dates_with_regression(ROOT_STEAM_ID)
+file = f'../../static/images/{ROOT_STEAM_ID}-{random.randrange(0, 99999)}.png'
+
+visualize_creation_dates_with_regression(ROOT_STEAM_ID, file)
