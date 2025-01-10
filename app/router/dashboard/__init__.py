@@ -148,7 +148,7 @@ def statistics():
     user = UserProfile(**user_profile_data) if user_profile_data else None
 
     img_prediction = f'{user.display_name}-{random.randrange(0, 99999)}'
-    visualize_creation_dates_with_regression(user.get_steam_id(), img_prediction)
+    prediction = visualize_creation_dates_with_regression(user.get_steam_id(), img_prediction)
 
     img_gemiddelde = 'gemiddelde'
     gemiddelde_functie(img_gemiddelde)
@@ -162,7 +162,8 @@ def statistics():
                            url_avatar=user.get_avatar_small() if user else "",
                            img_prediction=img_prediction,
                            img_gemiddelde=img_gemiddelde,
-                           img_mediaan=img_mediaan
+                           img_mediaan=img_mediaan,
+                           prediction = prediction
                            )
 
 
