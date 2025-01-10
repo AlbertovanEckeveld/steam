@@ -90,8 +90,8 @@ def visualize_creation_dates_with_regression(root_id, file_name):
     plt.legend()
     plt.grid(True, linestyle="--", alpha=0.6)
     plt.tight_layout()
-    plt.savefig(file_name, dpi=300, bbox_inches='tight')
+    plt.savefig(f'../../static/images/{file_name}.png', dpi=300, bbox_inches='tight')
 
-file = f'../../static/images/{ROOT_STEAM_ID}-{random.randrange(0, 99999)}.png'
 
-visualize_creation_dates_with_regression(ROOT_STEAM_ID, file)
+name = f'{ROOT_STEAM_ID}-{random.randrange(0, 99999)}'
+visualize_creation_dates_with_regression(ROOT_STEAM_ID, name)
