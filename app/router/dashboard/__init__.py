@@ -3,6 +3,11 @@ from flask import Blueprint, render_template, session, redirect, url_for, jsonif
 from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime
 from app.connector.afstandsensor import measure_distance
 from app.models import UserProfile
+import random
+from app.connector.ai.prediction import visualize_creation_dates_with_regression
+from app.connector.ai.gemiddelde import gemiddelde_functie
+from app.connector.ai.mediaan import mediaan_functie
+
 
 # Dashboard blueprint
 Dash = Blueprint('dashboard', __name__, static_folder='app/static', template_folder='app/templates')
@@ -142,10 +147,22 @@ def statistics():
     user_profile_data = session.get('user_profile')
     user = UserProfile(**user_profile_data) if user_profile_data else None
 
+    img_prediction = f'{user.display_name}-{random.randrange(0, 99999)}'
+    visualize_creation_dates_with_regression(user.get_steam_id(), img_prediction)
+
+    img_gemiddelde = 'gemiddelde'
+    gemiddelde_functie(img_gemiddelde)
+
+    img_mediaan = 'gemiddelde'
+    gemiddelde_functie(img_mediaan)
+
     # Render de statistiekenpagina met gebruikersgegevens
     return render_template("dashboard/dashboard-statistics.html",
                            display_name=user.get_displayname() if user else "",
-                           url_avatar=user.get_avatar_small() if user else ""
+                           url_avatar=user.get_avatar_small() if user else "",
+                           img_prediction=img_prediction,
+                           img_gemiddelde=img_gemiddelde,
+                           img_mediaan=img_mediaan
                            )
 
 

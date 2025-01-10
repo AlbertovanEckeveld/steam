@@ -12,5 +12,10 @@
 
 {% block content %}
         <h1>Dashboard - {{ gettext('statistiek') }}</h1>
-        <h2>grafiek</h2>
+        <h2>Prediction</h2>
+    <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}", width=600, height="425">
+    <h2>Gemiddelde</h2>
+    <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}", width=600, height="425">
+    <h2>Mediaan</h2>
+    <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}", width=600, height="425">
 {% endblock %}
