@@ -201,6 +201,8 @@ def get_recent_playtime(steam_id: str):
         sorted_games = sorted([
             {
                 'name': game['name'],
+                'appid': game['appid'],
+                'url_avatar': game['img_icon_url'],
                 'playtime_2weeks': round((game['playtime_2weeks']) / 60, 2)
             }
             for game in games

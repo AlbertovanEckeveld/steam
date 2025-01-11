@@ -202,7 +202,7 @@ body {
     flex-wrap: wrap; /* Laat kaarten op meerdere rijen lopen als er niet genoeg ruimte is */
     justify-content: space-around; /* Centreer de kaarten horizontaal */
     padding: 80px;
-    gap: 20px;
+    gap: 50px;
     align-content: center;
 }
 
@@ -225,14 +225,17 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-.card img{
+.card .card-image {
     width: 90%; /* Beeld vult de kaart */
     object-fit: contain; /* Zorg dat de afbeelding correct wordt bijgesneden */
-
 }
 
 .card-content {
     padding: 15px;
+}
+.card-content h4{
+    justify-content:  center;
+    font-size: 24px;
 }
 .card-content h1 {
     font-size:14px ;
@@ -240,7 +243,8 @@ body {
 }
 .card-content h3 {
     font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+
 }
 
 .card-content p {
@@ -259,20 +263,71 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-.card-button {
-    background-color: #66c0f4; /* Steam blauw */
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
 .card-button:hover {
     background-color: #4a8cb4; /* Donkerdere blauwe tint bij hover */
 }
 
 
+/* tabel css */
+table {
+    width: 100%; /* Zorg ervoor dat de tabel de volledige breedte van de container vult */
+    background-color: #2a475e; /* Achtergrondkleur van de tabel */
+    color: #fff; /* Tekstkleur */
+    border-collapse: collapse; /* Verwijdert dubbele randen tussen cellen */
+}
+
+/* Stijlen voor de tabelkop */
+thead {
+    background-color: #1b2838; /* Achtergrondkleur voor de kop */
+}
+
+th {
+    padding: 15px 10px; /* Ruimte binnen de tabelkoppen */
+    text-align: center; /* Zorgt ervoor dat de tekst in de koppen naar het midden is uitgelijnd */
+    font-size: 18px; /* Verhoogt het lettertype van de koppen */
+    font-weight: bold; /* Maakt de tekst vetgedrukt */
+    border-bottom: 2px solid #66c0f4; /* Geeft een blauwe lijn onder de koptekst */
+}
 
 
+
+/* Stijlen voor de tabelcellen */
+td {
+    padding: 5px 5px; /* Ruimte binnen de tabelcellen */
+    text-align: center; /* Zorgt ervoor dat de tekst in de cellen naar het midden is uitgelijnd */
+    font-size: 12px; /* Verhoogt het lettertype van de cellen */
+    border-bottom: 1px solid #344a63; /* Een dunne lijn onder de cellen voor visuele scheiding */
+}
+
+/* Afbeeldingen in de tabel */
+td img {
+    width: 40px; /* Maakt de afbeeldingen iets groter */
+    height: 40px; /* Zorgt ervoor dat de afbeelding een vierkante vorm heeft */
+    border-radius: 5px; /* Zorgt voor afgeronde hoeken bij de afbeelding */
+    object-fit: cover; /* Zorgt ervoor dat de afbeelding goed wordt bijgesneden */
+}
+
+
+
+
+
+.game-info {
+    display: flex; /* Plaatst de elementen naast elkaar */
+    gap: 10px; /* Voeg wat ruimte toe tussen de afbeelding en de naam */
+}
+
+/* Stijl voor de game-avatar afbeelding */
+.game-avatar {
+    width: 40px; /* Grotere afbeelding */
+    height: 40px; /* Zorgt ervoor dat de afbeelding vierkant is */
+    border-radius: 5px; /* Zorgt voor afgeronde hoeken bij de afbeelding */
+    object-fit: contain; /* Zorgt ervoor dat de afbeelding goed wordt bijgesneden */
+
+}
+
+/* Zorgt ervoor dat de naam niet te groot is en mooi uitgelijnd is */
+.game-info span {
+    font-size: 16px; /* Verhoog de lettergrootte voor de naam */
+    font-weight: bold; /* Maakt de naam vetgedrukt */
+
+}

@@ -9,22 +9,21 @@
       <div class="card-container">
         <div class="card">
             <div class="card-content">
-                <h3>Dashboard - {{ gettext('statistiek') }}</h3>
-                <h1>Prediction</h1>
-            <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}">
+                <h3>Prediction</h3>
+            <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}" class="card-image">
             <p>Voorspelling is {{ prediction }} aantal nieuwe accounts in een jaar</p>
             </div>
         </div>
         <div class="card">
             <div class="card-content">
                 <h3>Gemiddelde</h3>
-                <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}">
+                <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}" class="card-image">
             </div>
         </div>
         <div class="card">
             <div class="card-content">
                 <h3>Mediaan</h3>
-                <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}">
+                <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}" class="card-image">
             </div>
         </div>
       </div>

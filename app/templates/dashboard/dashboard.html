@@ -75,8 +75,15 @@
                         <tbody>
                             {% for game in games %}
                                 <tr>
-                                    <td>{{ game.name }}</td>
-                                    <td>{{ game.playtime_2weeks }}</td>
+                                    <div class="game-info">
+                                        <td>
+                                            <img src="https://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.url_avatar }}.jpg" alt="{{ game.name }}" class="game-avatar"/>
+                                            <span>{{ game.name }}</span>
+                                        </td>
+                                        <td>
+                                            {{ game.playtime_2weeks }}
+                                        </td>
+                                    </div>
                                 </tr>
                             {% endfor %}
                         </tbody>
