@@ -98,8 +98,8 @@ def get_friend_list(steam_id: str):
     return [
         {
             'steamid': friend['steamid'],
-            'display_name': friends_info.get(friend['steamid'], "Unknown"),
-            'avatar': friends_info.get(friend['steamid'], {}).get('avatar', None),
+            'display_name': friends_info.get(friend['steamid'], {}).get('display_name', "Unknown"),
+            'avatar': friends_info.get(friend['steamid'], {}).get('avatar', ""),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }
