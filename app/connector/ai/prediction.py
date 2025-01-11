@@ -1,10 +1,8 @@
 import requests
 import matplotlib.pyplot as plt
-import random
 from datetime import datetime
 
 API_KEY = "B6B4AC430AB9229F3E35F0DD9FF510CE"
-ROOT_STEAM_ID = "76561198311281508"
 BASE_URL = "https://api.steampowered.com"
 
 def get_friends(steam_id):
@@ -90,8 +88,6 @@ def visualize_creation_dates_with_regression(root_id, file_name):
     plt.legend()
     plt.grid(True, linestyle="--", alpha=0.6)
     plt.tight_layout()
-    plt.savefig(f'../../static/images/{file_name}.png', dpi=300, bbox_inches='tight')
+    plt.savefig(f'static/images/{file_name}.png', dpi=300, bbox_inches='tight')
+    return round(slope, 2)
 
-
-name = f'{ROOT_STEAM_ID}-{random.randrange(0, 99999)}'
-visualize_creation_dates_with_regression(ROOT_STEAM_ID, name)
