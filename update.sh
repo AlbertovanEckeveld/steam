@@ -230,7 +230,7 @@ if [ -f "Dockerfile" ]; then
     sudo docker build -t ${DOCKER_IMAGE_NEOPIXEL} . > /dev/null  2>&1
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_NEOPIXEL} succesvol gebouwd${NC}"
 
-    cd ../app
+    cd ..
 
     # Bouw het Docker-image
     sudo docker build -t ${DOCKER_IMAGE_STEAM} . > /dev/null  2>&1
