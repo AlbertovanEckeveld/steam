@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Kopieer de applicatiecode
 COPY . /steam/
-COPY .env /steam/.env
+COPY .venv /steam/.venv
 
 # Kopieer configuratiebestanden
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
