@@ -3,7 +3,7 @@ FROM python:3.12-slim
 LABEL authors="AlbertoVE"
 
 # Installeer de benodigde pakketten en Nginx
-RUN apt-get update && apt-get install -y nginx supervisor python3-dev python3-rpi.gpio build-essential && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nginx supervisor python3-dev python3-matplotlib python3-rpi.gpio build-essential && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir gunicorn
 
