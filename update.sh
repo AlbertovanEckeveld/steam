@@ -233,7 +233,7 @@ if [ -f "Dockerfile" ]; then
     cd ../
 
     # Bouw het Docker-image
-    sudo docker build -t ${DOCKER_IMAGE_STEAM} . > /dev/null  2>&1
+    sudo docker build -t ${DOCKER_IMAGE_STEAM} . 
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_STEAM} succesvol gebouwd${NC}"
 
     # Start de Docker-container
