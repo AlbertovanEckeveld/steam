@@ -167,7 +167,7 @@ if [ "$(systemctl is-active docker)" != "active" ]; then
     echo -e "${BOLD_RED}Docker-service is niet actief.. ${YELLOW}Inschakelen ...${NC}"
     sudo systemctl start docker
     echo -e "${GREEN}Docker-service gestart${NC}"
-    
+
 fi
 
 # Controleren of de Docker-service is ingeschakeld
@@ -230,10 +230,10 @@ if [ -f "Dockerfile" ]; then
     sudo docker build -t ${DOCKER_IMAGE_NEOPIXEL} . > /dev/null  2>&1
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_NEOPIXEL} succesvol gebouwd${NC}"
 
-    cd ../steam
+    cd ../
 
     # Bouw het Docker-image
-    sudo docker build -t ${DOCKER_IMAGE_STEAM} . > /dev/null  2>&1
+    sudo docker build -t ${DOCKER_IMAGE_STEAM} . 
     echo -e "${BOLD_GREEN}Docker-image: ${DOCKER_IMAGE_STEAM} succesvol gebouwd${NC}"
 
     # Start de Docker-container
