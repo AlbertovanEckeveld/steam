@@ -10,44 +10,21 @@
             </div>
 {% endblock %}
 
-{% block content %}
-        <h1>Dashboard</h1>
+{% block contentinlog %}
+        <h3>Dashboard</h3>
         <p>{{ gettext('Ingelogd als') }}: {{ display_name }}</p>
 
-        <h2>{{ gettext('Mijn statestieken') }}</h2>
+        <h3>{{ gettext('Mijn statestieken') }}</h3>
         <p>{{ gettext('Uren gespeeld deze 2 weken') }}: {{ playtime }}</p>
-
-    <h2>{{ gettext('Afstand tussen laptop:') }}</h2>
+{% endblock %}
+{% block contentafstand %}
+    <h3>{{ gettext('Afstand tussen laptop:') }}</h3>
     {% if afstand %}
         <p id="afstand"></p>
     {% else %}
         <p>{{ gettext('Fout: We konden de afstand niet ophalen.') }}</p>
         <a href="{{ url_for('dashboard.index') }}">{{ gettext('Ga terug') }}</a>
     {% endif %}
-
-        <h2>{{ gettext('Meest gespeelde spelen deze 2 weken:') }}</h2>
-    {% if games %}
-        <table>
-            <thead>
-                <tr>
-                    <th><h2>{{ gettext('Naam van spel') }}</h2></th>
-                    <th><h2>{{ gettext('Uren deze 2 weken') }}</h2></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for game in games %}
-                    <tr>
-                        <td>{{ game.name }}</td>
-                        <td>{{ game.playtime_2weeks }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
-        <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
-    {% endif %}
-
     <script>
         // Counter om bij te houden hoe vaak de functie is aangeroepen
         let counter = 0;
@@ -85,4 +62,28 @@
         const interval = setInterval(updateAfstand, 3000);
     </script>
 
+{% endblock %}
+{% block contentgespeeld %}
+        <h3>{{ gettext('Meest gespeelde spellen deze 2 weken:') }}</h3>
+    {% if games %}
+        <table>
+            <thead>
+                <tr>
+                    <th><h3>{{ gettext('Naam van spel') }}</h3></th>
+                    <th><h3>{{ gettext('Uren deze 2 weken') }}</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                    <tr>
+                        <td>{{ game.name }}</td>
+                        <td>{{ game.playtime_2weeks }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
+        <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
+    {% endif %}
 {% endblock %}
