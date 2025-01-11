@@ -150,19 +150,21 @@ def statistics():
     img_prediction = f'{user.display_name}-{random.randrange(0, 99999)}'
     prediction = visualize_creation_dates_with_regression(user.get_steam_id(), img_prediction)
 
-    img_gemiddelde = 'gemiddelde'
-    gemiddelde_functie(img_gemiddelde)
+#    img_gemiddelde = 'gemiddelde'
+#    gemiddelde_functie(img_gemiddelde)
 
-    img_mediaan = 'gemiddelde'
-    gemiddelde_functie(img_mediaan)
+#    img_mediaan = 'gemiddelde'
+#    gemiddelde_functie(img_mediaan)
+    img_gemiddelde = ""
+    img_mediaan = ""
 
     # Render de statistiekenpagina met gebruikersgegevens
     return render_template("dashboard/dashboard-statistics.html",
                            display_name=user.get_displayname() if user else "",
                            url_avatar=user.get_avatar_small() if user else "",
                            img_prediction=img_prediction,
-                           img_gemiddelde=img_gemiddelde,
-                           img_mediaan=img_mediaan,
+                           img_gemiddelde=img_gemiddelde if img_gemiddelde else "",
+                           img_mediaan=img_mediaan if img_mediaan else "",
                            prediction = prediction
                            )
 
