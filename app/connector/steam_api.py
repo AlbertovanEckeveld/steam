@@ -39,7 +39,7 @@ def get_player_summary(steam_id: str):
         raise Exception(f"API request mislukt met status code {response.status_code}")
 
 
-def get_player_displayname(steam_id: str):
+def get_friend_info(steam_id: str):
     """
         Haal gebruikersweergavenaam op van de Steam API.
 
@@ -49,15 +49,23 @@ def get_player_displayname(steam_id: str):
         Returns:
         str of dict: Gebruikersweergavenaam of dict van weergavenamen.
     """
-    # Haal de spelersgegevens op van de Steam API
     player_data = get_player_summary(steam_id)
 
-    # Controleer of steam_id een string is en retourneer de weergavenaam
+    # Controleer of steam_id een string is en retourneer de weergavenaam en avatar
     if isinstance(steam_id, str):
-        return player_data[0]['personaname'] if player_data else None
+        return {
+            'display_name': player_data[0]['personaname'],
+            'avatar': player_data[0]['avatar']
+        } if player_data else None
 
-    # Maak een dict van weergavenamen voor een lijst van Steam IDs
-    return {player['steamid']: player['personaname'] for player in player_data}
+    # Maak een dict van weergavenamen en avatars voor een lijst van Steam IDs
+    return {
+        player['steamid']: {
+            'display_name': player['personaname'],
+            'avatar': player['avatar']
+        }
+        for player in player_data
+    }
 
 
 def get_friend_list(steam_id: str):
@@ -84,13 +92,14 @@ def get_friend_list(steam_id: str):
     friend_ids = [friend['steamid'] for friend in friends]
 
     # Haal de weergavenamen van de vrienden op
-    display_names = get_player_displayname(friend_ids)
+    friends_info = get_friend_info(friend_ids)
 
     # Return een lijst van vrienden met details
     return [
         {
             'steamid': friend['steamid'],
-            'display_name': display_names.get(friend['steamid'], "Unknown"),
+            'display_name': friends_info.get(friend['steamid'], "Unknown"),
+            'avatar': friends_info.get(friend['steamid'], {}).get('avatar', None),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }

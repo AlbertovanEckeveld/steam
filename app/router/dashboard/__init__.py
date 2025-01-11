@@ -85,6 +85,8 @@ def friends():
     user_profile_data = session.get('user_profile')
     user = UserProfile(**user_profile_data) if user_profile_data else None
 
+
+
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
     return render_template("dashboard/dashboard-friends.html",
                            display_name=user.get_displayname() if user else "",
