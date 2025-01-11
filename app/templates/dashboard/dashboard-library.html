@@ -2,13 +2,7 @@
 
 {% block title %} Library {% endblock %}
 
-{% block navbar %}
-            <div class="user-section">
-                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
-                <span class="user-name">{{ display_name }}</span>
-                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
-            </div>
-{% endblock %}
+
 
 {% block content %}
         <h1>Dashboard - {{ gettext('Bibliotheek') }}</h1>
@@ -16,8 +10,8 @@
         <table>
             <thead>
                 <tr>
-                    <th><h2>{{ gettext('Naam van spel') }}</h2></th>
-                    <th><h2>{{ gettext('Totaal uren') }}</h2></th>
+                    <th><h3>{{ gettext('Naam van spel') }}</h3></th>
+                    <th><h3>{{ gettext('Totaal uren') }}</h3></th>
                 </tr>
             </thead>
             <tbody>
