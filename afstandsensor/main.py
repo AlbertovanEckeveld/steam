@@ -8,8 +8,8 @@ TRIG_PIN = 15  # GPIO 15
 ECHO_PIN = 14  # GPIO 14
 SOUND_SPEED = 343  # m/s
 TRIG_PULSE_DURATION_US = 10  # microseconds
-THRESHOLD_DISTANCE = 20  # in cm
-HIGH_DISTANCE = 30  # in cm
+THRESHOLD_DISTANCE = 50  # in cm
+HIGH_DISTANCE = 70  # in cm
 
 # GPIO Setup
 GPIO.setmode(GPIO.BCM)
@@ -90,7 +90,7 @@ def light_pulse_effect_green(color, cycles=1):
                          brightness * color[2] // 255]
             np.write()
             time.sleep(0.025)
-            
+
             
 def light_pulse_effect_blue(color, cycles=1):
     """
