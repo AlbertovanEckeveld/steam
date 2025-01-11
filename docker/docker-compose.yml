@@ -50,3 +50,6 @@ services:
 #    default:
 #        external: true
 #        name: steam_network
+
+volumes:
+  postgres_data:
