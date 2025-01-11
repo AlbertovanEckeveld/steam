@@ -172,6 +172,7 @@ def get_common_games(own_games, friend_games):
         for game_id in own_game_dict if game_id in friend_game_dict
     ]
 
+
 def get_recent_playtime(steam_id: str):
     """
         Haal recent gespeelde spellen op van de Steam API.
@@ -201,6 +202,8 @@ def get_recent_playtime(steam_id: str):
         sorted_games = sorted([
             {
                 'name': game['name'],
+                'appid': game['appid'],
+                'url_avatar': game['img_icon_url'],
                 'playtime_2weeks': round((game['playtime_2weeks']) / 60, 2)
             }
             for game in games
@@ -212,7 +215,8 @@ def get_recent_playtime(steam_id: str):
     else:
         return {
             'total_playtime_2weeks': 0,
-            'games': []
+            'games': [],
+            'url_avatar': ""
         }
 
 

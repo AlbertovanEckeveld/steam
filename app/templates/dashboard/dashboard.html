@@ -10,80 +10,97 @@
             </div>
 {% endblock %}
 
-{% block contentinlog %}
-        <h3>Dashboard</h3>
-        <p>{{ gettext('Ingelogd als') }}: {{ display_name }}</p>
+{% block content %}
+    <main class="page-body">
+      <div class="card-container">
+        <div class="card">
+            <div class="card-content">
+                <h3>Dashboard</h3>
+                <p>{{ gettext('Ingelogd als') }}: {{ display_name }}</p>
 
-        <h3>{{ gettext('Mijn statestieken') }}</h3>
-        <p>{{ gettext('Uren gespeeld deze 2 weken') }}: {{ playtime }}</p>
-{% endblock %}
-{% block contentafstand %}
-    <h3>{{ gettext('Afstand tussen laptop:') }}</h3>
-    {% if afstand %}
-        <p id="afstand"></p>
-    {% else %}
-        <p>{{ gettext('Fout: We konden de afstand niet ophalen.') }}</p>
-        <a href="{{ url_for('dashboard.index') }}">{{ gettext('Ga terug') }}</a>
-    {% endif %}
-    <script>
-        // Counter om bij te houden hoe vaak de functie is aangeroepen
-        let counter = 0;
-        const maxCalls = 20;
-    
-        function updateAfstand() {
-            // Maak de interval leeg als maxCalls is bereikt
-            if (counter >= maxCalls) {
-                clearInterval(interval); // Stop the interval if maxCalls is reached
-                return;
-            }
-    
-            // URL om de afstand op te halen
-            const afstand_url = "/dashboard/afstand?afstand=13.28";
-    
-            // Fetch data van de afstand URL
-            fetch(afstand_url)
-                .then(response => response.json())
-                .then(data => {
-                    const afstandValue = data.afstand;
-    
-                    // Update de afstand in de HTML
-                    const afstandElement = document.getElementById('afstand');
-                    afstandElement.innerHTML = `${afstandValue}cm`;
-                })
-                .catch(error => {
-                    console.error('Error fetching afstand:', error);
-                });
-    
-            // Optellen bij de counter
-            counter++;
-        }
-    
-        // Zet de interval om de 3 seconden
-        const interval = setInterval(updateAfstand, 3000);
-    </script>
+                <h3>{{ gettext('Mijn statestieken') }}</h3>
+                <p>{{ gettext('Uren gespeeld deze 2 weken') }}: {{ playtime }}</p>
+             </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>{{ gettext('Afstand tussen laptop:') }}</h3>
+                {% if afstand %}
+                    <p id="afstand"></p>
+                {% else %}
+                    <p>{{ gettext('Fout: We konden de afstand niet ophalen.') }}</p>
+                    <a href="{{ url_for('dashboard.index') }}">{{ gettext('Ga terug') }}</a>
+                {% endif %}
+                <script>
+                    // Counter om bij te houden hoe vaak de functie is aangeroepen
+                    let counter = 0;
+                    const maxCalls = 20;
 
+                    function updateAfstand() {
+                        // Maak de interval leeg als maxCalls is bereikt
+                        if (counter >= maxCalls) {
+                            clearInterval(interval); // Stop the interval if maxCalls is reached
+                            return;
+                        }
+
+                        // URL om de afstand op te halen
+                        const afstand_url = "/dashboard/afstand?afstand=13.28";
+
+                        // Fetch data van de afstand URL
+                        fetch(afstand_url)
+                            .then(response => response.json())
+                            .then(data => {
+                                const afstandValue = data.afstand;
+
+                                // Update de afstand in de HTML
+                                const afstandElement = document.getElementById('afstand');
+                                afstandElement.innerHTML = `${afstandValue}cm`;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching afstand:', error);
+                            });
+
+                        // Optellen bij de counter
+                        counter++;
+                    }
+
+                    // Zet de interval om de 3 seconden
+                    const interval = setInterval(updateAfstand, 3000);
+                </script>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>{{ gettext('Meest gespeelde spellen deze 2 weken:') }}</h3>
+                {% if games %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><h3>{{ gettext('Naam van spel') }}</h3></th>
+                                <th><h3>{{ gettext('Uren deze 2 weken') }}</h3></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for game in games %}
+                                <tr>
+                                    <td><img src="https://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.url_avatar }}.jpg" alt="{{ game.name }}"/>
+                                        {{ game.name }} </td>
+                                    <td>{{ game.playtime_2weeks }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
+                    <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
+                {% endif %}
+            </div>
+        </div>
+         <div class="card">
+             <div class="card-content">
+             </div>
+         </div>
+    </div>
+  </main>
 {% endblock %}
-{% block contentgespeeld %}
-        <h3>{{ gettext('Meest gespeelde spellen deze 2 weken:') }}</h3>
-    {% if games %}
-        <table>
-            <thead>
-                <tr>
-                    <th><h3>{{ gettext('Naam van spel') }}</h3></th>
-                    <th><h3>{{ gettext('Uren deze 2 weken') }}</h3></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for game in games %}
-                    <tr>
-                        <td>{{ game.name }}</td>
-                        <td>{{ game.playtime_2weeks }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>{{ gettext('Fout: We konden je bibliotheek niet ophalen.') }}</p>
-        <p>{{ gettext('Mogelijk staat je bibliotheek op prive.') }}</p>
-    {% endif %}
-{% endblock %}
+

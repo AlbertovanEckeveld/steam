@@ -2,7 +2,9 @@ import requests
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-API_KEY = "B6B4AC430AB9229F3E35F0DD9FF510CE"
+from app.connector import get_steam_API
+
+API_KEY = get_steam_API()
 BASE_URL = "https://api.steampowered.com"
 
 def get_friends(steam_id):

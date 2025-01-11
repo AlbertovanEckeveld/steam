@@ -40,31 +40,7 @@
     </div>
   </div>
   </header>
-
-
-    <main class="page-body">
-      <div class="card-container">
-        <div class="card">
-            <div class="card-content">
-                {% block contentinlog %}{% endblock %}
-             </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                {% block contentafstand %}{% endblock %}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                {% block contentgespeeld %}{% endblock %}
-            </div>
-        </div>
-         <div class="card">
-             <div class="card-content">
-             </div>
-         </div>
-    </div>
-  </main>
+        {% block content %}{% endblock %}
   <footer class="page-footer">
       <p>&copy; 2024 {{ gettext('Alle rechten zijn voorbehouden') }}</p>
       <a target="_blank" href="https://www.instagram.com/maxarinkk/">Web Design By</a>
