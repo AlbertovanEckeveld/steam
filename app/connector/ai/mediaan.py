@@ -1,5 +1,6 @@
 import json
 import matplotlib.pyplot as plt
+import os
 
 def median(data):
     sorted_data = sorted(data)
@@ -12,7 +13,10 @@ def median(data):
         return sorted_data[mid]
 
 def mediaan_functie(file_name):
-    with open('steam.json', 'r') as file:
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_path, 'steam.json')
+
+    with open(file_path, 'r') as file:
         games = json.load(file)
 
     action_games = [game for game in games if 'Action' in game['genres'] and float(game['price']) <= 70 and game['positive_ratings'] <= 50000 and 100 <= game['average_playtime'] <= 30000]
@@ -29,8 +33,8 @@ def mediaan_functie(file_name):
     plt.axhline(median_playtime, color='red', linestyle='dashed', linewidth=1, label=f'Mediaan Speeltijd (minuten): {median_playtime:.2f}')
     plt.xlabel('Prijs')
     plt.ylabel('Gemiddelde Speeltijd (minuten)')
-    plt.title('prijs vs gemiddelde speeltijd voor genre "Action"')
+    plt.title('(mediaan) prijs vs speeltijd voor genre "Action"')
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f'../../static/images/{file_name}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'static/images/{file_name}', dpi=300, bbox_inches='tight')
