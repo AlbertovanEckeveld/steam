@@ -153,8 +153,8 @@ def statistics():
     img_gemiddelde = 'gemiddelde'
     gemiddelde_functie(img_gemiddelde)
 
-    img_mediaan = 'gemiddelde'
-    gemiddelde_functie(img_mediaan)
+    img_mediaan = 'mediaan'
+    mediaan_functie(img_mediaan)
 
     # Render de statistiekenpagina met gebruikersgegevens
     return render_template("dashboard/dashboard-statistics.html",
