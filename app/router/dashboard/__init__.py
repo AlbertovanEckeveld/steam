@@ -163,7 +163,7 @@ def statistics():
                            img_prediction=img_prediction,
                            img_gemiddelde=img_gemiddelde,
                            img_mediaan=img_mediaan,
-                           prediction = prediction
+                           prediction=prediction
                            )
 
 
