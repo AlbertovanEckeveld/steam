@@ -23,7 +23,10 @@
             <tbody>
                 {% for friend in friends %}
                     <tr>
-                        <td><a href="{{ url_for('dashboard.compare', friend_id=friend['steamid']) }}"> {{ friend['display_name'] }} </a></td>
+                        <td>
+                            <img src="{{ friend['avatar'] }}" />
+                            <a href="{{ url_for('dashboard.compare', friend_id=friend['steamid']) }}"> {{ friend['display_name'] }} </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
