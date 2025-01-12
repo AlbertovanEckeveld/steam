@@ -12,13 +12,22 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #1b2838;
-    color: #c7d5e0;
+    /*background-color: #1b2838;*/
+    /*color: #c7d5e0;*/
     display: flex;
     flex-direction: column; /* Allow stacking of content and footer */
     min-height: 100vh; /* Ensure body spans the full viewport */
     overflow-y: auto;
+    background: linear-gradient(135deg, #121212, #1b2838, #66c0f4);
+    background-size: 800% 800%;
+    animation: gradientBG 15s ease infinite;
+    color: #ffffff;
 }
+ @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+ }
 
 html {
   height: 100%;
@@ -62,20 +71,43 @@ body {
   background-color: #66c0f4; / Steam blauw /;
   border-radius: 15px;
 }
-
+.dropdown{
+    background-color: #1b2838;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
 .dropdown-menu {
     display: none; /* Verberg standaard */
     position: absolute;
     top: 100%; /* Plaats net onder het Steam-logo */
     left: 0;
     background-color: #1b2838;
-    padding: 10px 0;
+    padding: 5px 10px;
     list-style: none;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000; /* Zorgt ervoor dat het menu boven andere content verschijnt */
 }
+.dropdown > a {
+    position: relative; /* Maak positie relatief voor pseudo-element */
+    color: #ffffff; /* Tekstkleur */
+    text-decoration: none; /* Verwijder onderstreping */
+    padding-right: 20px; /* Maak ruimte voor de pijl */
+}
 
+.dropdown > a::after {
+    content: ''; /* Maak een leeg content-blok voor de pijl */
+    position: absolute;
+    right: 5px; /* Plaats aan de rechterkant van de link */
+    top: 50%; /* Centreer verticaal */
+    transform: translateY(-50%);
+    border-style: solid; /* Maak de randen zichtbaar */
+    border-width: 5px 5px 0 5px; /* Vorm een driehoek (onderrand is 0) */
+    border-color: white transparent transparent transparent; /* Kleur alleen de bovenrand */
+    width: 0;
+    height: 0;
+    pointer-events: none; /* Zorg ervoor dat het niet klikbaar is */
+}
 
 .dropdown-menu li {
     padding: 5px 20px;
@@ -173,10 +205,10 @@ body {
 }
 
 .user-avatar {
-  width: 20px; /* Standaard breedte van avatar */
-  height: 20px; /* Standaard hoogte van avatar */
+  width: 30px; /* Standaard breedte van avatar */
+  height: 30px; /* Standaard hoogte van avatar */
   border-radius: 50%; /* Rond de avatar af */
-  object-fit: cover; /* Zorg dat de afbeelding goed binnen de container past */
+  object-fit: contain; /* Zorg dat de afbeelding goed binnen de container past */
 }
 
 .user-name {
