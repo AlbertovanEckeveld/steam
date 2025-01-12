@@ -2,7 +2,9 @@ import requests
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-API_KEY = "B6B4AC430AB9229F3E35F0DD9FF510CE"
+from app.connector import get_steam_API
+
+API_KEY = get_steam_API()
 BASE_URL = "https://api.steampowered.com"
 
 def get_friends(steam_id):
@@ -54,14 +56,14 @@ def visualize_creation_dates_with_regression(root_id, file_name):
 
     for friend_id in friends[:40]:
         second_level_friends = get_friends(friend_id)
-        second_level_data = get_user_summary(second_level_friends[:40])
+        second_level_data = get_user_summary(second_level_friends[:50])
         for friend in second_level_data:
             if "timecreated" in friend:
                 creation_dates.append(friend["timecreated"])
 
     for second_level_id in friends[:40]:
         third_level_friends = get_friends(second_level_id)
-        third_level_data = get_user_summary(third_level_friends[:40])
+        third_level_data = get_user_summary(third_level_friends[:50])
         for friend in third_level_data:
             if "timecreated" in friend:
                 creation_dates.append(friend["timecreated"])

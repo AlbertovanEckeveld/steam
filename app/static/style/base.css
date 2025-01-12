@@ -48,9 +48,12 @@ body {
 }
 
 .user-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex; /* Zet de elementen naast elkaar */
+  align-items: center; /* Zorg dat ze verticaal gecentreerd zijn */
+  gap: 10px; /* Ruimte tussen avatar, naam en de link */
+  padding: 5px 5px; /* Voeg wat padding toe voor betere zichtbaarheid */
+  background-color: transparent; /* Transparant of een kleur naar keuze */
+  color: white; /* Zorg dat tekst zichtbaar is op een donkere achtergrond */
 }
 
 .user-avatar {
@@ -147,9 +150,11 @@ th {
 /* Footer Section */
 .footer-section {
     background-color: #171a21;
+    margin: 0;
     color: #c7d5e0;
     text-align: center;
-    padding: 20px 10px;
+    min-height: 10px;
+
 }
 
 .footer-section .container {
@@ -159,6 +164,8 @@ th {
     flex-wrap: wrap; /* Allow content to wrap on smaller screens */
     max-width: 800px;
     margin: 0 auto; /* Center the footer content */
+    padding: 20px;
+
 }
 
 .footer-section p {

@@ -1,45 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %} - Dashboard Steam</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/base.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/dashboard_style.css') }}">
 </head>
 
 <body>
-    <header>
-        <nav class="steam-navbar">
-            <div class="steam-logo">
-                <img src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo">
-            </div>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('dashboard.index') }}">{{ gettext('HOME') }}</a></li>
-                <li><a href="{{ url_for('dashboard.library') }}">{{ gettext('BIBLIOTHEEK') }}</a></li>
-                <li><a href="{{ url_for('dashboard.friends') }}">{{ gettext('VRIENDEN') }}</a></li>
-                <li><a href="{{ url_for('dashboard.statistics') }}">{{ gettext('STATISTIEK') }}</a></li>
-            </ul>
-            <ul class="nav-links">
+<div class="wrapper">
+  <header class=page-header>
+
+        <a href="{{ url_for('dashboard.index') }}">
+            <img src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo">
+        </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a>{{ gettext('Hoofdmenu') }}</a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('dashboard.library') }}">{{ gettext('Bibliotheek') }}</a></li>
+          <li><a href="{{ url_for('dashboard.friends') }}">{{ gettext('Vrienden') }}</a></li>
+          <li><a href="{{ url_for('dashboard.statistics') }}">{{ gettext('Statistieken') }}</a></li>
+        </ul>
+      </li>
+    </ul>
+  <div class="right-section">
+   <ul class="nav-links">
+        <li class="dropdown talen-dropdown">
+            <a>{{ gettext('Talen') }}</a>
+            <ul class="dropdown-menu">
                 <li><a href="{{ url_for('change_language', lang='nl') }}">Nederlands</a></li>
                 <li><a href="{{ url_for('change_language', lang='en') }}">English</a></li>
             </ul>
-                {% block navbar %} {% endblock %}
-        </nav>
-    </header>
-
-    <div class="container">
-        <div class="content">
-            {% block content %} {% endblock %}
-        </div>
+        </li>
+   </ul>
+    <div class="user-section">
+      {% block navbar %}
+            <div class="user-section">
+                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
+                <span class="user-name">{{ display_name }}</span>
+                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
+            </div>
+        {% endblock %}
     </div>
-
-    <footer class="footer-section">
-        <div class="container">
-            <p>&copy; 2024 {{ gettext('Alle rechten zijn voorbehouden') }}</p>
-            <ul>
-                <li><a target="_blank" href="https://www.instagram.com/albertovaneckeveld/">Social Media</a></li>
-                <li><a target="_blank" href="https://github.com/AlbertovanEckeveld/">Terms and Conditions</a></li>
-            </ul>
-        </div>
-    </footer>
+  </div>
+  </header>
+ {% block content %}{% endblock %}
+  <footer class="page-footer">
+      <p>&copy; 2025 {{ gettext('Alle rechten zijn voorbehouden') }}</p>
+      <a target="_blank" href="https://www.instagram.com/maxarinkk/">Web Design By</a>
+      <ul>
+        <li><a target="_blank" href="https://www.instagram.com/albertovaneckeveld/">Social Media</a></li>
+        <li><a target="_blank" href="https://github.com/AlbertovanEckeveld/">Terms and Conditions</a></li>
+      </ul>
+  </footer>
+</div>
 </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{% block title %} {% endblock %} - Dashboard Steam</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='style/base.css') }}">#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<div class="parent">#}
+{#  <div class="one">#}
+{#    <header>#}
+{#        <nav class="steam-navbar">#}
+{#            <div class="steam-logo">#}
+{#                <img src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo">#}
+{#            </div>#}
+{#            <ul class="nav-links">#}
+{#                <li><a href="{{ url_for('dashboard.index') }}">{{ gettext('HOME') }}</a></li>#}
+{#                <li><a href="{{ url_for('dashboard.library') }}">{{ gettext('BIBLIOTHEEK') }}</a></li>#}
+{#                <li><a href="{{ url_for('dashboard.friends') }}">{{ gettext('VRIENDEN') }}</a></li>#}
+{#                <li><a href="{{ url_for('dashboard.statistics') }}">{{ gettext('STATISTIEK') }}</a></li>#}
+{#            </ul>#}
+{#            <ul class="nav-links">#}
+{#                <li><a href="{{ url_for('change_language', lang='nl') }}">Nederlands</a></li>#}
+{#                <li><a href="{{ url_for('change_language', lang='en') }}">English</a></li>#}
+{#            </ul>#}
+{#                {% block navbar %} {% endblock %}#}
+{#        </nav>#}
+{#    </header>#}
+{#  </div>#}
+{#  <div class="three">#}
+{#    <div class="container">#}
+{#        <div class="content">#}
+{#            {% block content %} {% endblock %}#}
+{#        </div>#}
+{#    </div>#}
+{#  </div>#}
+{#<div class="five">#}
+{#    <footer class="footer-section">#}
+{#        <div class="container">#}
+{#            <p>&copy; 2024 {{ gettext('Alle rechten zijn voorbehouden') }}</p>#}
+{#            <ul>#}
+{#                <li><a target="_blank" href="https://www.instagram.com/albertovaneckeveld/">Social Media</a></li>#}
+{#                <li><a target="_blank" href="https://github.com/AlbertovanEckeveld/">Terms and Conditions</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </footer>#}
+{#</div>#}
+{#</div>#}
+{#</body>#}
