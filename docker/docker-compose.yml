@@ -21,20 +21,6 @@ services:
 #    networks:
 #        - steam_network
 
-  postgres:
-    image: postgres
-    container_name: postgres
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=Steam123!
-      - POSTGRES_DB=postgres
-    restart: unless-stopped
-    command: postgres -c listen_addresses='172.18.0.5'
-
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
