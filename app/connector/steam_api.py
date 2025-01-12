@@ -39,7 +39,7 @@ def get_player_summary(steam_id: str):
         raise Exception(f"API request mislukt met status code {response.status_code}")
 
 
-def get_player_displayname(steam_id: str):
+def get_friend_info(steam_id: str):
     """
         Haal gebruikersweergavenaam op van de Steam API.
 
@@ -57,7 +57,8 @@ def get_player_displayname(steam_id: str):
         return player_data[0]['personaname'] if player_data else None
 
     # Maak een dict van weergavenamen voor een lijst van Steam IDs
-    return {player['steamid']: player['personaname'] for player in player_data}
+    return {player['steamid']: {'personaname': player['personaname'], 'avatar': player['avatar']} for player in player_data}
+
 
 
 def get_friend_list(steam_id: str):
@@ -84,25 +85,19 @@ def get_friend_list(steam_id: str):
     friend_ids = [friend['steamid'] for friend in friends]
 
     # Haal de weergavenamen van de vrienden op
-    display_names = get_player_displayname(friend_ids)
+    friend_info = get_friend_info(friend_ids)
 
     # Return een lijst van vrienden met details
     return [
         {
             'steamid': friend['steamid'],
-            'display_name': display_names.get(friend['steamid'], "Unknown"),
+            'display_name': friend_info.get(friend['steamid'], {}).get('personaname', "Unknown"),
+            'avatar': friend_info.get(friend['steamid'], {}).get('avatar', ""),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }
         for friend in friends
     ]
-"""
- Voorbeeld van de return:
- [
-   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
-   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
- ]
-"""
 
 def get_owned_games(steam_id: str):
     """

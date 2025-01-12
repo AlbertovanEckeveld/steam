@@ -201,7 +201,7 @@ body {
     display: flex;
     flex-wrap: wrap; /* Laat kaarten op meerdere rijen lopen als er niet genoeg ruimte is */
     justify-content: space-around; /* Centreer de kaarten horizontaal */
-    padding: 80px;
+    padding: 50px;
     gap: 50px;
     align-content: center;
 }
@@ -215,7 +215,7 @@ body {
     width: 850px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -295,10 +295,10 @@ h2 {
 
 /* Stijlen voor de tabelcellen */
 td {
-    padding: 5px 5px; /* Ruimte binnen de tabelcellen */
+    padding: 10px 5px; /* Ruimte binnen de tabelcellen */
     text-align: center; /* Zorgt ervoor dat de tekst in de cellen naar het midden is uitgelijnd */
     font-size: 18px; /* Verhoogt het lettertype van de cellen */
-    border-bottom: 1px solid #344a63; /* Een dunne lijn onder de cellen voor visuele scheiding */
+    border-bottom: 3px solid #344a63; /* Een dunne lijn onder de cellen voor visuele scheiding */
 }
 
 
