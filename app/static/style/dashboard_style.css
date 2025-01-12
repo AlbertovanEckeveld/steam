@@ -289,26 +289,17 @@ th {
     border-bottom: 2px solid #66c0f4; /* Geeft een blauwe lijn onder de koptekst */
 }
 
-
+h2 {
+    margin: 50px;
+}
 
 /* Stijlen voor de tabelcellen */
 td {
     padding: 5px 5px; /* Ruimte binnen de tabelcellen */
     text-align: center; /* Zorgt ervoor dat de tekst in de cellen naar het midden is uitgelijnd */
-    font-size: 12px; /* Verhoogt het lettertype van de cellen */
+    font-size: 18px; /* Verhoogt het lettertype van de cellen */
     border-bottom: 1px solid #344a63; /* Een dunne lijn onder de cellen voor visuele scheiding */
 }
-
-/* Afbeeldingen in de tabel */
-td img {
-    width: 40px; /* Maakt de afbeeldingen iets groter */
-    height: 40px; /* Zorgt ervoor dat de afbeelding een vierkante vorm heeft */
-    border-radius: 5px; /* Zorgt voor afgeronde hoeken bij de afbeelding */
-    object-fit: cover; /* Zorgt ervoor dat de afbeelding goed wordt bijgesneden */
-}
-
-
-
 
 
 .game-info {
@@ -330,4 +321,21 @@ td img {
     font-size: 16px; /* Verhoog de lettergrootte voor de naam */
     font-weight: bold; /* Maakt de naam vetgedrukt */
 
+}
+
+
+
+
+button {
+  background-color: #66c0f4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+margin: 30px;
+}
+
+button:hover {
+  background-color: #4a8cb4;
 }
