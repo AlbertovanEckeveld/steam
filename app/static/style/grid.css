@@ -1,0 +1,41 @@
+/*.parent {*/
+/*  display: grid;*/
+/*  grid-template-columns: repeat(3, minmax(150px, 1fr));*/
+/*  grid-template-rows: minmax(50px, auto) 1fr minmax(50px, auto);*/
+/*  gap: 5px; !* Manage gaps for rows and columns *!*/
+/*  width: 100%; !* Restrict total grid width *!*/
+/*  min-height: 100vh; !* Ensure it fills the viewport height *!*/
+/*  padding: 0;*/
+/*  box-sizing: border-box; !* Include padding and gaps in size calculations *!*/
+/*  overflow: hidden; !* Prevent overflow if necessary *!*/
+/*}*/
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px, 1fr)); /* 6 kolommen */
+  grid-template-rows: repeat(8, minmax(10px, auto)); /* 8 rijen met flexibele hoogte */
+  gap: 5px; /* Ruimte tussen rijen en kolommen */
+  width: 100%; /* Beperk de totale grid breedte */
+  min-height: 100vh; /* Zorg ervoor dat het de hoogte van het viewport vult */
+  padding: 0;
+  box-sizing: border-box; /* Inclusief padding en gaps in grootte berekeningen */
+  overflow: hidden; /* Voorkom overflow indien nodig */
+}
+
+/* Individual grid items */
+/*.one { grid-area: 1 / 1 / 2 / 7; }*/
+/*.two { grid-area: 2 / 1 / 3 / 2; }*/
+/*.three { grid-area: 2 / 2 / 2 / 3; }*/
+/*.four { grid-area: 2 / 3 / 3 / 4; }*/
+/*.five { grid-area: 8 / 1 / 9 / 7; }*/
+.one { grid-area: 1 / 1 / 2 / 7; background-color: #ffcccc; border: 1px solid #ff0000; }
+.two { grid-area: 2 / 1 / 3 / 2; background-color: #ccffcc; border: 1px solid #00ff00; }
+.three { grid-area: 2 / 2 / 2 / 3; background-color: #ccccff; border: 1px solid #0000ff; }
+.four { grid-area: 2 / 3 / 3 / 4; background-color: #ffffcc; border: 1px solid #ffff00; }
+.five { grid-area: 8 / 1 / 9 / 7; background-color: #ffccff; border: 1px solid #ff00ff; }
+/*.parent div {*/
+/*    background-color: lightgray;*/
+/*    border: 1px solid black;*/
+/*    text-align: center;*/
+/*    box-sizing: border-box;*/
+/*}*/

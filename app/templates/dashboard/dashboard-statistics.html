@@ -2,35 +2,29 @@
 
 {% block title %} Statistiek {% endblock %}
 
-{% block navbar %}
-            <div class="user-section">
-                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
-                <span class="user-name">{{ display_name }}</span>
-                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
-            </div>
-{% endblock %}
-
 {% block content %}
-        <h1>Dashboard - {{ gettext('statistiek') }}</h1>
-
-        <h2>Prediction</h2>
-        <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}", width=600, height="425">
-        <p>Voorspelling is {{ prediction }} aantal nieuwe accounts in een jaar</p>
-
-        {% if img_gemiddelde %}
-            <h2>Gemiddelde</h2>
-            <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}", width=600, height="425">
-        {% else %}
-            <p>Voorspelling is dat er geen nieuwe accounts zullen worden aangemaakt in een jaar</p>
-        {% endif %}
-
-        {% if img_mediaan %}
-            <h2>Mediaan</h2>
-            <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}", width=600, height="425">
-        {% else %}
-            <p>Voorspelling is dat er geen nieuwe accounts zullen worden aangemaakt in een jaar</p>
-        {% endif %}
-
-
-
+    <main class="page-body">
+      <div class="card-container">
+        <div class="card">
+            <div class="card-content">
+                <h3>Prediction</h3>
+            <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}" class="card-image">
+            <p>Voorspelling is {{ prediction }} aantal nieuwe accounts in een jaar</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>Gemiddelde</h3>
+                <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}" class="card-image">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>Mediaan</h3>
+                <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}" class="card-image">
+                <p><a target="_blank" href="https://www.instagram.com/kevin_makkink/">Stats By</a></p>
+            </div>
+        </div>
+      </div>
+    </main>
 {% endblock %}

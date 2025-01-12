@@ -156,14 +156,13 @@ def statistics():
     img_mediaan = 'mediaan'
     mediaan_functie(img_mediaan)
 
-
     # Render de statistiekenpagina met gebruikersgegevens
     return render_template("dashboard/dashboard-statistics.html",
                            display_name=user.get_displayname() if user else "",
                            url_avatar=user.get_avatar_small() if user else "",
                            img_prediction=img_prediction,
-                           img_gemiddelde=img_gemiddelde if img_gemiddelde else "",
-                           img_mediaan=img_mediaan if img_mediaan else "",
+                           img_gemiddelde=img_gemiddelde,
+                           img_mediaan=img_mediaan,
                            prediction = prediction
                            )
 
