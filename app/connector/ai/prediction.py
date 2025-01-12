@@ -48,22 +48,22 @@ def visualize_creation_dates_with_regression(root_id, file_name):
 
     print('vrienden van vrienden ophalen...')
 
-    friends_data = get_user_summary(friends[:25])
+    friends_data = get_user_summary(friends[:50])
     for friend in friends_data:
         if "timecreated" in friend:
             creation_dates.append(friend["timecreated"])
 
 
-    for friend_id in friends[:25]:
+    for friend_id in friends[:50]:
         second_level_friends = get_friends(friend_id)
-        second_level_data = get_user_summary(second_level_friends[:20])
+        second_level_data = get_user_summary(second_level_friends[:50])
         for friend in second_level_data:
             if "timecreated" in friend:
                 creation_dates.append(friend["timecreated"])
 
-    for second_level_id in friends[:25]:
+    for second_level_id in friends[:50]:
         third_level_friends = get_friends(second_level_id)
-        third_level_data = get_user_summary(third_level_friends[:20])
+        third_level_data = get_user_summary(third_level_friends[:50])
         for friend in third_level_data:
             if "timecreated" in friend:
                 creation_dates.append(friend["timecreated"])

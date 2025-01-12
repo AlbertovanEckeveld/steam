@@ -99,6 +99,7 @@ def get_friend_list(steam_id: str):
         for friend in friends
     ]
 
+
 def get_owned_games(steam_id: str):
     """
         Haal bezeten spellen op van de Steam API.
