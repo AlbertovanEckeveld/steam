@@ -71,7 +71,7 @@ def get_friend_list(steam_id: str):
         list: Lijst van vrienden met details.
     """
     # Stel de URL en parameters in voor de API-aanroep
-    url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/"
+    url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001"
     params = {"key": API_KEY, "steamid": steam_id, "relationship": "friend" }
 
     # Voer de API-aanroep uit en controleer de status code van de response
