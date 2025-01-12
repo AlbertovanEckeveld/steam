@@ -3,18 +3,29 @@
 {% block title %} Statistiek {% endblock %}
 
 {% block content %}
-    <h1>Dashboard - {{ gettext('statistiek') }}</h1>
-{% endblock %}
+    <main class="page-body">
+      <div class="card-container">
+        <div class="card">
+            <div class="card-content">
+                <h3>{{ gettext('Prediction') }}</h3>
+            <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}" class="card-image">
+              <p>{{ gettext('Voorspelling is {prediction} aantal nieuwe accounts in een jaar').format(prediction=prediction) }}</p>
 
-{% block navbar %}
-            <div class="user-section">
-                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
-                <span class="user-name">{{ display_name }}</span>
-                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
             </div>
-{% endblock %}
-
-{% block content %}
-        <h1>Dashboard - {{ gettext('statistiek') }}</h1>
-
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>{{ gettext('Gemiddelde') }}</h3>
+                <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}" class="card-image">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>{{ gettext('Mediaan') }}</h3>
+                <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}" class="card-image">
+                <p><a target="_blank" href="https://www.instagram.com/kevin_makkink/">Stats By</a></p>
+            </div>
+        </div>
+      </div>
+    </main>
 {% endblock %}

@@ -2,30 +2,32 @@ services:
   steam:
     image: steam
     container_name: steam
-    privileged: true # Required for GPIO access
+    privileged: true # nodig voor GPIO toegang
     ports:
       - 80:80 # HTTP
       - 443:443 # HTTPS
+      - 5000:5000 # Flask
     devices:
-      - /dev/gpiomem:/dev/gpiomem # GPIO access
+      - /dev/gpiomem:/dev/gpiomem # GPIO toegang
     restart: unless-stopped
-#    networks:
-#        - steam_network
 
-#  postgres:
-#    image: postgres
-#    container_name: postgres
-#    ports:
-#      - 5432:5432
-#    environment:
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=postgres
-#      - POSTGRES_DB=postgres
-#    restart: unless-stopped
-#    networks:
-#      - steam_network
+  neopixel:
+    image: neopixel
+    container_name: neopixel
+    privileged: true # nodig voor GPIO toegang
+    devices:
+      - /dev/gpiomem:/dev/gpiomem # GPIO toegang
+    restart: unless-stopped
 
-#networks:
-#    default:
-#        external: true
-#        name: steam_network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=info@albertove.nl
+      - PGADMIN_DEFAULT_PASSWORD=Steam123!
+
+
+volumes:
+  postgres_data:

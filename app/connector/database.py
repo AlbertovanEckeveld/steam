@@ -61,6 +61,23 @@ def execute_query(query, params=None):
         # Sluit de databaseverbinding
         conn.close()
 
+
+def rf_authentication(rfid):
+    """
+        Controleer of de gegeven RFID-tag voorkomt in de database.
+
+        Argumenten:
+            rfid (int): RFID-tag om te controleren.
+
+        Returns:
+            bool: True als de RFID-tag voorkomt in de database, anders False.
+    """
+    query = execute_query(f"SELECT COUNT(*) FROM authentication WHERE rfid = '{rfid}'")
+    if query[0][0] == 1: 
+        return True
+    return False
+
+
 def get_version():
     """
         Voorbeeldfunctie om de databaseverbinding te testen.

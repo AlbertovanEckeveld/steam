@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eeaster-eggs - Steam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/base.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <div class="container">
+            <p>&copy; 2024 {{ gettext('Alle rechten zijn voorbehouden') }}</p>
+            <ul>
+                <li><a target="_blank" href="https://www.instagram.com/albertovaneckeveld/">Social Media</a></li>
+                <li><a target="_blank" href="https://github.com/AlbertovanEckeveld/">Terms and Conditions</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>

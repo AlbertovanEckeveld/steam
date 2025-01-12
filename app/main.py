@@ -9,6 +9,7 @@ from app.router.auth import Auth
 from app.router.test import Test
 from app.router.index import Index
 from app.router.dashboard import Dash
+from app.router.easteregg import Easter_egg
 from app.router.error import page_not_found
 from app.connector.babel import babel, get_locale
 from app.config import SECRET_KEY, LANGUAGES, BABEL_DEFAULT_LOCALE, BABEL_TRANSLATION_FOLDER
@@ -32,6 +33,7 @@ app.register_blueprint(Index, url_prefix='/')
 app.register_blueprint(Dash, url_prefix='/dashboard')
 app.register_blueprint(Auth, url_prefix='/auth')
 app.register_blueprint(Test, url_prefix='/test')
+app.register_blueprint(Easter_egg, url_prefix='/easter-egg')
 
 
 # Taal wijzigen
@@ -45,4 +47,4 @@ def change_language(lang):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

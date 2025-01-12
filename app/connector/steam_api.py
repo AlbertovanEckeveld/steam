@@ -39,7 +39,7 @@ def get_player_summary(steam_id: str):
         raise Exception(f"API request mislukt met status code {response.status_code}")
 
 
-def get_player_displayname(steam_id: str):
+def get_friend_info(steam_id: str):
     """
         Haal gebruikersweergavenaam op van de Steam API.
 
@@ -57,7 +57,7 @@ def get_player_displayname(steam_id: str):
         return player_data[0]['personaname'] if player_data else None
 
     # Maak een dict van weergavenamen voor een lijst van Steam IDs
-    return {player['steamid']: player['personaname'] for player in player_data}
+    return {player['steamid']: {'personaname': player['personaname'], 'avatar': player['avatar']} for player in player_data}
 
 
 def get_friend_list(steam_id: str):
@@ -71,7 +71,7 @@ def get_friend_list(steam_id: str):
         list: Lijst van vrienden met details.
     """
     # Stel de URL en parameters in voor de API-aanroep
-    url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/"
+    url = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001"
     params = {"key": API_KEY, "steamid": steam_id, "relationship": "friend" }
 
     # Voer de API-aanroep uit en controleer de status code van de response
@@ -84,25 +84,20 @@ def get_friend_list(steam_id: str):
     friend_ids = [friend['steamid'] for friend in friends]
 
     # Haal de weergavenamen van de vrienden op
-    display_names = get_player_displayname(friend_ids)
+    friend_info = get_friend_info(friend_ids)
 
     # Return een lijst van vrienden met details
     return [
         {
             'steamid': friend['steamid'],
-            'display_name': display_names.get(friend['steamid'], "Unknown"),
+            'display_name': friend_info.get(friend['steamid'], {}).get('personaname', "Unknown"),
+            'avatar': friend_info.get(friend['steamid'], {}).get('avatar', ""),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }
         for friend in friends
     ]
-"""
- Voorbeeld van de return:
- [
-   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
-   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
- ]
-"""
+
 
 def get_owned_games(steam_id: str):
     """
@@ -165,12 +160,14 @@ def get_common_games(own_games, friend_games):
     return [
         {
             'id': game_id,
+            'url_avatar': own_game_dict[game_id]['url_avatar'],
             'name': own_game_dict[game_id]['name'],
             'own_playtime': own_game_dict[game_id].get('playtime_forever', 0),
             'friend_playtime': friend_game_dict[game_id].get('playtime_forever', 0)
         }
         for game_id in own_game_dict if game_id in friend_game_dict
     ]
+
 
 def get_recent_playtime(steam_id: str):
     """
@@ -201,6 +198,8 @@ def get_recent_playtime(steam_id: str):
         sorted_games = sorted([
             {
                 'name': game['name'],
+                'appid': game['appid'],
+                'url_avatar': game['img_icon_url'],
                 'playtime_2weeks': round((game['playtime_2weeks']) / 60, 2)
             }
             for game in games
@@ -212,7 +211,8 @@ def get_recent_playtime(steam_id: str):
     else:
         return {
             'total_playtime_2weeks': 0,
-            'games': []
+            'games': [],
+            'url_avatar': ""
         }
 
 

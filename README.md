@@ -5,23 +5,24 @@
 Project Steam is een semesterproject binnen de propedeuse van de opleiding HBO-ICT aan de Hogeschool Utrecht.
 
 ## Omschrijving
-Project Steam is third-party platform om gebruikers meer inzicht te geven in hun Steam-spellen en -vrienden.
-De Steam Web API is gebruikt om gegevens over spellen en gebruikers op te halen.
+Project Steam is third-party platform om gebruikers meer inzicht te geven in hun Steam spellen en vrienden.
+De Steam Web API is gebruikt om gegevens van spellen en gebruikers op te halen.
  
 <details><summary>Context: Opgeleverd prototype</summary><br>
 
-In het opgeleverde prototype van Project Steam is het een webapplicatie, 
-die gebruikers in staat stelt om in te loggen met hun Steam-account met RFID Twee-factor authenticatie, 
-en hun eigen Steam-profiel, spellen en vrienden te bekijken.
-Daarnaast kunnen gebruikers hun spelstatistieken vergelijken met een vriend en de gemiddelde spelprijs per spel-genre bekijken.
+Het opgeleverde prototype van Project Steam is een webapplicatie.
+Deze webapplicatie biedt de volgende mogelijkheden:
+- Inloggen via Steam
+- 2FA doormiddel van een RFID tag
+- Je eigen Steamprofiel bekijken
+- Het Steamprofiel van vrienden bekijken
+- Speeltijd bekijken en vergelijken
+- Multi-language support
+
 
 ###### Technische context
-De webapplicatie draaide op een Raspberry Pi 4 met een RFID-lezer en een Oled-display.
-
-Een Raspberry Pi Pico W met een afstands-sensor werd geplaatst boven een beeldscherm, 
-om te detecteren of de gebruiker te dicht in de buurt van het beeldscherm zit.
-
-De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
+- De webapplicatie draaide op een Raspberry Pi 4 in een docker container met een RFID-lezer, een HC-SR04 afstandsensor en een NeoPixel.
+- De PostgreSQL database server draaide op een virtual machine in Microsoft Azure en lokaal op de Raspberry Pi met een replicatie.
 
 </details>
 
@@ -34,11 +35,10 @@ De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
 
 ## Functionaliteiten
 - Inloggen met Steam account
-- Twee-factor authenticatie met RFID tags
-- Gebruikersafstand monitoren met afstands-sensor
+- 2FA met RFID tags
+- Gebruikersafstand monitoren met afstands-sensor (HC-SR04)
 - Inzien van eigen Steam-profiel, games en vrienden
 - Spel statistieken vergelijken met een vriend
-- Gemiddelde spelprijs per spel-genre
 
 
 ## Installatie instructies
@@ -49,13 +49,27 @@ De PostgreSQL database server draaide op een virtual machine in Microsoft Azure.
 - Python 3.8 of hoger
 - python3-venv
 - Database (PostgreSQL)
-<br><br>
 - (Optioneel) Docker
 - (Optioneel) curl
 </details>
 
 ### Installatie methodes
 Er zijn verschillende manieren om de applicatie te installeren en draaien:
+
+<details><summary>Installatie Debian linux script (Linux)</summary>
+
+#### Er is een installatie script beschikbaar voor ***Debian Systemen*** om de applicatie eenvoudig op te zetten en draaien in docker.
+Om de applicatie te installeren en draaien, volg deze stappen om het installatie script te downloaden en uit te voeren:
+
+#### 1: Instaleer eerst het installatie script:
+```sh
+curl -L  https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA -o setup.sh
+```
+#### 2: Maak het script uitvoerbaar en voer het uit:
+```sh
+sudo chmod a+x setup.sh && sudo ./setup.sh
+```
+</details>
 
 <details><summary>Installatie via Docker image (Windows / Linux / MacOS)</summary>
 
@@ -67,7 +81,7 @@ docker build -t steam-project .
 ```
 #### Draai de Docker container:  
 ```sh
-docker run -d -p 80:80 -p 443:443 --name steam steam-project
+docker compose up -d
 ```
 Nadat de applicatie is geïnstalleerd en de docker container draait, is de url:  ```https://<ip-adres>```
 
@@ -106,21 +120,6 @@ python main.py
 ```
 Met deze stappen kun je de applicatie lokaal opzetten en draaien.
 
-</details>
-
-<details><summary>Installatie Debian linux script (Linux)</summary>
-
-#### Er is een installatie script beschikbaar voor ***Debian Systemen*** om de applicatie eenvoudig op te zetten en draaien in docker.
-Om de applicatie te installeren en draaien, volg deze stappen om het installatie script te downloaden en uit te voeren:
-
-#### 1: Instaleer eerst het installatie script:
-```sh
-curl -L  https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA -o setup.sh
-```
-#### 2: Maak het script uitvoerbaar en voer het uit:
-```sh
-sudo chmod a+x setup.sh && sudo ./setup.sh
-```
 </details>
 
 ## Update instructies

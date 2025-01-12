@@ -1,15 +1,16 @@
-# English translations for PROJECT.
-# Copyright (C) 2024 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# English translations for Steam Project.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Steam Project
+# project.
+# FIRST AUTHOR alberto.vaneckeveld@student.hu.nl, 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Steam 1.0v\n"
-"Report-Msgid-Bugs-To: alberto.vaneckeveld\n"
-"POT-Creation-Date: 2024-12-11 03:47+0100\n"
-"PO-Revision-Date: 2024-12-11 03:48+0100\n"
-"Last-Translator: Alberto van Eckeveld alberto.vaneckeveld@student.hu.nl\n"
+"Project-Id-Version: Steam Project v1.0\n"
+"Report-Msgid-Bugs-To: alberto.vaneckeveld@student.hu.nl\n"
+"POT-Creation-Date: 2025-01-12 22:22+0100\n"
+"PO-Revision-Date: 2025-01-12 23:12+0100\n"
+"Last-Translator: FULL NAME alberto.vaneckeveld@student.hu.nl\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -20,121 +21,198 @@ msgstr ""
 
 #: app/templates/error.html:10
 msgid "Ga terug naar home pagina"
-msgstr "Return to home page"
+msgstr "Go back to the home page"
 
 #: app/templates/index.html:6 app/templates/test.html:34
 msgid "Je bent nog niet ingelogd, meld je via de knop hieronder aan."
-msgstr "You are not logged in yet, please register via the button below."
+msgstr "You are not logged in yet. Log in using the button below."
 
-#: app/templates/dashboard/dashboard-friends-compare.html:9
-#: app/templates/dashboard/dashboard-friends.html:9
-#: app/templates/dashboard/dashboard-library.html:9
-#: app/templates/dashboard/dashboard.html:9 app/templates/test.html:14
+#: app/templates/base/dashboard-base.html:43 app/templates/test.html:14
 msgid "Uitloggen"
-msgstr "Logout"
+msgstr "Log out"
 
 #: app/templates/test.html:20
 msgid "Dit is de test pagina van Steam"
-msgstr "This is the Steam test page"
+msgstr "This is the test page of Steam"
 
 #: app/templates/test.html:26
 msgid "gebruiker"
-msgstr "user"
+msgstr "User"
 
 #: app/templates/test.html:27
 msgid "versie"
-msgstr "version"
+msgstr "Version"
 
 #: app/templates/test.html:31
 msgid "gebruikersnaam"
-msgstr "username"
+msgstr "Username"
 
-#: app/templates/base/base.html:16 app/templates/base/dashboard-base.html:17
+#: app/templates/base/base.html:16 app/templates/base/base.html:40
 #: app/templates/base/error-base.html:16
 msgid "HOME"
-msgstr ""
+msgstr "HOME"
 
-#: app/templates/base/base.html:17 app/templates/base/dashboard-base.html:18
-#: app/templates/base/error-base.html:17
+#: app/templates/base/base.html:17 app/templates/base/error-base.html:17
 msgid "BIBLIOTHEEK"
 msgstr "LIBRARY"
 
-#: app/templates/base/base.html:18 app/templates/base/dashboard-base.html:19
-#: app/templates/base/error-base.html:18
+#: app/templates/base/base.html:18 app/templates/base/error-base.html:18
 msgid "VRIENDEN"
 msgstr "FRIENDS"
 
-#: app/templates/base/base.html:19 app/templates/base/dashboard-base.html:20
-#: app/templates/base/error-base.html:19
+#: app/templates/base/base.html:19 app/templates/base/error-base.html:19
 msgid "STATISTIEK"
 msgstr "STATISTICS"
 
-#: app/templates/base/base.html:38 app/templates/base/dashboard-base.html:38
+#: app/templates/base/base.html:38 app/templates/base/dashboard-base.html:51
+#: app/templates/base/easter_egg-base.html:19
 #: app/templates/base/error-base.html:38
 msgid "Alle rechten zijn voorbehouden"
 msgstr "All rights reserved"
 
-#: app/templates/dashboard/dashboard-friends-compare.html:15
-msgid "Vrienden vergelijken"
-msgstr "Comparing with a friend"
+#: app/templates/base/dashboard-base.html:20
+msgid "Hoofdmenu"
+msgstr "Main menu"
 
-#: app/templates/dashboard/dashboard-friends-compare.html:18
-msgid "Toggle gemeenschappelijke spellen."
-msgstr "Toggle common games"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:24
-#: app/templates/dashboard/dashboard-friends-compare.html:41
-#: app/templates/dashboard/dashboard-library.html:19
-msgid "Naam van spel"
-msgstr "Name of the game"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:25
-#: app/templates/dashboard/dashboard-friends-compare.html:42
-#: app/templates/dashboard/dashboard-library.html:20
-msgid "Totaal uren"
-msgstr "Total hours"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:58
-msgid "Spellen gemeenschappelijk"
-msgstr "Common games"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:60
-msgid "Spel Naam"
-msgstr "Game name"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:61
-msgid "Jouw Speeltijd (uur)"
-msgstr "Your played time (hours)"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:62
-msgid "Speeltijd (uur)"
-msgstr "Played time (hours)"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:76
-msgid "Geen gemeenschappelijke games gevonden."
-msgstr ""
-
-#: app/templates/dashboard/dashboard-friends-compare.html:79
-msgid "Fout: We konden de spellen van {name} niet ophalen."
-msgstr "Error: We couldn't retrieve the games of {name}"
-
-#: app/templates/dashboard/dashboard-friends-compare.html:80
-msgid "Ga terug"
-msgstr "Go back"
-
-#: app/templates/dashboard/dashboard-friends.html:15
-msgid "Vrienden"
-msgstr "Friends"
-
-#: app/templates/dashboard/dashboard-friends.html:20
-msgid "Vriendenlijst"
-msgstr "Friendlist"
-
-#: app/templates/dashboard/dashboard-library.html:14
+#: app/templates/base/dashboard-base.html:22
+#: app/templates/dashboard/dashboard-library.html:10
 msgid "Bibliotheek"
 msgstr "Library"
 
-#: app/templates/dashboard/dashboard.html:15
+#: app/templates/base/dashboard-base.html:23
+#: app/templates/dashboard/dashboard-friends.html:10
+msgid "Vrienden"
+msgstr "Friends"
+
+#: app/templates/base/dashboard-base.html:24
+msgid "Statistieken"
+msgstr "Statistics"
+
+#: app/templates/base/dashboard-base.html:31
+msgid "Talen"
+msgstr "Languages"
+
+#: app/templates/base/dashboard-base.html:54
+msgid "Sociale media"
+msgstr "Social media"
+
+#: app/templates/base/dashboard-base.html:55
+msgid "Algemene voorwaarden"
+msgstr "Terms and conditions"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:13
+msgid "Spel statistieken van jezelf"
+msgstr "Your game statistics"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:15
+#: app/templates/dashboard/dashboard-friends-compare.html:74
+msgid "Toggle gemeenschappelijke spellen."
+msgstr "Toggle common games."
+
+#: app/templates/dashboard/dashboard-friends-compare.html:20
+#: app/templates/dashboard/dashboard-friends-compare.html:48
+#: app/templates/dashboard/dashboard-library.html:15
+#: app/templates/dashboard/dashboard.html:35
+msgid "Naam van spel"
+msgstr "Game name"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:21
+#: app/templates/dashboard/dashboard-friends-compare.html:49
+#: app/templates/dashboard/dashboard-library.html:16
+msgid "Totaal uren"
+msgstr "Total hours"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:44
+msgid "Spel statistieken van: "
+msgstr "Game statistics of: "
+
+#: app/templates/dashboard/dashboard-friends-compare.html:72
+msgid "Spellen gemeenschappelijk"
+msgstr "Games in common"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:79
+msgid "Spel Naam"
+msgstr "Game Name"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:80
+msgid "Jouw Speeltijd (uur)"
+msgstr "Your Playtime (hours)"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:81
+msgid "Speeltijd (uur)"
+msgstr "Playtime (hours)"
+
+#: app/templates/dashboard/dashboard-friends-compare.html:102
+msgid "Geen gemeenschappelijke games gevonden."
+msgstr "No common games found."
+
+#: app/templates/dashboard/dashboard-friends-compare.html:105
+msgid "Fout: We konden de spellen van {name} niet ophalen."
+msgstr "Error: We could not retrieve the games of {name}."
+
+#: app/templates/dashboard/dashboard-friends.html:15
+msgid "Vriendenlijst"
+msgstr "Friends list"
+
+#: app/templates/dashboard/dashboard-friends.html:30
+msgid "Fout: We konden je vriendenlijst niet ophalen."
+msgstr "Error: We could not retrieve your friends list."
+
+#: app/templates/dashboard/dashboard-friends.html:31
+msgid "Mogelijk staat je vriendenlijst op prive."
+msgstr "Your friends list might be set to private."
+
+#: app/templates/dashboard/dashboard-library.html:33
+#: app/templates/dashboard/dashboard.html:54
+msgid "Fout: We konden je bibliotheek niet ophalen."
+msgstr "Error: We could not retrieve your library."
+
+#: app/templates/dashboard/dashboard-library.html:34
+#: app/templates/dashboard/dashboard.html:55
+msgid "Mogelijk staat je bibliotheek op prive."
+msgstr "Your library might be set to private."
+
+#: app/templates/dashboard/dashboard-statistics.html:10
+msgid "Prediction"
+msgstr "Prediction"
+
+#: app/templates/dashboard/dashboard-statistics.html:12
+msgid "Voorspelling is {{ prediction }} aantal nieuwe accounts in een jaar"
+msgstr "The prediction is {{ prediction }} new accounts in a year."
+
+#: app/templates/dashboard/dashboard-statistics.html:17
+msgid "Gemiddelde"
+msgstr "Average"
+
+#: app/templates/dashboard/dashboard-statistics.html:23
+msgid "Mediaan"
+msgstr "Median"
+
+#: app/templates/dashboard/dashboard.html:11
 msgid "Ingelogd als"
 msgstr "Logged in as"
+
+#: app/templates/dashboard/dashboard.html:13
+msgid "Mijn statistieken"
+msgstr "My statistics"
+
+#: app/templates/dashboard/dashboard.html:14
+msgid "Uren gespeeld deze 2 weken"
+msgstr "Hours played in the last 2 weeks"
+
+#: app/templates/dashboard/dashboard.html:19
+msgid "Afstand tussen laptop:"
+msgstr "Distance to laptop:"
+
+#: app/templates/dashboard/dashboard.html:23
+msgid "Fout: We konden de afstand niet ophalen."
+msgstr "Error: We could not retrieve the distance."
+
+#: app/templates/dashboard/dashboard.html:30
+msgid "Meest gespeelde spellen deze 2 weken:"
+msgstr "Most played games in the last 2 weeks:"
+
+#: app/templates/dashboard/dashboard.html:36
+msgid "Uren"
+msgstr "Hours"
 

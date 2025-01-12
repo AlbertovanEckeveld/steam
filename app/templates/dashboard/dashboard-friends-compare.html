@@ -2,111 +2,128 @@
 
 {% block title %} Friends {% endblock %}
 
-{% block navbar %}
-            <div class="user-section">
-                <img class="user-avatar" src="{{ url_avatar }}" alt="User Avatar">
-                <span class="user-name">{{ display_name }}</span>
-                <a href="{{ url_for('auth.logout') }}">{{ gettext('Uitloggen') }}</a>
-            </div>
-{% endblock %}
-
 {% block content %}
+<main class="page-body">
+  <div class="card-container">
+    <!-- Own Games Card -->
+    <div class="card" id="own-games-card">
+      <div class="card-content">
+        {% if friend_games %}
 
-        <h1>Dashboard - {{ gettext('Vrienden vergelijken') }}</h1>
-    {% if friend_games %}
-        <button id="show-common-games" onclick="toggleCommonGames()">
+        <h2 id="own-title-table-games">{{ gettext('Spel statistieken van jezelf') }}</h2>
+            <button id="show-common-games" onclick="toggleCommonGames()">
             {{ gettext('Toggle gemeenschappelijke spellen.') }}
-        </button>
+            </button>
         <table id="own-games-table">
-            <thead>
-                <h2 id="own-title-table-games">Spel statistieken van jezelf </h2>
-                <tr>
-                    <th><h2>{{ gettext('Naam van spel') }}</h2></th>
-                    <th><h2>{{ gettext('Totaal uren') }}</h2></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for game in own_games %}
-                    <tr>
-                        <td>{{ game.name }}</td>
-                        <td>{{ game.playtime_forever }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+          <thead>
+            <tr>
+              <th>{{ gettext('Naam van spel') }}</th>
+              <th>{{ gettext('Totaal uren') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for game in own_games %}
+            <tr>
+            <tr>
+                <td>
+                    <div class="game-info">
+                        <img src="https://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.url_avatar }}.jpg" alt="{{ game.name }}" class="game-avatar"/>
+                        <span>{{ game.name }}</span>
+                    </div>
+                <td>{{ game.playtime_forever }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- Friend Games Card -->
+    <div class="card" id="friend-games-card">
+      <div class="card-content">
+        <h2 id="friends-title-table-games">{{ gettext('Spel statistieken van: ') }} {{ friend_display_name }}</h2>
         <table id="friend-games-table">
-            <thead>
-                    <h2 id="friends-title-table-games">Spel statistieken van: {{ friend_display_name }}</h2>
-                <tr>
-                    <th><h2>{{ gettext('Naam van spel') }}</h2></th>
-                    <th><h2>{{ gettext('Totaal uren') }}</h2></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for game in friend_games %}
-                    <tr>
-                        <td>{{ game.name }}</td>
-                        <td>{{ game.playtime_forever }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+          <thead>
+            <tr>
+              <th>{{ gettext('Naam van spel') }}</th>
+              <th>{{ gettext('Totaal uren') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for game in friend_games %}
+            <tr>
+                <td>
+                    <div class="game-info">
+                        <img src="https://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.url_avatar }}.jpg" alt="{{ game.name }}" class="game-avatar"/>
+                        <span>{{ game.name }}</span>
+                    </div>
+                <td>{{ game.playtime_forever }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
         </table>
+      </div>
+    </div>
 
-        {% if common_games %}
-            <table id="common-games-table" border="1" style="display:none;">
-                <thead>
-                 <h2>{{ gettext('Spellen gemeenschappelijk') }} </h2>
-                    <tr>
-                        <th><h2>{{ gettext('Spel Naam') }}</h2></th>
-                        <th><h2>{{ gettext('Jouw Speeltijd (uur)') }}</h2></th>
-                        <th><h2>{{ friend_display_name }} {{ gettext('Speeltijd (uur)') }}</h2></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for game in common_games %}
-                        <tr>
-                            <td>{{ game.name }}</td>
-                            <td>{{ game.own_playtime  }}</td>
-                            <td>{{ game.friend_playtime }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>{{ gettext('Geen gemeenschappelijke games gevonden.') }}</p>
-        {% endif %}
+    <!-- Common Games Card -->
+    {% if common_games %}
+    <div class="card" id="common-games-card" style="display: none;">
+      <div class="card-content">
+        <h2>{{ gettext('Spellen gemeenschappelijk') }}</h2>
+         <button id="show-common-games" onclick="toggleCommonGames()">
+          {{ gettext('Toggle gemeenschappelijke spellen.') }}
+        </button>
+        <table id="common-games-table">
+          <thead>
+            <tr>
+              <th>{{ gettext('Spel Naam') }}</th>
+              <th>{{ gettext('Jouw Speeltijd (uur)') }}</th>
+              <th>{{ friend_display_name }} {{ gettext('Speeltijd (uur)') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for game in common_games %}
+            <tr>
+                <td>
+                    <div class="game-info">
+                        <img src="https://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.url_avatar }}.jpg" alt="{{ game.name }}" class="game-avatar"/>
+                        <span>{{ game.name }}</span>
+                    </div>
+                </td>
+              <td>{{ game.own_playtime }}</td>
+              <td>{{ game.friend_playtime }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
     {% else %}
-        <p>{{ gettext('Fout: We konden de spellen van {name} niet ophalen.').format(name=friend_display_name) }}</p>
-        <a href="{{ url_for('dashboard.friends') }}">{{ gettext('Ga terug') }}</a>
+    <p>{{ gettext('Geen gemeenschappelijke games gevonden.') }}</p>
     {% endif %}
+    {% else %}
+    <p>{{ gettext('Fout: We konden de spellen van {name} niet ophalen.').format(name=friend_display_name) }}</p>
+    <a href="{{ url_for('dashboard.friends') }}">{{ gettext('Ga terug') }}</a>
+    {% endif %}
+  </div>
+</main>
 
-    <script>
-        function toggleCommonGames() {
-            var ownGamesTable = document.getElementById("own-games-table");
-            var friendGamesTable = document.getElementById("friend-games-table");
-            var commonGamesTable = document.getElementById("common-games-table");
-            var ownGamesTitle = document.getElementById("own-title-table-games");
-            var friendGamesTitle = document.getElementById("friends-title-table-games");
+<script>
+  function toggleCommonGames() {
+    var ownGamesCard = document.getElementById("own-games-card");
+    var friendGamesCard = document.getElementById("friend-games-card");
+    var commonGamesCard = document.getElementById("common-games-card");
 
-            // Toggle visibility based on the current state of commonGamesTable
-            if (commonGamesTable.style.display === "none") {
-                // Hide individual tables and show common games
-                ownGamesTable.style.display = "none";
-                ownGamesTitle.style.display = "none";
-                friendGamesTable.style.display = "none";
-                friendGamesTitle.style.display = "none";
-                commonGamesTable.style.display = "table";
-            } else {
-                // Show individual tables and hide common games
-                ownGamesTable.style.display = "table";
-                ownGamesTitle.style.display = "table";
-                friendGamesTable.style.display = "table";
-                friendGamesTitle.style.display = "table";
-                commonGamesTable.style.display = "none";
-            }
-        }
-    </script>
-
+    if (commonGamesCard.style.display === "none") {
+      ownGamesCard.style.display = "none";
+      friendGamesCard.style.display = "none";
+      commonGamesCard.style.display = "block";
+    } else {
+      ownGamesCard.style.display = "block";
+      friendGamesCard.style.display = "block";
+      commonGamesCard.style.display = "none";
+    }
+  }
+</script>
 {% endblock %}
-
 
