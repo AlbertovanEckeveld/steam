@@ -49,23 +49,15 @@ def get_friend_info(steam_id: str):
         Returns:
         str of dict: Gebruikersweergavenaam of dict van weergavenamen.
     """
+    # Haal de spelersgegevens op van de Steam API
     player_data = get_player_summary(steam_id)
 
-    # Controleer of steam_id een string is en retourneer de weergavenaam en avatar
+    # Controleer of steam_id een string is en retourneer de weergavenaam
     if isinstance(steam_id, str):
-        return {
-            'display_name': player_data[0]['personaname'],
-            'avatar': player_data[0]['avatar']
-        } if player_data else None
+        return player_data[0]['personaname'] if player_data else None
 
-    # Maak een dict van weergavenamen en avatars voor een lijst van Steam IDs
-    return {
-        player['steamid']: {
-            'display_name': player['personaname'],
-            'avatar': player['avatar']
-        }
-        for player in player_data
-    }
+    # Maak een dict van weergavenamen voor een lijst van Steam IDs
+    return {player['steamid']: {'personaname': player['personaname'], 'avatar': player['avatar']} for player in player_data}
 
 
 def get_friend_list(steam_id: str):
@@ -92,26 +84,20 @@ def get_friend_list(steam_id: str):
     friend_ids = [friend['steamid'] for friend in friends]
 
     # Haal de weergavenamen van de vrienden op
-    friends_info = get_friend_info(friend_ids)
+    friend_info = get_friend_info(friend_ids)
 
     # Return een lijst van vrienden met details
     return [
         {
             'steamid': friend['steamid'],
-            'display_name': friends_info.get(friend['steamid'], {}).get('display_name', "Unknown"),
-            'avatar': friends_info.get(friend['steamid'], {}).get('avatar', ""),
+            'display_name': friend_info.get(friend['steamid'], {}).get('personaname', "Unknown"),
+            'avatar': friend_info.get(friend['steamid'], {}).get('avatar', ""),
             'relationship': friend['relationship'],
             'friend_since': friend['friend_since']
         }
         for friend in friends
     ]
-"""
- Voorbeeld van de return:
- [
-   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831},
-   {'steamid': '76561198033737398', 'display_name': 'AlbertoVE', 'relationship': 'friend', 'friend_since': 1509471831}
- ]
-"""
+
 
 def get_owned_games(steam_id: str):
     """
@@ -181,6 +167,7 @@ def get_common_games(own_games, friend_games):
         for game_id in own_game_dict if game_id in friend_game_dict
     ]
 
+
 def get_recent_playtime(steam_id: str):
     """
         Haal recent gespeelde spellen op van de Steam API.
@@ -210,6 +197,8 @@ def get_recent_playtime(steam_id: str):
         sorted_games = sorted([
             {
                 'name': game['name'],
+                'appid': game['appid'],
+                'url_avatar': game['img_icon_url'],
                 'playtime_2weeks': round((game['playtime_2weeks']) / 60, 2)
             }
             for game in games
@@ -221,7 +210,8 @@ def get_recent_playtime(steam_id: str):
     else:
         return {
             'total_playtime_2weeks': 0,
-            'games': []
+            'games': [],
+            'url_avatar': ""
         }
 
 
