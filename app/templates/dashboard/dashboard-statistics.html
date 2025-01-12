@@ -9,7 +9,7 @@
             <div class="card-content">
                 <h3>{{ gettext('Prediction') }}</h3>
             <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}" class="card-image">
-              <p>{{ _('Voorspelling is %(prediction)s aantal nieuwe accounts in een jaar') | format(prediction=prediction) }}</p>
+              <p>{{ gettext('Voorspelling is {prediction} aantal nieuwe accounts in een jaar').format(prediction=prediction) }}</p>
 
             </div>
         </div>
