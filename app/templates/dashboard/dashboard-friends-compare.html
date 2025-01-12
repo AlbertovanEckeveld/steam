@@ -110,19 +110,15 @@
 
 <script>
   function toggleCommonGames() {
-    // Get all the cards
     var ownGamesCard = document.getElementById("own-games-card");
     var friendGamesCard = document.getElementById("friend-games-card");
     var commonGamesCard = document.getElementById("common-games-card");
 
-    // Toggle visibility based on the current state of the common games card
     if (commonGamesCard.style.display === "none") {
-      // Hide individual cards and show the common games card
       ownGamesCard.style.display = "none";
       friendGamesCard.style.display = "none";
       commonGamesCard.style.display = "block";
     } else {
-      // Show individual cards and hide the common games card
       ownGamesCard.style.display = "block";
       friendGamesCard.style.display = "block";
       commonGamesCard.style.display = "none";

@@ -65,22 +65,19 @@
     const maxCalls = 20;
 
     function updateAfstand() {
-        // Maak de interval leeg als maxCalls is bereikt
+
         if (counter >= maxCalls) {
-            clearInterval(interval); // Stop the interval if maxCalls is reached
+            clearInterval(interval);
             return;
         }
 
-        // URL om de afstand op te halen
         const afstand_url = "/dashboard/afstand?afstand=13.28";
 
-        // Fetch data van de afstand URL
         fetch(afstand_url)
             .then(response => response.json())
             .then(data => {
                 const afstandValue = data.afstand;
 
-                // Update de afstand in de HTML
                 const afstandElement = document.getElementById('afstand');
                 afstandElement.innerHTML = `${afstandValue}cm`;
             })
@@ -88,11 +85,9 @@
                 console.error('Error fetching afstand:', error);
             });
 
-        // Optellen bij de counter
         counter++;
     }
 
-    // Zet de interval om de 3 seconden
     const interval = setInterval(updateAfstand, 3000);
 </script>
 {% endblock %}

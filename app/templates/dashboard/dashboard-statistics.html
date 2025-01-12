@@ -7,20 +7,20 @@
       <div class="card-container">
         <div class="card">
             <div class="card-content">
-                <h3>Prediction</h3>
+                <h3>{{ gettext('Prediction') }}</h3>
             <img src="{{ url_for('static', filename='images/' + img_prediction + ".png") }}" class="card-image">
-            <p>Voorspelling is {{ prediction }} aantal nieuwe accounts in een jaar</p>
+            <p>{{ gettext('Voorspelling is {{ prediction }} aantal nieuwe accounts in een jaar') }}</p>
             </div>
         </div>
         <div class="card">
             <div class="card-content">
-                <h3>Gemiddelde</h3>
+                <h3>{{ gettext('Gemiddelde') }}</h3>
                 <img src="{{ url_for('static', filename='images/' + img_gemiddelde + ".png") }}" class="card-image">
             </div>
         </div>
         <div class="card">
             <div class="card-content">
-                <h3>Mediaan</h3>
+                <h3>{{ gettext('Mediaan') }}</h3>
                 <img src="{{ url_for('static', filename='images/' + img_mediaan + ".png") }}" class="card-image">
                 <p><a target="_blank" href="https://www.instagram.com/kevin_makkink/">Stats By</a></p>
             </div>

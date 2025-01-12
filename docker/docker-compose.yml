@@ -18,8 +18,11 @@ services:
     devices:
       - /dev/gpiomem:/dev/gpiomem # GPIO toegang
     restart: unless-stopped
+<<<<<<< HEAD
 #    networks:
 #        - steam_network
+=======
+>>>>>>> refs/remotes/origin/prod_webserv
 
   pgadmin:
     image: dpage/pgadmin4
@@ -29,13 +32,7 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=info@albertove.nl
       - PGADMIN_DEFAULT_PASSWORD=Steam123!
-#    networks:
-#      - steam_network
 
-#networks:
-#    default:
-#        external: true
-#        name: steam_network
 
 volumes:
   postgres_data:
