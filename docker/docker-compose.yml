@@ -33,7 +33,7 @@ services:
       - POSTGRES_PASSWORD=Steam123!
       - POSTGRES_DB=postgres
     restart: unless-stopped
-    command: postgres -c postgres -c listen_addresses='*'
+    command: postgres -c listen_addresses='*'
 
   pgadmin:
     image: dpage/pgadmin4
