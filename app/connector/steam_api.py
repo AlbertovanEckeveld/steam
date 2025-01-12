@@ -160,6 +160,7 @@ def get_common_games(own_games, friend_games):
     return [
         {
             'id': game_id,
+            'url_avatar': own_game_dict[game_id]['url_avatar'],
             'name': own_game_dict[game_id]['name'],
             'own_playtime': own_game_dict[game_id].get('playtime_forever', 0),
             'friend_playtime': friend_game_dict[game_id].get('playtime_forever', 0)
