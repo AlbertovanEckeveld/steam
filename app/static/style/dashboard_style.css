@@ -19,7 +19,7 @@ body {
     min-height: 100vh; /* Ensure body spans the full viewport */
     overflow-y: auto;
     background: linear-gradient(135deg, #121212, #1b2838, #66c0f4);
-    background-size: 800% 800%;
+    background-size: 3000% 3000%;
     animation: gradientBG 15s ease infinite;
     color: #ffffff;
 }
@@ -288,7 +288,7 @@ body {
 .card-content a{
     text-decoration: none;
     color: #66c0f4;
-    font-size: 14px
+    font-size: 14px;
 }
 .card-content a:hover{
     text-decoration: underline;
@@ -324,19 +324,20 @@ th {
 h2 {
     margin: 50px;
 }
-
-/* Stijlen voor de tabelcellen */
 td {
     padding: 10px 5px; /* Ruimte binnen de tabelcellen */
-    text-align: center; /* Zorgt ervoor dat de tekst in de cellen naar het midden is uitgelijnd */
+    text-align:center;  /* Zorgt ervoor dat de tekst in de cellen naar het midden is uitgelijnd */
     font-size: 18px; /* Verhoogt het lettertype van de cellen */
     border-bottom: 3px solid #344a63; /* Een dunne lijn onder de cellen voor visuele scheiding */
 }
 
 
+
+
 .game-info {
     display: flex; /* Plaatst de elementen naast elkaar */
-    gap: 10px; /* Voeg wat ruimte toe tussen de afbeelding en de naam */
+    gap: 15px; /* Voeg wat ruimte toe tussen de afbeelding en de naam */
+
 }
 
 /* Stijl voor de game-avatar afbeelding */
@@ -365,7 +366,7 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-margin: 30px;
+    margin: 30px;
 }
 
 button:hover {

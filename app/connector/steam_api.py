@@ -216,7 +216,7 @@ def get_recent_playtime(steam_id: str):
         }
 
 
-def get_user_profile(steam_id: str = None, incl_friends: bool = True, incl_games: bool = False):
+def get_user_profile(steam_id: str = None, incl_friends: bool = False, incl_games: bool = False):
     """
         Maakt een userprofile aan.
 

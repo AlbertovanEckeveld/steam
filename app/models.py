@@ -16,7 +16,7 @@ class UserProfile:
         return self.steam_id
 
     def __dir__(self):
-        return ['steam_id', 'display_name', 'url_avatar_small', 'url_avatar_medium', 'url_avatar_full', 'url_profile', 'friend_list']
+        return ['steam_id', 'display_name', 'url_avatar_small', 'url_avatar_medium', 'url_avatar_full', 'url_profile']
 
     def get_steam_id(self) -> str:
         return self.steam_id

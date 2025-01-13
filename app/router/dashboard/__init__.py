@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for, jsonify, request 
 
-from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime
+from app.connector.steam_api import get_user_profile, get_owned_games, get_common_games, get_recent_playtime, \
+    get_friend_list
 from app.connector.afstandsensor import measure_distance
 from app.models import UserProfile
 import random
@@ -85,12 +86,15 @@ def friends():
     user_profile_data = session.get('user_profile')
     user = UserProfile(**user_profile_data) if user_profile_data else None
 
+    friends = get_friend_list(user.get_steam_id())
+    total_friends = len(friends)
+
     # Render de vriendenpagina met gebruikersgegevens en vriendenlijst
     return render_template("dashboard/dashboard-friends.html",
                            display_name=user.get_displayname() if user else "",
                            url_avatar=user.get_avatar_small()  if user else "",
-                           friends=user.get_friendlist(),
-                           total_friends=user.get_total_friends() if user else 0
+                           friends=friends,
+                           total_friends=total_friends if user else 0
                            )
 
 
