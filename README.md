@@ -41,92 +41,10 @@ Deze webapplicatie biedt de volgende mogelijkheden:
 - Spel statistieken vergelijken met een vriend
 
 
-## Installatie instructies
-### Benodigdheden om de installatiestappen te volgen:
-<details><summary>Benodigdheden</summary>
+## Showcase
+Check here for the demo:
+[steam.albertove.nl](https://steam.albertove.nl)
 
-- Git
-- Python 3.8 of hoger
-- python3-venv
-- Database (PostgreSQL)
-- (Optioneel) Docker
-- (Optioneel) curl
-</details>
-
-### Installatie methodes
-Er zijn verschillende manieren om de applicatie te installeren en draaien:
-
-<details><summary>Installatie Debian linux script (Linux)</summary>
-
-#### Er is een installatie script beschikbaar voor ***Debian Systemen*** om de applicatie eenvoudig op te zetten en draaien in docker.
-Om de applicatie te installeren en draaien, volg deze stappen om het installatie script te downloaden en uit te voeren:
-
-#### 1: Instaleer eerst het installatie script:
-```sh
-curl -L  https://raw.githubusercontent.com/AlbertovanEckeveld/steam/refs/heads/main/setup.sh?token=GHSAT0AAAAAAC3TTZVNSOQX3KYJJ3R2DSBGZ23OKPA -o setup.sh
-```
-#### 2: Maak het script uitvoerbaar en voer het uit:
-```sh
-sudo chmod a+x setup.sh && sudo ./setup.sh
-```
-</details>
-
-<details><summary>Installatie via Docker image (Windows / Linux / MacOS)</summary>
-
-#### Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie te draaien in een Docker-container:  
-
-#### Bouw de Docker image:  
-```sh
-docker build -t steam-project .
-```
-#### Draai de Docker container:  
-```sh
-docker compose up -d
-```
-Nadat de applicatie is geïnstalleerd en de docker container draait, is de url:  ```https://<ip-adres>```
-
-</details>
-
-<details><summary>Installatie handmatig lokaal (Windows / Linux / MacOS)</summary>
-
-#### Na het clonen van de repository, volg deze stappen om de omgeving op te zetten en de applicatie lokaal te draaien:
-
-#### 1: Maak een virtuele omgeving aan:
-```sh
-   python -m venv .venv
-```
-
-#### 2: Activeer de virtuele omgeving:  
-Voor Linux/macOS:
-```sh
-source .venv/bin/activate
-```
-Voor Windows:
-```sh
-.venv\Scripts\activate
-```
-#### 3: Installeer de vereiste Python-pakketten:  
-```sh
-pip install -r requirements.txt
-```
-#### 4: Compileer de vertalingen:  
-```sh
-pybabel compile -d app/translations
-```
-#### 5: Start de Flask-applicatie:  
-```sh
-cd app
-python main.py
-```
-Met deze stappen kun je de applicatie lokaal opzetten en draaien.
-
-</details>
-
-## Update instructies
-#### Om de docker cotainer te updaten, volg deze stappen:
-```sh
-sudo ./update.sh
-```
 
 ## Gebruik
 
