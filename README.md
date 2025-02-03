@@ -33,10 +33,10 @@ Deze webapplicatie biedt de volgende mogelijkheden:
 <a href="https://github.com/owzezo" target="__blank">![Static Badge](https://img.shields.io/badge/SD%20%20Backend:-%20Zaid%20Al%20Abbasy:%20zezo%20(1767972)-blue)</a>
 <a href="#">![Static Badge](https://img.shields.io/badge/CSC%20en%20SD%20backend:-%20Alberto%20van%20Eckeveld:%20AlbertoVE%20(1876166)-yellow)</a>
 
-## Functionaliteiten
+## Functionaliteiten  (Doorgestreept = niet zichtbaar op de showcase)
 - Inloggen met Steam account
-- 2FA met RFID tags
-- Gebruikersafstand monitoren met afstands-sensor (HC-SR04)
+- ~~2FA met RFID tags~~
+- ~~Gebruikersafstand monitoren met afstands-sensor (HC-SR04)~~
 - Inzien van eigen Steam-profiel, games en vrienden
 - Spel statistieken vergelijken met een vriend
 
