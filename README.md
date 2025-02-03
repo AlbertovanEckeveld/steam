@@ -46,8 +46,6 @@ Check here for the demo:
 [steam.albertove.nl](https://steam.albertove.nl)
 
 
-## Gebruik
-
 ### Vertaling
 Om nieuwe vertalingen toe te voegen of bestaande te updaten, volg deze stappen:  
 
